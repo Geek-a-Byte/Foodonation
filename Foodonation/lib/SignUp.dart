@@ -50,51 +50,14 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: <Widget>[
-          IconButton(icon: Icon(Icons.settings), onPressed: () {}),
-        ],
-        title: Text(
-          'Home',
-          style: TextStyle(fontSize: 20, color: Colors.white),
-        ),
-        backgroundColor: Colors.black,
-      ),
-      drawer: Drawer(
-        child: ListView(
-          children: <Widget>[
-            DrawerHeader(
-              child: Text(
-                'Menu',
-                style: TextStyle(fontSize: 20, color: Colors.black),
-              ),
-              decoration: BoxDecoration(
-                color: Colors.white,
-              ),
-            ),
-            ListTile(
-              title: Text(
-                'Item 1',
-                style: TextStyle(fontSize: 30, color: Colors.white),
-              ),
-              onTap: () {
-                //setValue("isLoggedin", "false");
-              },
-            ),
-            ListTile(
-              title: Text('logout'),
-              onTap: () {
-                setValue("isLoggedin", "false");
-              },
-            ),
-          ],
-        ),
-      ),
       body: Container(
-        color: Colors.cyan,
+        color: Color(0xffdfe6e9),
         child: Center(
           child: Card(
-            margin: EdgeInsets.all(18.0),
+            margin: EdgeInsets.all(28.0),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(18.0),
+            ),
 
             //color: Color(hashCode),
 
@@ -111,14 +74,21 @@ class _SignUpState extends State<SignUp> {
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text("Sign Up!",
-                        style: GoogleFonts.openSans(
+                    //Create account
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 18.0),
+                      child: Text("Create  Account",
+                          style: GoogleFonts.openSans(
                             textStyle: TextStyle(
-                                fontSize: 30,
-                                color: Colors.lightBlue[900],
-                                letterSpacing: 2,
-                                wordSpacing: 10,
-                                fontWeight: FontWeight.w500))),
+                              fontSize: 30,
+                              color: Colors.lightBlue[900],
+                              fontFamily: 'HelveticaNeue',
+                              fontWeight: FontWeight.w700,
+                              //wordSpacing: 10,
+                            ),
+                          )),
+                    ),
+
                     Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: TextFormField(
@@ -127,17 +97,21 @@ class _SignUpState extends State<SignUp> {
                         ),
                         controller: nameController,
                         decoration: InputDecoration(
-                          labelText: "Requestor's Name:",
+                          labelText: "Name:".toUpperCase(),
 
                           labelStyle: TextStyle(
-                              fontSize: 15, color: Colors.lightBlueAccent[700]),
+                            fontSize: 13,
+                            color: Colors.black54,
+                            fontFamily: 'HelveticaNeue',
+                            fontWeight: FontWeight.w700,
+                          ),
 
-                          hintText: "your Name",
+                          hintText: "Your Name",
 
                           hintStyle: TextStyle(color: Colors.blueGrey),
 
                           enabledBorder: new UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black),
+                            borderSide: BorderSide(color: Colors.grey),
                           ),
 
                           // and:
@@ -151,6 +125,7 @@ class _SignUpState extends State<SignUp> {
                         //cursorRadius: Radius.elliptical(10, 15),
                       ),
                     ),
+
                     Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: TextFormField(
@@ -159,17 +134,23 @@ class _SignUpState extends State<SignUp> {
                         ),
                         controller: AddController,
                         decoration: InputDecoration(
-                          labelText: "Requestor's Address:",
+                          labelText: "Address:".toUpperCase(),
 
                           labelStyle: TextStyle(
-                              fontSize: 15, color: Colors.lightBlueAccent[700]),
+                              fontSize: 13,
+                              fontFamily: 'HelveticaNeue',
+                              fontWeight: FontWeight.w700,
+                              color: Colors.black54),
 
-                          hintText: "your Address",
+                          hintText: "Your Address",
 
-                          hintStyle: TextStyle(color: Colors.blueGrey),
+                          hintStyle: TextStyle(
+                              fontFamily: 'HelveticaNeue',
+                              fontWeight: FontWeight.w500,
+                              color: Colors.blueGrey),
 
                           enabledBorder: new UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black),
+                            borderSide: BorderSide(color: Colors.grey),
                           ),
 
                           // and:
@@ -183,6 +164,7 @@ class _SignUpState extends State<SignUp> {
                         //cursorRadius: Radius.elliptical(10, 15),
                       ),
                     ),
+
                     Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: TextFormField(
@@ -191,17 +173,23 @@ class _SignUpState extends State<SignUp> {
                         ),
                         controller: nidController,
                         decoration: InputDecoration(
-                          labelText: "NID:",
+                          labelText: "NID:".toUpperCase(),
 
                           labelStyle: TextStyle(
-                              fontSize: 15, color: Colors.lightBlueAccent[700]),
+                              fontSize: 13,
+                              fontFamily: 'HelveticaNeue',
+                              fontWeight: FontWeight.w700,
+                              color: Colors.black54),
 
-                          hintText: "your NID",
+                          hintText: "Your NID",
 
-                          hintStyle: TextStyle(color: Colors.blueGrey),
+                          hintStyle: TextStyle(
+                              fontFamily: 'HelveticaNeue',
+                              fontWeight: FontWeight.w500,
+                              color: Colors.blueGrey),
 
                           enabledBorder: new UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black),
+                            borderSide: BorderSide(color: Colors.grey),
                           ),
 
                           // and:
@@ -215,25 +203,34 @@ class _SignUpState extends State<SignUp> {
                         //cursorRadius: Radius.elliptical(10, 15),
                       ),
                     ),
+
                     Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: TextFormField(
                         style: TextStyle(
-                          color: Colors.black87,
+                          fontFamily: 'HelveticaNeue',
+                          fontWeight: FontWeight.w700,
+                          color: Colors.black54,
                         ),
                         controller: contactController,
                         decoration: InputDecoration(
-                          labelText: "phn no:",
+                          labelText: "Phone no:".toUpperCase(),
 
                           labelStyle: TextStyle(
-                              fontSize: 15, color: Colors.lightBlueAccent[700]),
+                              fontSize: 13,
+                              fontFamily: 'HelveticaNeue',
+                              fontWeight: FontWeight.w700,
+                              color: Colors.black54),
 
-                          hintText: "your phone number",
+                          hintText: "Your phone number",
 
-                          hintStyle: TextStyle(color: Colors.blueGrey),
+                          hintStyle: TextStyle(
+                              fontFamily: 'HelveticaNeue',
+                              fontWeight: FontWeight.w500,
+                              color: Colors.blueGrey),
 
                           enabledBorder: new UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black),
+                            borderSide: BorderSide(color: Colors.grey),
                           ),
 
                           // and:
@@ -247,21 +244,25 @@ class _SignUpState extends State<SignUp> {
                         //cursorRadius: Radius.elliptical(10, 15),
                       ),
                     ),
+
                     Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: TextFormField(
                         controller: passwordcontroller,
                         obscureText: true,
                         decoration: InputDecoration(
-                          labelText: "Password : ",
+                          labelText: "Password:".toUpperCase(),
 
                           hintText: "*********",
 
-                          labelStyle:
-                              TextStyle(color: Colors.lightBlueAccent[700]),
+                          labelStyle: TextStyle(
+                              fontFamily: 'HelveticaNeue',
+                              fontWeight: FontWeight.w700,
+                              fontSize: 13,
+                              color: Colors.black54),
 
                           enabledBorder: new UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black),
+                            borderSide: BorderSide(color: Colors.grey),
                           ),
 
                           // and:
@@ -273,21 +274,25 @@ class _SignUpState extends State<SignUp> {
                         cursorColor: Colors.black,
                       ),
                     ),
+
                     Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: TextFormField(
                         controller: confirmpasswordcontroller,
                         obscureText: true,
                         decoration: InputDecoration(
-                          labelText: "Confirm Password : ",
+                          labelText: "Confirm Password:".toUpperCase(),
 
                           hintText: "*********",
 
-                          labelStyle:
-                              TextStyle(color: Colors.lightBlueAccent[700]),
+                          labelStyle: TextStyle(
+                              fontFamily: 'HelveticaNeue',
+                              fontWeight: FontWeight.w700,
+                              fontSize: 13,
+                              color: Colors.black54),
 
                           enabledBorder: new UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black),
+                            borderSide: BorderSide(color: Colors.grey),
                           ),
 
                           // and:
@@ -299,44 +304,71 @@ class _SignUpState extends State<SignUp> {
                         cursorColor: Colors.black,
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        RaisedButton(
-                            child: Row(
-                              children: <Widget>[
-                                Icon(Icons.person_add, color: Colors.white),
-                                Text(
-                                  "Sign up",
-                                  style: TextStyle(
-                                      fontSize: 15, color: Colors.white),
-                                ),
-                              ],
-                            ),
-                            color: Colors.black,
-                            onPressed: signup),
 
-                        RaisedButton(
-                            child: Row(
-                              children: <Widget>[
-                                Icon(Icons.account_circle, color: Colors.white),
-                                Text(
-                                  title,
-                                  style: TextStyle(
-                                      fontSize: 15, color: Colors.white),
-                                ),
-                              ],
+                    //Buttons
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 28.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          //Sign up button ( Added buttontheme to change shape)
+                          ButtonTheme(
+                            minWidth: 88,
+                            height: 38,
+                            child: RaisedButton(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              color: Color(0xff0984e3),
+                              child: Row(
+                                children: <Widget>[
+                                  //Icon(Icons.person_add, color: Colors.white),  I PERSONALLY DON'T PREFER THIS THO
+                                  Text(
+                                    "Sign up",
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              //color: Colors.black,    I CHANGED THIS//RAIYAN
+                              onPressed: signup,
                             ),
-                            color: Colors.black,
-                            onPressed: () {
-                              /*setState(() {
+                          ),
+
+                          //Sign in button ( Added buttontheme to change shape)
+                          ButtonTheme(
+                            minWidth: 88,
+                            height: 38,
+                            child: RaisedButton(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              color: Color(0xff0984e3),
+                              child: Row(
+                                children: <Widget>[
+                                  //Icon(Icons.account_circle, color: Colors.white),
+                                  Text(
+                                    'Sign in',
+                                    style: TextStyle(
+                                        fontSize: 15, color: Colors.white),
+                                  ),
+                                ],
+                              ),
+                              //color: Colors.black, RAIYAN CHANGED THIS
+                              onPressed: () {
+                                /*setState(() {
   
                        //title=nidController.text;                     
   
                      });*/
-                              Navigator.pushNamed(context, '/signin');
-                            }), //raised button
-                      ],
+                                Navigator.pushNamed(context, '/signin');
+                              },
+                            ),
+                          ), //raised button
+                        ],
+                      ),
                     ),
                   ],
                 ),

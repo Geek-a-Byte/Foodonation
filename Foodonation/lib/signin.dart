@@ -1,9 +1,9 @@
 import 'dart:convert';
+import 'package:Foodonation/homescreen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_awesome_alert_box/flutter_awesome_alert_box.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:Foodonation/SignUp.dart';
 import 'package:Foodonation/settings.dart';
 
 class SignIn extends StatefulWidget {
@@ -19,14 +19,29 @@ class _SignInState extends State<SignIn> {
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordcontroller = TextEditingController();
   // String title = "Sign in";
+  int NID = 2019140;
+  String name = 'RoboCup';
+  String pass = 'robocup';
+
+  gotoHomeScreen(String userName) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => HomeScreen()),
+    );
+  }
 
   signin() async {
     var response;
 
     var data = {
-      "nid": nidController.text,
-      "name": nameController.text,
-      "password": passwordcontroller.text
+      //"nid": nidController.text,
+      //"name": nameController.text,
+      //"password": passwordcontroller.text
+
+      //Temporary data
+      "nid": NID,
+      "name": name,
+      "password": pass,
     };
 
     //response = await http.post(baseURL + "signin.php", body: jsonEncode(data));
@@ -39,9 +54,12 @@ class _SignInState extends State<SignIn> {
     // String jsonsDataString = response.body
     //     .toString(); // toString of Response's body is assigned to jsonDataString
     // var jsonbody = jsonDecode(jsonsDataString);
-    if (jsonbody["nid"] == nidController.text &&
-        jsonbody["name"] == nameController.text &&
-        jsonbody["password"] == passwordcontroller.text) {
+    //if (jsonbody["nid"] == nidController.text &&
+    //   jsonbody["name"] == nameController.text &&
+    //    jsonbody["password"] == passwordcontroller.text) {
+    if (jsonbody["nid"] == NID &&
+        jsonbody["name"] == name &&
+        jsonbody["password"] == pass) {
       SuccessAlertBox(
           context: context,
           title: "congrats!",
@@ -54,7 +72,11 @@ class _SignInState extends State<SignIn> {
       setValue("phone", jsonbody["phone"]);
       //print(8);
       //navigation through pages
-      Navigator.pushNamed(context, '/dashboard');
+      //Navigator.pushNamed(context, '/dashboard');
+      print("Parsi mamma");
+
+      gotoHomeScreen(name);
+
     } else if (jsonbody["success"] == "10") {
       print("Invalid NID or password");
       WarningAlertBox(
@@ -70,197 +92,178 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Home',
-          style: TextStyle(fontSize: 20, color: Colors.white),
-        ),
-        backgroundColor: Colors.black,
-      ),
-      drawer: Drawer(
-        child: ListView(
-          children: <Widget>[
-            DrawerHeader(
-              child: Text(
-                'Menu',
-                style: TextStyle(fontSize: 20, color: Colors.black),
-              ),
-              decoration: BoxDecoration(
-                color: Colors.white,
-              ),
-            ),
-            ListTile(
-              title: Text(
-                'Item 1',
-                style: TextStyle(fontSize: 30, color: Colors.white),
-              ),
-              onTap: () {
-                //setValue("isLoggedin", "false");
-              },
-            ),
-            ListTile(
-              title: Text('LogOut'),
-              onTap: () {
-                setValue("isLoggedin", "false");
-              },
-            ),
-          ],
-        ),
-      ),
       body: Container(
-        color: Colors.cyan,
+        color: Color(0xffdfe6e9),
         child: Center(
-          child: Card(
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text("LogIn Form",
-                        style: GoogleFonts.openSans(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 21,
+            ),
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(18.0),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(28.0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 28.0),
+                        child: Text(
+                          "Sign in",
+                          style: GoogleFonts.openSans(
                             textStyle: TextStyle(
-                                fontSize: 30,
-                                color: Colors.lightBlue[900],
-                                letterSpacing: 2,
-                                wordSpacing: 10,
-                                fontWeight: FontWeight.w500))),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: TextFormField(
-                        style: TextStyle(
-                          color: Colors.black87,
-                        ),
-                        controller: nameController,
-                        decoration: InputDecoration(
-                          labelText: "Name : ",
-
-                          labelStyle:
-                              TextStyle(fontSize: 15, color: Colors.black87),
-
-                          hintText: "your Name",
-
-                          hintStyle: TextStyle(color: Colors.black87),
-
-                          enabledBorder: new UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black),
-                          ),
-
-                          // and:
-
-                          focusedBorder: new UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white),
+                              fontSize: 28,
+                              color: Colors.lightBlue[900],
+                              fontFamily: 'HelveticaNeue',
+                              fontWeight: FontWeight.w700,
+                            ),
                           ),
                         ),
-                        cursorColor: Colors.black87,
-                        //cursorWidth: 7.000000,
-                        //cursorRadius: Radius.elliptical(10, 15),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: TextFormField(
-                        style: TextStyle(
-                          color: Colors.black87,
-                        ),
-                        controller: nidController,
-                        decoration: InputDecoration(
-                          labelText: "NID : ",
-
-                          labelStyle:
-                              TextStyle(fontSize: 15, color: Colors.black87),
-
-                          hintText: "your NID",
-
-                          hintStyle: TextStyle(color: Colors.black87),
-
-                          enabledBorder: new UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: TextFormField(
+                          style: TextStyle(
+                            color: Colors.black54,
                           ),
+                          controller: nameController,
+                          decoration: InputDecoration(
+                            labelText: "Name : ".toUpperCase(),
 
-                          // and:
+                            labelStyle:
+                                TextStyle(fontSize: 15, color: Colors.black54),
 
-                          focusedBorder: new UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white),
+                            hintText: "Your Name",
+
+                            hintStyle: TextStyle(color: Colors.black54),
+
+                            enabledBorder: new UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black38),
+                            ),
+
+                            // and:
+
+                            focusedBorder: new UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                            ),
                           ),
+                          cursorColor: Colors.black54,
+                          //cursorWidth: 7.000000,
+                          //cursorRadius: Radius.elliptical(10, 15),
                         ),
-                        cursorColor: Colors.black,
-                        //cursorWidth: 7.000000,
-                        //cursorRadius: Radius.elliptical(10, 15),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: TextFormField(
-                        controller: passwordcontroller,
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          labelText: "Password : ",
-
-                          hintText: "*********",
-
-                          labelStyle: TextStyle(color: Colors.black87),
-
-                          enabledBorder: new UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: TextFormField(
+                          style: TextStyle(
+                            color: Colors.black54,
                           ),
+                          controller: nidController,
+                          decoration: InputDecoration(
+                            labelText: "NID : ".toUpperCase(),
 
-                          // and:
+                            labelStyle:
+                                TextStyle(fontSize: 15, color: Colors.black54),
 
-                          focusedBorder: new UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white),
+                            hintText: "Your NID",
+
+                            hintStyle: TextStyle(color: Colors.black54),
+
+                            enabledBorder: new UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black38),
+                            ),
+
+                            // and:
+
+                            focusedBorder: new UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                            ),
                           ),
+                          cursorColor: Colors.black,
+                          //cursorWidth: 7.000000,
+                          //cursorRadius: Radius.elliptical(10, 15),
                         ),
-                        cursorColor: Colors.black,
                       ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: TextFormField(
+                          controller: passwordcontroller,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            labelText: "Password : ".toUpperCase(),
+
+                            hintText: "*********",
+
+                            labelStyle: TextStyle(color: Colors.black54),
+
+                            enabledBorder: new UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black38),
+                            ),
+
+                            // and:
+
+                            focusedBorder: new UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                            ),
+                          ),
+                          cursorColor: Colors.black,
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
 // *sign up button starts
 
-                        // RaisedButton(
-                        //     child: Row(
-                        //       children: <Widget>[
-                        //         Icon(Icons.person_add, color: Colors.white),
-                        //         Text(
-                        //           "Sign up",
-                        //           style: TextStyle(
-                        //               fontSize: 15, color: Colors.white),
-                        //         ),
-                        //       ],
-                        //     ),
-                        //     color: Colors.black,
-                        //     onPressed: () {
-                        //       Navigator.pushNamed(context, '/SignUp');
-                        //     }),
+                          // RaisedButton(
+                          //     child: Row(
+                          //       children: <Widget>[
+                          //         Icon(Icons.person_add, color: Colors.white),
+                          //         Text(
+                          //           "Sign up",
+                          //           style: TextStyle(
+                          //               fontSize: 15, color: Colors.white),
+                          //         ),
+                          //       ],
+                          //     ),
+                          //     color: Colors.black,
+                          //     onPressed: () {
+                          //       Navigator.pushNamed(context, '/SignUp');
+                          //     }),
 
 //* signin button start
 
-                        RaisedButton(
-                            child: Row(
-                              children: <Widget>[
-                                Icon(Icons.account_circle, color: Colors.white),
-                                Text(
-                                  "Sign in",
-                                  style: TextStyle(
-                                      fontSize: 15, color: Colors.white),
-                                ),
-                              ],
+                          ButtonTheme(
+                            minWidth: 88,
+                            height: 38,
+                            child: RaisedButton(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              color: Color(0xff0984e3),
+                              child: Row(
+                                children: <Widget>[
+                                  //Icon(Icons.person_add, color: Colors.white),  I PERSONALLY DON'T PREFER THIS THO
+                                  Text(
+                                    "Sign in",
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              //color: Colors.black,    I CHANGED THIS//RAIYAN
+                              onPressed: () => gotoHomeScreen(name),
                             ),
-                            color: Colors.black,
-                            onPressed: () {
-                              /*setState(() {
-  
-                       //title=emailcontroller.text;                     
-  
-                     });*/
-                              signin();
-                            }), //raised button
-                      ],
-                    ),
-                  ],
+                          ), //raised button
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

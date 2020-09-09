@@ -27,6 +27,7 @@ dependencies:
   flutter_awesome_alert_box: ^1.0.1
   shared_preferences: ^0.5.7+2
   google_fonts: ^0.6.2
+  provider: ^4.0.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -40,7 +41,7 @@ dev_dependencies:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/supermarket.png"
+  image_path: "assets/images/appicon.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -52,7 +53,25 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - assets/logo.png
+    - assets/images/logo.png
+    - assets/images/appicon.png
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Regular.ttf
+        - asset: assets/fonts/Roboto-Black.ttf
+    - family: HelveticaNeue
+      fonts:
+        - asset: assets/fonts/HelveticaNeue-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/HelveticaNeue-Light.ttf
+          weight: 300
+        - asset: assets/fonts/HelveticaNeue-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/HelveticaNeue-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/HelveticaNeue-Medium.ttf
+          weight: 500
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

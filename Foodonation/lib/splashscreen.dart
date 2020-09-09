@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:Foodonation/settings.dart';
 
-import 'PageOne.dart';
 import 'SignUp.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -73,7 +72,7 @@ class _SplashScreenState extends State<SplashScreen> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 80.0),
                 child: Image.asset(
-                  'assets/logo.png',
+                  'assets/images/logo.png',
                   width: 180,
                 ),
               ),

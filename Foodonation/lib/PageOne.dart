@@ -1,6 +1,5 @@
 import 'package:Foodonation/signin.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:Foodonation/SignUp.dart';
 
 import 'PageTwo.dart';
@@ -34,10 +33,25 @@ class MyHome extends StatelessWidget {
       //backgroundColor: Color(0xff0984E3),
       body: Column(
         children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 88),
+          ),
+
+          //Logo image
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 18.0),
+                child: Image.asset(
+                  'assets/images/logo.png',
+                  width: 80,
+                ),
+              ),
+            ),
+
           //Top text
           Center(
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 180.0),
+              padding: const EdgeInsets.only(bottom: 150.0),
               child: Text(
                 'Are you a donor or receiver?',
                 style: TextStyle(

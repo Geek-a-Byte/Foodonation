@@ -17,10 +17,20 @@ class PageTwo extends StatelessWidget {
         //backgroundColor: Color(0xff0984E3),
         body: Column(
           children: [
+          //Logo image
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 108.0),
+                child: Image.asset(
+                  'assets/images/logo.png',
+                  width: 80,
+                ),
+              ),
+            ),
             //Contact us
             Center(
               child: Padding(
-                padding: const EdgeInsets.only(top: 180.0),
+                padding: const EdgeInsets.only(top: 38.0),
                 child: Text(
                   'Please contact us:',
                   style: TextStyle(
@@ -58,7 +68,7 @@ class PageTwo extends StatelessWidget {
             //Or Bkash this number
             Center(
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 48.0),
+                padding: const EdgeInsets.symmetric(vertical: 18.0),
                 child: Text(
                   'or, Bkash this number',
                   style: TextStyle(
@@ -77,7 +87,7 @@ class PageTwo extends StatelessWidget {
             //Numbers II
             Center(
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10.0),
+                padding: const EdgeInsets.symmetric(vertical: 20.0),
                 child: Text(
                   '0192*******\n',
                   style: TextStyle(
