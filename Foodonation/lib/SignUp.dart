@@ -83,7 +83,7 @@ class _SignUpState extends State<SignUp> {
                             textStyle: TextStyle(
                               fontSize: 30,
                               color: Colors.lightBlue[900],
-                              fontFamily: 'HelveticaNeue',
+                              fontFamily: 'Avenir',
                               fontWeight: FontWeight.w700,
                               //wordSpacing: 10,
                             ),
@@ -328,6 +328,7 @@ class _SignUpState extends State<SignUp> {
                                     style: TextStyle(
                                       fontSize: 15,
                                       color: Colors.white,
+                                      fontFamily: 'Avenir',
                                     ),
                                   ),
                                 ],
@@ -349,7 +350,7 @@ class _SignUpState extends State<SignUp> {
                               style: new TextStyle(color: Colors.black),
                             ),
                             new TextSpan(
-                              text: 'Signin!',
+                              text: 'Sign in!',
                               style: new TextStyle(color: Colors.blue),
                               recognizer: new TapGestureRecognizer()
                                 ..onTap = () {

@@ -91,7 +91,7 @@ class _SignInState extends State<SignIn> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Color(0xffdfe6e9),
+        color: Color(0xfff5f5f5),
         child: Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(
@@ -116,7 +116,7 @@ class _SignInState extends State<SignIn> {
                             textStyle: TextStyle(
                               fontSize: 28,
                               color: Colors.lightBlue[900],
-                              fontFamily: 'HelveticaNeue',
+                              fontFamily: 'Avenir',
                               fontWeight: FontWeight.w700,
                             ),
                           ),
@@ -183,7 +183,7 @@ class _SignInState extends State<SignIn> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
                           Padding(
-                            padding: const EdgeInsets.all(5.0),
+                            padding: const EdgeInsets.all(25.0),
                             child: ButtonTheme(
                               minWidth: 88,
                               height: 38,
@@ -200,6 +200,7 @@ class _SignInState extends State<SignIn> {
                                       style: TextStyle(
                                         fontSize: 15,
                                         color: Colors.white,
+                                        fontFamily: 'Avenir',
                                       ),
                                     ),
                                   ],
@@ -221,7 +222,7 @@ class _SignInState extends State<SignIn> {
                                 style: new TextStyle(color: Colors.black),
                               ),
                               new TextSpan(
-                                text: 'Create One!',
+                                text: 'Create one!',
                                 style: new TextStyle(color: Colors.blue),
                                 recognizer: new TapGestureRecognizer()
                                   ..onTap = () {
