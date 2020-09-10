@@ -56,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   'Hi, Welcome to Foodonation',
                   style: TextStyle(
                     fontSize: 22,
-                    fontFamily: 'HelveticaNeue',
+                    fontFamily: 'Avenir',
                     fontWeight: FontWeight.w700,
                     //Black Text
                     color: Color(0xff2D3436),
@@ -87,7 +87,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 18,
-                    fontFamily: 'HelveticaNeue',
+                    fontFamily: 'Avenir',
                     fontWeight: FontWeight.w300,
                     color: Color(0xff2D3436),
                   ),
@@ -110,7 +110,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   style: TextStyle(
                     color: Color(0xffFFFFFF),
                     fontSize: 15,
-                    fontFamily: 'HelveticaNeue',
+                    fontFamily: 'Avenir',
                     fontWeight: FontWeight.w500,
                   ),
                 ),
