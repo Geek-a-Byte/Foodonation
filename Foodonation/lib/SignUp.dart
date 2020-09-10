@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_awesome_alert_box/flutter_awesome_alert_box.dart';
@@ -306,13 +307,12 @@ class _SignUpState extends State<SignUp> {
                     ),
 
                     //Buttons
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 28.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          //Sign up button ( Added buttontheme to change shape)
-                          ButtonTheme(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: ButtonTheme(
                             minWidth: 88,
                             height: 38,
                             child: RaisedButton(
@@ -324,7 +324,7 @@ class _SignUpState extends State<SignUp> {
                                 children: <Widget>[
                                   //Icon(Icons.person_add, color: Colors.white),  I PERSONALLY DON'T PREFER THIS THO
                                   Text(
-                                    "Sign up",
+                                    "Sign Up",
                                     style: TextStyle(
                                       fontSize: 15,
                                       color: Colors.white,
@@ -336,38 +336,28 @@ class _SignUpState extends State<SignUp> {
                               onPressed: signup,
                             ),
                           ),
-
-                          //Sign in button ( Added buttontheme to change shape)
-                          ButtonTheme(
-                            minWidth: 88,
-                            height: 38,
-                            child: RaisedButton(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              color: Color(0xff0984e3),
-                              child: Row(
-                                children: <Widget>[
-                                  //Icon(Icons.account_circle, color: Colors.white),
-                                  Text(
-                                    'Sign in',
-                                    style: TextStyle(
-                                        fontSize: 15, color: Colors.white),
-                                  ),
-                                ],
-                              ),
-                              //color: Colors.black, RAIYAN CHANGED THIS
-                              onPressed: () {
-                                /*setState(() {
-  
-                       //title=nidController.text;                     
-  
-                     });*/
-                                Navigator.pushNamed(context, '/signin');
-                              },
+                        ), //raised button
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: new RichText(
+                        text: new TextSpan(
+                          children: [
+                            new TextSpan(
+                              text: "Already have an account? ",
+                              style: new TextStyle(color: Colors.black),
                             ),
-                          ), //raised button
-                        ],
+                            new TextSpan(
+                              text: 'Signin!',
+                              style: new TextStyle(color: Colors.blue),
+                              recognizer: new TapGestureRecognizer()
+                                ..onTap = () {
+                                  Navigator.pushNamed(context, '/signin');
+                                },
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],

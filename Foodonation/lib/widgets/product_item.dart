@@ -7,7 +7,6 @@ class ProductItem extends StatelessWidget {
   // final String id;
   // final String title;
   // final String imageURL;
-
   // ProductItem(this.id, this.title, this.imageURL);
 
   @override

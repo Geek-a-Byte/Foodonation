@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:Foodonation/homescreen.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_awesome_alert_box/flutter_awesome_alert_box.dart';
@@ -15,11 +16,11 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   // TextEditingController confirmpasswordcontroller = TextEditingController();
-  TextEditingController nidController = TextEditingController();
+  //TextEditingController nidController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordcontroller = TextEditingController();
   // String title = "Sign in";
-  int NID = 2019140;
+  //int NID = 2019140;
   String name = 'RoboCup';
   String pass = 'robocup';
 
@@ -39,7 +40,7 @@ class _SignInState extends State<SignIn> {
       //"password": passwordcontroller.text
 
       //Temporary data
-      "nid": NID,
+      //"nid": NID,
       "name": name,
       "password": pass,
     };
@@ -57,9 +58,7 @@ class _SignInState extends State<SignIn> {
     //if (jsonbody["nid"] == nidController.text &&
     //   jsonbody["name"] == nameController.text &&
     //    jsonbody["password"] == passwordcontroller.text) {
-    if (jsonbody["nid"] == NID &&
-        jsonbody["name"] == name &&
-        jsonbody["password"] == pass) {
+    if (jsonbody["name"] == name && jsonbody["password"] == pass) {
       SuccessAlertBox(
           context: context,
           title: "congrats!",
@@ -68,7 +67,7 @@ class _SignInState extends State<SignIn> {
       //print(7);
       setValue("isLoggedin", "true");
       setValue("name", jsonbody["name"]);
-      setValue("nid", jsonbody["nid"]);
+      //setValue("nid", jsonbody["nid"]);
       setValue("phone", jsonbody["phone"]);
       //print(8);
       //navigation through pages
@@ -76,7 +75,6 @@ class _SignInState extends State<SignIn> {
       print("Parsi mamma");
 
       gotoHomeScreen(name);
-
     } else if (jsonbody["success"] == "10") {
       print("Invalid NID or password");
       WarningAlertBox(
@@ -159,42 +157,10 @@ class _SignInState extends State<SignIn> {
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: TextFormField(
-                          style: TextStyle(
-                            color: Colors.black54,
-                          ),
-                          controller: nidController,
-                          decoration: InputDecoration(
-                            labelText: "NID : ".toUpperCase(),
-
-                            labelStyle:
-                                TextStyle(fontSize: 15, color: Colors.black54),
-
-                            hintText: "Your NID",
-
-                            hintStyle: TextStyle(color: Colors.black54),
-
-                            enabledBorder: new UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black38),
-                            ),
-
-                            // and:
-
-                            focusedBorder: new UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white),
-                            ),
-                          ),
-                          cursorColor: Colors.black,
-                          //cursorWidth: 7.000000,
-                          //cursorRadius: Radius.elliptical(10, 15),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: TextFormField(
                           controller: passwordcontroller,
                           obscureText: true,
                           decoration: InputDecoration(
-                            labelText: "Password : ".toUpperCase(),
+                            labelText: "Phone No : ".toUpperCase(),
 
                             hintText: "*********",
 
@@ -216,51 +182,55 @@ class _SignInState extends State<SignIn> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-// *sign up button starts
-
-                          // RaisedButton(
-                          //     child: Row(
-                          //       children: <Widget>[
-                          //         Icon(Icons.person_add, color: Colors.white),
-                          //         Text(
-                          //           "Sign up",
-                          //           style: TextStyle(
-                          //               fontSize: 15, color: Colors.white),
-                          //         ),
-                          //       ],
-                          //     ),
-                          //     color: Colors.black,
-                          //     onPressed: () {
-                          //       Navigator.pushNamed(context, '/SignUp');
-                          //     }),
-
-//* signin button start
-
-                          ButtonTheme(
-                            minWidth: 88,
-                            height: 38,
-                            child: RaisedButton(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              color: Color(0xff0984e3),
-                              child: Row(
-                                children: <Widget>[
-                                  //Icon(Icons.person_add, color: Colors.white),  I PERSONALLY DON'T PREFER THIS THO
-                                  Text(
-                                    "Sign in",
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                      color: Colors.white,
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: ButtonTheme(
+                              minWidth: 88,
+                              height: 38,
+                              child: RaisedButton(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                color: Color(0xff0984e3),
+                                child: Row(
+                                  children: <Widget>[
+                                    //Icon(Icons.person_add, color: Colors.white),  I PERSONALLY DON'T PREFER THIS THO
+                                    Text(
+                                      "Sign in",
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        color: Colors.white,
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
+                                //color: Colors.black,    I CHANGED THIS//RAIYAN
+                                onPressed: () => gotoHomeScreen(name),
                               ),
-                              //color: Colors.black,    I CHANGED THIS//RAIYAN
-                              onPressed: () => gotoHomeScreen(name),
                             ),
                           ), //raised button
                         ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: new RichText(
+                          text: new TextSpan(
+                            children: [
+                              new TextSpan(
+                                text: "Don't have an account? ",
+                                style: new TextStyle(color: Colors.black),
+                              ),
+                              new TextSpan(
+                                text: 'Create One!',
+                                style: new TextStyle(color: Colors.blue),
+                                recognizer: new TapGestureRecognizer()
+                                  ..onTap = () {
+                                    Navigator.pushNamed(context, '/SignUp');
+                                  },
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ],
                   ),

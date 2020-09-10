@@ -38,15 +38,15 @@ class MyHome extends StatelessWidget {
           ),
 
           //Logo image
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 18.0),
-                child: Image.asset(
-                  'assets/images/logo.png',
-                  width: 80,
-                ),
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 18.0),
+              child: Image.asset(
+                'assets/images/logo.png',
+                width: 80,
               ),
             ),
+          ),
 
           //Top text
           Center(
@@ -113,7 +113,7 @@ class MyHome extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  onPressed: () => Navigator.pushNamed(context, '/SignUp'),
+                  onPressed: () => Navigator.pushNamed(context, '/signin'),
                 ),
               )),
         ],

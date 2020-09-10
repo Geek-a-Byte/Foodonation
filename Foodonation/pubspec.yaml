@@ -28,6 +28,9 @@ dependencies:
   shared_preferences: ^0.5.7+2
   google_fonts: ^0.6.2
   provider: ^4.0.0
+  firebase_auth: ^0.14.0+5
+  cloud_firestore: ^0.12.9+4
+  firebase_core_web: ^0.2.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -72,6 +75,14 @@ flutter:
           weight: 100
         - asset: assets/fonts/HelveticaNeue-Medium.ttf
           weight: 500
+    - family: Lato
+      fonts:
+        - asset: assets/fonts/Lato-Regular.ttf
+        - asset: assets/fonts/Lato-Bold.ttf
+          weight: 700
+    - family: Anton
+      fonts:
+        - asset: assets/fonts/Anton-Regular.ttf
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

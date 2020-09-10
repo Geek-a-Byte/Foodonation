@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:Foodonation/providers/products_provider.dart';
 import './product_item.dart';
 
-
 class ProductsGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -13,7 +12,7 @@ class ProductsGrid extends StatelessWidget {
     ///provider already listened!
     final products = productsData.items;
     return GridView.builder(
-      padding: const EdgeInsets.all(25.0),
+      padding: const EdgeInsets.all(30.0),
       itemCount: products.length,
       itemBuilder: (ctx, i) => ChangeNotifierProvider(
         //wrapping with change notifier!
