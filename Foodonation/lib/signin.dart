@@ -104,7 +104,7 @@ class _SignInState extends State<SignIn> {
               children: [
                 Container(
                   margin: EdgeInsets.only(
-                    top: 150.0,
+                    top: MediaQuery.of(context).size.width * 0.35,
                     left: MediaQuery.of(context).size.width * 0.08,
                   ),
                   child: Column(
@@ -114,7 +114,7 @@ class _SignInState extends State<SignIn> {
                         'Sign In',
                         style: TextStyle(
                           color: Colors.white,
-                          fontFamily: 'Avenir',
+                          fontFamily: 'HelveticaNeue',
                           fontWeight: FontWeight.bold,
                           fontSize: 35,
                         ),
@@ -142,11 +142,11 @@ class _SignInState extends State<SignIn> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Padding(
-                              padding: const EdgeInsets.only(
-                                top: 65.0,
-                                bottom: 30,
-                                left: 10,
-                                right: 10,
+                              padding: EdgeInsets.only(
+                                top: MediaQuery.of(context).size.height * 0.05,
+                                bottom: MediaQuery.of(context).size.height * 0.03,
+                                left: MediaQuery.of(context).size.height * 0.01,
+                                right: MediaQuery.of(context).size.height * 0.01,
                               ),
                               child: TextFormField(
                                 style: TextStyle(
@@ -154,16 +154,19 @@ class _SignInState extends State<SignIn> {
                                 ),
                                 controller: nameController,
                                 decoration: InputDecoration(
-                                  labelText: "Name : ".toUpperCase(),
+                                  labelText: "Name : ",
 
                                   labelStyle: TextStyle(
                                     fontSize: 16,
                                     color: Colors.black54,
+                                    fontFamily: 'HelveticaNeue',
                                     fontWeight: FontWeight.bold,
                                   ),
 
                                   hintText: "Your Name",
-
+                                  contentPadding: EdgeInsets.only(
+                                    bottom: MediaQuery.of(context).size.height * .05,
+                                  ),
                                   hintStyle: TextStyle(color: Colors.black54),
 
                                   enabledBorder: new UnderlineInputBorder(
@@ -183,23 +186,27 @@ class _SignInState extends State<SignIn> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(
-                                top: 10.0,
-                                bottom: 35,
-                                left: 10,
-                                right: 10,
+                              padding: EdgeInsets.only(
+                                top: MediaQuery.of(context).size.height * 0.01,
+                                bottom: MediaQuery.of(context).size.height * 0.03,
+                                left: MediaQuery.of(context).size.height * 0.01,
+                                right: MediaQuery.of(context).size.height * 0.01,
                               ),
                               child: TextFormField(
                                 controller: passwordcontroller,
                                 obscureText: true,
                                 decoration: InputDecoration(
-                                  labelText: "Phone No : ".toUpperCase(),
+                                  labelText: "Phone No : ",
 
-                                  hintText: "*********",
+                                  hintText: "01*********",
+                                  contentPadding: EdgeInsets.only(
+                                    bottom: MediaQuery.of(context).size.height * .05,
+                                  ),
 
                                   labelStyle: TextStyle(
                                     fontSize: 16,
                                     color: Colors.black54,
+                                    fontFamily: 'HelveticaNeue',
                                     fontWeight: FontWeight.bold,
                                   ),
 
@@ -239,7 +246,8 @@ class _SignInState extends State<SignIn> {
                                             style: TextStyle(
                                               fontSize: 15,
                                               color: Colors.white,
-                                              fontFamily: 'Avenir',
+                                              fontFamily: 'HelveticaNeue',
+                                              fontWeight: FontWeight.bold,
                                             ),
                                           ),
                                         ],
@@ -252,7 +260,10 @@ class _SignInState extends State<SignIn> {
                               ],
                             ),
                             Padding(
-                              padding: const EdgeInsets.all(35.0),
+                              padding: EdgeInsets.symmetric(
+                                vertical:
+                                    MediaQuery.of(context).size.width * .075,
+                              ),
                               child: new RichText(
                                 text: new TextSpan(
                                   children: [

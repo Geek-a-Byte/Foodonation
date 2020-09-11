@@ -347,7 +347,7 @@ class _SignUpState extends State<SignUp> {
                           children: [
                             new TextSpan(
                               text: "Already have an account? ",
-                              style: new TextStyle(color: Colors.black),
+                              style: new TextStyle(color: Colors.black54),
                             ),
                             new TextSpan(
                               text: 'Sign in!',
