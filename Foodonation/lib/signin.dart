@@ -97,12 +97,13 @@ class _SignInState extends State<SignIn> {
         child: Container(
           child: Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: 0,    //Width equal to device
+              horizontal: 0, //Width equal to device
             ),
             child: Card(
               color: Colors.white,
               elevation: 0,
-              margin: EdgeInsets.only(top:MediaQuery.of(context).size.height * 0.25),
+              margin: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * 0.30),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(50),
@@ -117,21 +118,12 @@ class _SignInState extends State<SignIn> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 28.0),
-                        child: Text(
-                          "Sign in",
-                          style: GoogleFonts.openSans(
-                            textStyle: TextStyle(
-                              fontSize: 28,
-                              color: Colors.lightBlue[900],
-                              fontFamily: 'Avenir',
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
+                        padding: const EdgeInsets.only(
+                          top: 65.0,
+                          bottom: 30,
+                          left: 10,
+                          right: 10,
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
                         child: TextFormField(
                           style: TextStyle(
                             color: Colors.black54,
@@ -139,9 +131,12 @@ class _SignInState extends State<SignIn> {
                           controller: nameController,
                           decoration: InputDecoration(
                             labelText: "Name : ".toUpperCase(),
-
-                            labelStyle:
-                                TextStyle(fontSize: 15, color: Colors.black54),
+                          
+                            labelStyle: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black54,
+                              fontWeight: FontWeight.bold,
+                            ),
 
                             hintText: "Your Name",
 
@@ -163,7 +158,12 @@ class _SignInState extends State<SignIn> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.only(
+                          top: 10.0,
+                          bottom: 35,
+                          left: 10,
+                          right: 10,
+                        ),
                         child: TextFormField(
                           controller: passwordcontroller,
                           obscureText: true,
@@ -172,7 +172,11 @@ class _SignInState extends State<SignIn> {
 
                             hintText: "*********",
 
-                            labelStyle: TextStyle(color: Colors.black54),
+                            labelStyle: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black54,
+                              fontWeight: FontWeight.bold,
+                            ),
 
                             enabledBorder: new UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.black38),
@@ -193,11 +197,11 @@ class _SignInState extends State<SignIn> {
                           Padding(
                             padding: const EdgeInsets.all(25.0),
                             child: ButtonTheme(
-                              minWidth: 88,
-                              height: 38,
+                              minWidth: 150,
+                              height: 40,
                               child: RaisedButton(
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8.0),
+                                  borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 color: Color(0xff0984e3),
                                 child: Row(
@@ -221,13 +225,13 @@ class _SignInState extends State<SignIn> {
                         ],
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(5.0),
+                        padding: const EdgeInsets.all(35.0),
                         child: new RichText(
                           text: new TextSpan(
                             children: [
                               new TextSpan(
                                 text: "Don't have an account? ",
-                                style: new TextStyle(color: Colors.black),
+                                style: new TextStyle(color: Colors.black54),
                               ),
                               new TextSpan(
                                 text: 'Create one!',
