@@ -92,6 +92,7 @@ class _SignInState extends State<SignIn> {
     return Scaffold(
       body: Container(
         //color: Color(0xfff5f5f5),
+        height: MediaQuery.of(context).size.height,
         color: Colors.blue,
         child: Container(
           child: Padding(
