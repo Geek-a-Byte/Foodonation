@@ -99,156 +99,188 @@ class _SignInState extends State<SignIn> {
             padding: const EdgeInsets.symmetric(
               horizontal: 0, //Width equal to device
             ),
-            child: Card(
-              color: Colors.white,
-              elevation: 0,
-              margin: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.30),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(50),
-                  topRight: Radius.circular(50),
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(30.0),
-                child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: EdgeInsets.only(
+                    top: 150.0,
+                    left: MediaQuery.of(context).size.width * 0.08,
+                  ),
                   child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          top: 65.0,
-                          bottom: 30,
-                          left: 10,
-                          right: 10,
-                        ),
-                        child: TextFormField(
-                          style: TextStyle(
-                            color: Colors.black54,
-                          ),
-                          controller: nameController,
-                          decoration: InputDecoration(
-                            labelText: "Name : ".toUpperCase(),
-                          
-                            labelStyle: TextStyle(
-                              fontSize: 16,
-                              color: Colors.black54,
-                              fontWeight: FontWeight.bold,
-                            ),
-
-                            hintText: "Your Name",
-
-                            hintStyle: TextStyle(color: Colors.black54),
-
-                            enabledBorder: new UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black38),
-                            ),
-
-                            // and:
-
-                            focusedBorder: new UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white),
-                            ),
-                          ),
-                          cursorColor: Colors.black54,
-                          //cursorWidth: 7.000000,
-                          //cursorRadius: Radius.elliptical(10, 15),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          top: 10.0,
-                          bottom: 35,
-                          left: 10,
-                          right: 10,
-                        ),
-                        child: TextFormField(
-                          controller: passwordcontroller,
-                          obscureText: true,
-                          decoration: InputDecoration(
-                            labelText: "Phone No : ".toUpperCase(),
-
-                            hintText: "*********",
-
-                            labelStyle: TextStyle(
-                              fontSize: 16,
-                              color: Colors.black54,
-                              fontWeight: FontWeight.bold,
-                            ),
-
-                            enabledBorder: new UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black38),
-                            ),
-
-                            // and:
-
-                            focusedBorder: new UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white),
-                            ),
-                          ),
-                          cursorColor: Colors.black,
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.all(25.0),
-                            child: ButtonTheme(
-                              minWidth: 150,
-                              height: 40,
-                              child: RaisedButton(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                color: Color(0xff0984e3),
-                                child: Row(
-                                  children: <Widget>[
-                                    //Icon(Icons.person_add, color: Colors.white),  I PERSONALLY DON'T PREFER THIS THO
-                                    Text(
-                                      "Sign in",
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        color: Colors.white,
-                                        fontFamily: 'Avenir',
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                //color: Colors.black,    I CHANGED THIS//RAIYAN
-                                onPressed: () => gotoHomeScreen(name),
-                              ),
-                            ),
-                          ), //raised button
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(35.0),
-                        child: new RichText(
-                          text: new TextSpan(
-                            children: [
-                              new TextSpan(
-                                text: "Don't have an account? ",
-                                style: new TextStyle(color: Colors.black54),
-                              ),
-                              new TextSpan(
-                                text: 'Create one!',
-                                style: new TextStyle(color: Colors.blue),
-                                recognizer: new TapGestureRecognizer()
-                                  ..onTap = () {
-                                    Navigator.pushNamed(context, '/SignUp');
-                                  },
-                              ),
-                            ],
-                          ),
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Sign In',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'Avenir',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 35,
                         ),
                       ),
                     ],
                   ),
                 ),
-              ),
+                Expanded(
+                  child: Card(
+                    color: Colors.white,
+                    elevation: 0,
+                    margin: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height * 0.05),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(50),
+                        topRight: Radius.circular(50),
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(30.0),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: 65.0,
+                                bottom: 30,
+                                left: 10,
+                                right: 10,
+                              ),
+                              child: TextFormField(
+                                style: TextStyle(
+                                  color: Colors.black54,
+                                ),
+                                controller: nameController,
+                                decoration: InputDecoration(
+                                  labelText: "Name : ".toUpperCase(),
+
+                                  labelStyle: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.black54,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+
+                                  hintText: "Your Name",
+
+                                  hintStyle: TextStyle(color: Colors.black54),
+
+                                  enabledBorder: new UnderlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.black38),
+                                  ),
+
+                                  // and:
+
+                                  focusedBorder: new UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.white),
+                                  ),
+                                ),
+                                cursorColor: Colors.black54,
+                                //cursorWidth: 7.000000,
+                                //cursorRadius: Radius.elliptical(10, 15),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: 10.0,
+                                bottom: 35,
+                                left: 10,
+                                right: 10,
+                              ),
+                              child: TextFormField(
+                                controller: passwordcontroller,
+                                obscureText: true,
+                                decoration: InputDecoration(
+                                  labelText: "Phone No : ".toUpperCase(),
+
+                                  hintText: "*********",
+
+                                  labelStyle: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.black54,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+
+                                  enabledBorder: new UnderlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.black38),
+                                  ),
+
+                                  // and:
+
+                                  focusedBorder: new UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.white),
+                                  ),
+                                ),
+                                cursorColor: Colors.black,
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.all(25.0),
+                                  child: ButtonTheme(
+                                    minWidth: 150,
+                                    height: 40,
+                                    child: RaisedButton(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      ),
+                                      color: Color(0xff0984e3),
+                                      child: Row(
+                                        children: <Widget>[
+                                          //Icon(Icons.person_add, color: Colors.white),  I PERSONALLY DON'T PREFER THIS THO
+                                          Text(
+                                            "Sign in",
+                                            style: TextStyle(
+                                              fontSize: 15,
+                                              color: Colors.white,
+                                              fontFamily: 'Avenir',
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      //color: Colors.black,    I CHANGED THIS//RAIYAN
+                                      onPressed: () => gotoHomeScreen(name),
+                                    ),
+                                  ),
+                                ), //raised button
+                              ],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(35.0),
+                              child: new RichText(
+                                text: new TextSpan(
+                                  children: [
+                                    new TextSpan(
+                                      text: "Don't have an account? ",
+                                      style:
+                                          new TextStyle(color: Colors.black54),
+                                    ),
+                                    new TextSpan(
+                                      text: 'Create one!',
+                                      style: new TextStyle(color: Colors.blue),
+                                      recognizer: new TapGestureRecognizer()
+                                        ..onTap = () {
+                                          Navigator.pushNamed(
+                                              context, '/SignUp');
+                                        },
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ),
