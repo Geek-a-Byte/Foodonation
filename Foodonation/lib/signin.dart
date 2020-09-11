@@ -91,18 +91,24 @@ class _SignInState extends State<SignIn> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Color(0xfff5f5f5),
+        //color: Color(0xfff5f5f5),
+        color: Colors.blue,
         child: Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: 21,
+              horizontal: 0,    //Width equal to device
             ),
             child: Card(
+              elevation: 0,
+              margin: EdgeInsets.only(top:MediaQuery.of(context).size.height * 0.1),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(18.0),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(50),
+                  topRight: Radius.circular(50),
+                ),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(28.0),
+                padding: const EdgeInsets.all(30.0),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
