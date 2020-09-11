@@ -50,320 +50,349 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
+    Size devSize = MediaQuery.of(context).size; //Gets device dimension
+
     return Scaffold(
       body: Container(
-        color: Color(0xffdfe6e9),
+        //color: Color(0xffdfe6e9),
+        color: Colors.blue,
+        height: MediaQuery.of(context).size.height,
         child: Center(
-          child: Card(
-            margin: EdgeInsets.all(28.0),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(18.0),
-            ),
+          child: Container(
+            height: MediaQuery.of(context).size.height,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                //Create account
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: devSize.height * .125,
+                    left: devSize.width * .06,
+                  ),
+                  child: Text(
+                    "Create  Account",
+                    style: TextStyle(
+                      fontSize: 30,
+                      color: Colors.white,
+                      fontFamily: 'HelveticaNeue',
+                      fontWeight: FontWeight.w700,
+                      //wordSpacing: 10,
+                    ),
+                  ),
+                ),
 
-            //color: Color(hashCode),
+                Expanded(
+                  child: Card(
+                    elevation: 0,
+                    margin: EdgeInsets.only(top: devSize.height * .035),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(50),
+                        topRight: Radius.circular(50),
+                      ),
+                    ),
 
-            //color: Color.fromRGBO(0, 0, 40, 0.35),
+                    //color: Color(hashCode),
 
-            //color : const Color(0XFF880E4F), //0xff hocche opacity
+                    //color: Color.fromRGBO(0, 0, 40, 0.35),
 
-            color: Colors.white,
+                    //color : const Color(0XFF880E4F), //0xff hocche opacity
 
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    //Create account
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 18.0),
-                      child: Text("Create  Account",
-                          style: GoogleFonts.openSans(
-                            textStyle: TextStyle(
-                              fontSize: 30,
-                              color: Colors.lightBlue[900],
-                              fontFamily: 'Avenir',
-                              fontWeight: FontWeight.w700,
-                              //wordSpacing: 10,
+                    color: Colors.white,
+
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: MediaQuery.of(context).size.width * 0.05,
+                      ),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.05,
                             ),
-                          )),
-                    ),
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: TextFormField(
+                                style: TextStyle(
+                                  color: Colors.black87,
+                                ),
+                                controller: nameController,
+                                decoration: InputDecoration(
+                                  labelText: "Name:",
 
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: TextFormField(
-                        style: TextStyle(
-                          color: Colors.black87,
-                        ),
-                        controller: nameController,
-                        decoration: InputDecoration(
-                          labelText: "Name:".toUpperCase(),
+                                  labelStyle: TextStyle(
+                                    fontSize: 15,
+                                    color: Colors.black54,
+                                    fontFamily: 'HelveticaNeue',
+                                    fontWeight: FontWeight.w700,
+                                  ),
 
-                          labelStyle: TextStyle(
-                            fontSize: 13,
-                            color: Colors.black54,
-                            fontFamily: 'HelveticaNeue',
-                            fontWeight: FontWeight.w700,
-                          ),
+                                  hintText: "Your Name",
 
-                          hintText: "Your Name",
+                                  hintStyle: TextStyle(color: Colors.blueGrey),
 
-                          hintStyle: TextStyle(color: Colors.blueGrey),
+                                  enabledBorder: new UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.grey),
+                                  ),
 
-                          enabledBorder: new UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey),
-                          ),
+                                  // and:
 
-                          // and:
-
-                          focusedBorder: new UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white),
-                          ),
-                        ),
-                        cursorColor: Colors.black,
-                        //cursorWidth: 7.000000,
-                        //cursorRadius: Radius.elliptical(10, 15),
-                      ),
-                    ),
-
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: TextFormField(
-                        style: TextStyle(
-                          color: Colors.black87,
-                        ),
-                        controller: AddController,
-                        decoration: InputDecoration(
-                          labelText: "Address:".toUpperCase(),
-
-                          labelStyle: TextStyle(
-                              fontSize: 13,
-                              fontFamily: 'HelveticaNeue',
-                              fontWeight: FontWeight.w700,
-                              color: Colors.black54),
-
-                          hintText: "Your Address",
-
-                          hintStyle: TextStyle(
-                              fontFamily: 'HelveticaNeue',
-                              fontWeight: FontWeight.w500,
-                              color: Colors.blueGrey),
-
-                          enabledBorder: new UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey),
-                          ),
-
-                          // and:
-
-                          focusedBorder: new UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white),
-                          ),
-                        ),
-                        cursorColor: Colors.black,
-                        //cursorWidth: 7.000000,
-                        //cursorRadius: Radius.elliptical(10, 15),
-                      ),
-                    ),
-
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: TextFormField(
-                        style: TextStyle(
-                          color: Colors.black87,
-                        ),
-                        controller: nidController,
-                        decoration: InputDecoration(
-                          labelText: "NID:".toUpperCase(),
-
-                          labelStyle: TextStyle(
-                              fontSize: 13,
-                              fontFamily: 'HelveticaNeue',
-                              fontWeight: FontWeight.w700,
-                              color: Colors.black54),
-
-                          hintText: "Your NID",
-
-                          hintStyle: TextStyle(
-                              fontFamily: 'HelveticaNeue',
-                              fontWeight: FontWeight.w500,
-                              color: Colors.blueGrey),
-
-                          enabledBorder: new UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey),
-                          ),
-
-                          // and:
-
-                          focusedBorder: new UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white),
-                          ),
-                        ),
-                        cursorColor: Colors.black,
-                        //cursorWidth: 7.000000,
-                        //cursorRadius: Radius.elliptical(10, 15),
-                      ),
-                    ),
-
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: TextFormField(
-                        style: TextStyle(
-                          fontFamily: 'HelveticaNeue',
-                          fontWeight: FontWeight.w700,
-                          color: Colors.black54,
-                        ),
-                        controller: contactController,
-                        decoration: InputDecoration(
-                          labelText: "Phone no:".toUpperCase(),
-
-                          labelStyle: TextStyle(
-                              fontSize: 13,
-                              fontFamily: 'HelveticaNeue',
-                              fontWeight: FontWeight.w700,
-                              color: Colors.black54),
-
-                          hintText: "Your phone number",
-
-                          hintStyle: TextStyle(
-                              fontFamily: 'HelveticaNeue',
-                              fontWeight: FontWeight.w500,
-                              color: Colors.blueGrey),
-
-                          enabledBorder: new UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey),
-                          ),
-
-                          // and:
-
-                          focusedBorder: new UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white),
-                          ),
-                        ),
-                        cursorColor: Colors.black,
-                        //cursorWidth: 7.000000,
-                        //cursorRadius: Radius.elliptical(10, 15),
-                      ),
-                    ),
-
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: TextFormField(
-                        controller: passwordcontroller,
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          labelText: "Password:".toUpperCase(),
-
-                          hintText: "*********",
-
-                          labelStyle: TextStyle(
-                              fontFamily: 'HelveticaNeue',
-                              fontWeight: FontWeight.w700,
-                              fontSize: 13,
-                              color: Colors.black54),
-
-                          enabledBorder: new UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey),
-                          ),
-
-                          // and:
-
-                          focusedBorder: new UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white),
-                          ),
-                        ),
-                        cursorColor: Colors.black,
-                      ),
-                    ),
-
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: TextFormField(
-                        controller: confirmpasswordcontroller,
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          labelText: "Confirm Password:".toUpperCase(),
-
-                          hintText: "*********",
-
-                          labelStyle: TextStyle(
-                              fontFamily: 'HelveticaNeue',
-                              fontWeight: FontWeight.w700,
-                              fontSize: 13,
-                              color: Colors.black54),
-
-                          enabledBorder: new UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey),
-                          ),
-
-                          // and:
-
-                          focusedBorder: new UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white),
-                          ),
-                        ),
-                        cursorColor: Colors.black,
-                      ),
-                    ),
-
-                    //Buttons
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: ButtonTheme(
-                            minWidth: 88,
-                            height: 38,
-                            child: RaisedButton(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.0),
+                                  focusedBorder: new UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.white),
+                                  ),
+                                ),
+                                cursorColor: Colors.black,
+                                //cursorWidth: 7.000000,
+                                //cursorRadius: Radius.elliptical(10, 15),
                               ),
-                              color: Color(0xff0984e3),
-                              child: Row(
-                                children: <Widget>[
-                                  //Icon(Icons.person_add, color: Colors.white),  I PERSONALLY DON'T PREFER THIS THO
-                                  Text(
-                                    "Sign Up",
-                                    style: TextStyle(
+                            ),
+
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: TextFormField(
+                                style: TextStyle(
+                                  color: Colors.black87,
+                                ),
+                                controller: AddController,
+                                decoration: InputDecoration(
+                                  labelText: "Address:",
+
+                                  labelStyle: TextStyle(
                                       fontSize: 15,
-                                      color: Colors.white,
-                                      fontFamily: 'Avenir',
+                                      fontFamily: 'HelveticaNeue',
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.black54),
+
+                                  hintText: "Your Address",
+
+                                  hintStyle: TextStyle(
+                                      fontFamily: 'HelveticaNeue',
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.blueGrey),
+
+                                  enabledBorder: new UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.grey),
+                                  ),
+
+                                  // and:
+
+                                  focusedBorder: new UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.white),
+                                  ),
+                                ),
+                                cursorColor: Colors.black,
+                                //cursorWidth: 7.000000,
+                                //cursorRadius: Radius.elliptical(10, 15),
+                              ),
+                            ),
+
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: TextFormField(
+                                style: TextStyle(
+                                  color: Colors.black87,
+                                ),
+                                controller: nidController,
+                                decoration: InputDecoration(
+                                  labelText: "NID:",
+
+                                  labelStyle: TextStyle(
+                                      fontSize: 15,
+                                      fontFamily: 'HelveticaNeue',
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.black54),
+
+                                  hintText: "Your NID",
+
+                                  hintStyle: TextStyle(
+                                      fontFamily: 'HelveticaNeue',
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.blueGrey),
+
+                                  enabledBorder: new UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.grey),
+                                  ),
+
+                                  // and:
+
+                                  focusedBorder: new UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.white),
+                                  ),
+                                ),
+                                cursorColor: Colors.black,
+                                //cursorWidth: 7.000000,
+                                //cursorRadius: Radius.elliptical(10, 15),
+                              ),
+                            ),
+
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: TextFormField(
+                                style: TextStyle(
+                                  fontFamily: 'HelveticaNeue',
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.black54,
+                                ),
+                                controller: contactController,
+                                decoration: InputDecoration(
+                                  labelText: "Phone no:",
+
+                                  labelStyle: TextStyle(
+                                      fontSize: 15,
+                                      fontFamily: 'HelveticaNeue',
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.black54),
+
+                                  hintText: "Your phone number",
+
+                                  hintStyle: TextStyle(
+                                      fontFamily: 'HelveticaNeue',
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.blueGrey),
+
+                                  enabledBorder: new UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.grey),
+                                  ),
+
+                                  // and:
+
+                                  focusedBorder: new UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.white),
+                                  ),
+                                ),
+                                cursorColor: Colors.black,
+                                //cursorWidth: 7.000000,
+                                //cursorRadius: Radius.elliptical(10, 15),
+                              ),
+                            ),
+
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: TextFormField(
+                                controller: passwordcontroller,
+                                obscureText: true,
+                                decoration: InputDecoration(
+                                  labelText: "Password:",
+
+                                  hintText: "*********",
+
+                                  labelStyle: TextStyle(
+                                      fontFamily: 'HelveticaNeue',
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 15,
+                                      color: Colors.black54),
+
+                                  enabledBorder: new UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.grey),
+                                  ),
+
+                                  // and:
+
+                                  focusedBorder: new UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.white),
+                                  ),
+                                ),
+                                cursorColor: Colors.black,
+                              ),
+                            ),
+
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: TextFormField(
+                                controller: confirmpasswordcontroller,
+                                obscureText: true,
+                                decoration: InputDecoration(
+                                  labelText: "Confirm Password:",
+
+                                  hintText: "*********",
+
+                                  labelStyle: TextStyle(
+                                      fontFamily: 'HelveticaNeue',
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 15,
+                                      color: Colors.black54),
+
+                                  enabledBorder: new UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.grey),
+                                  ),
+
+                                  // and:
+
+                                  focusedBorder: new UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.white),
+                                  ),
+                                ),
+                                cursorColor: Colors.black,
+                              ),
+                            ),
+
+                            //Buttons
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: ButtonTheme(
+                                    minWidth: 150,
+                                    height: 40,
+                                    child: RaisedButton(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
+                                      color: Color(0xff0984e3),
+                                      child: Row(
+                                        children: <Widget>[
+                                          //Icon(Icons.person_add, color: Colors.white),  I PERSONALLY DON'T PREFER THIS THO
+                                          Text(
+                                            "Sign Up",
+                                            style: TextStyle(
+                                              fontSize: 15,
+                                              color: Colors.white,
+                                              fontFamily: 'Avenir',
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      //color: Colors.black,    I CHANGED THIS//RAIYAN
+                                      onPressed: signup,
                                     ),
                                   ),
-                                ],
+                                ), //raised button
+                              ],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: new RichText(
+                                text: new TextSpan(
+                                  children: [
+                                    new TextSpan(
+                                      text: "Already have an account? ",
+                                      style:
+                                          new TextStyle(color: Colors.black54),
+                                    ),
+                                    new TextSpan(
+                                      text: 'Sign in!',
+                                      style: new TextStyle(color: Colors.blue),
+                                      recognizer: new TapGestureRecognizer()
+                                        ..onTap = () {
+                                          Navigator.pushNamed(
+                                              context, '/signin');
+                                        },
+                                    ),
+                                  ],
+                                ),
                               ),
-                              //color: Colors.black,    I CHANGED THIS//RAIYAN
-                              onPressed: signup,
-                            ),
-                          ),
-                        ), //raised button
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: new RichText(
-                        text: new TextSpan(
-                          children: [
-                            new TextSpan(
-                              text: "Already have an account? ",
-                              style: new TextStyle(color: Colors.black54),
-                            ),
-                            new TextSpan(
-                              text: 'Sign in!',
-                              style: new TextStyle(color: Colors.blue),
-                              recognizer: new TapGestureRecognizer()
-                                ..onTap = () {
-                                  Navigator.pushNamed(context, '/signin');
-                                },
                             ),
                           ],
                         ),
                       ),
                     ),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
           ),
         ),
