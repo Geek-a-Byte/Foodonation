@@ -93,14 +93,15 @@ class _SignInState extends State<SignIn> {
       body: Container(
         //color: Color(0xfff5f5f5),
         color: Colors.blue,
-        child: Center(
+        child: Container(
           child: Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 0,    //Width equal to device
             ),
             child: Card(
+              color: Colors.white,
               elevation: 0,
-              margin: EdgeInsets.only(top:MediaQuery.of(context).size.height * 0.1),
+              margin: EdgeInsets.only(top:MediaQuery.of(context).size.height * 0.25),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(50),
