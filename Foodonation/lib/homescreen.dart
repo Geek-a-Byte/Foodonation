@@ -10,8 +10,9 @@ void main() => runApp(HomeScreen());
 class HomeScreen extends StatelessWidget {
   //This is where username goes in
   final FirebaseUser user;
-
-  HomeScreen({this.user});
+  String name ;
+  HomeScreen({this.user, this.name});
+  
   @override
   //HomeScreen(userName);
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class HomeScreen extends StatelessWidget {
           fontFamily: 'HelveticaNeue',
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: OverviewScreen(user),
+        home: OverviewScreen(user, name),
         routes: {
           /// must define it in main.dart..it reduced state management complexity!
           ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),

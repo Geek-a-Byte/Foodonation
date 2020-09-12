@@ -18,88 +18,117 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   //taking the input from the user
-  TextEditingController nameController = TextEditingController();
-  TextEditingController phonecontroller = TextEditingController();
-  TextEditingController codecontroller = TextEditingController();
+  //TextEditingController nameController = TextEditingController();
+  //TextEditingController phonecontroller = TextEditingController();
+  //TextEditingController codecontroller = TextEditingController();
+
+  final _nameController = TextEditingController();
+  final _phoneController = TextEditingController();
+  final _codeController = TextEditingController();
 
   bool _showPass = false;
 
-  Future<bool> loginUser(String phone, BuildContext context) async {
+  Future<void> loginUser(
+      String phone, BuildContext context, String userName) async {
     FirebaseAuth _auth = FirebaseAuth.instance;
+    print(phone);
     _auth.verifyPhoneNumber(
-        phoneNumber: phone,
-        timeout: Duration(seconds: 60),
-        verificationCompleted: (AuthCredential credential) async {
-          Navigator.of(context).pop();
-          AuthResult result = await _auth.signInWithCredential(credential);
-          FirebaseUser user = result.user;
-          if (user != null) {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => OverviewScreen(user)));
-          } else {
-            print("Error");
-          }
-          //this verification is done when
-        },
-        verificationFailed: (AuthException e) {
-          print("is it?");
-          print(e);
-        },
-        codeSent: (String verificationId, [int forceResendingToken]) {
-          showDialog(
-              context: context,
-              barrierDismissible: false,
-              builder: (context) {
-                return AlertDialog(
-                    title: Text("Give me code?"),
-                    content: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        TextField(
-                          controller: codecontroller,
-                        )
-                      ],
-                    ),
-                    actions: <Widget>[
-                      FlatButton(
-                        child: Text("Confirm"),
-                        textColor: Colors.white,
-                        color: Colors.blue,
-                        onPressed: () async {
-                          final code = codecontroller.text.trim();
-                          AuthCredential credential =
-                              PhoneAuthProvider.getCredential(
-                                  //verificationId: verificationId,
-                                  verificationId: "8801928943835",
-                                  smsCode: "12345"
-                                  //smsCode: code
-                                  );
-                          AuthResult result =
-                              await _auth.signInWithCredential(credential);
-                          FirebaseUser user = result.user;
-                          if (user != null) {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        OverviewScreen(user)));
-                          } else {
-                            print("Error");
-                          }
-                        },
+      phoneNumber: phone,
+      timeout: Duration(seconds: 60),
+      verificationCompleted: (AuthCredential credential) async {
+        Navigator.of(context).pop();
+
+        AuthResult result = await _auth.signInWithCredential(credential);
+
+        FirebaseUser user = result.user;
+
+        if (user != null) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              //builder: (context) => OverviewScreen(user),
+              builder: (context) => HomeScreen(
+                user: user,
+                name: userName,
+              ),
+            ),
+          );
+        } else {
+          print("Error");
+        }
+        //this verification is done when
+      },
+      verificationFailed: (AuthException e) {
+        print(e.message);
+      },
+      codeSent: (String verificationId, [int forceResendingToken]) {
+        print('Verification id is:');
+        print(verificationId);
+        showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) {
+              return AlertDialog(
+                  title: Text("Give me code?"),
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      TextField(
+                        controller: _codeController,
                       )
-                    ]);
-              });
-        },
-        codeAutoRetrievalTimeout: null);
+                    ],
+                  ),
+                  actions: <Widget>[
+                    FlatButton(
+                      child: Text("Confirm"),
+                      textColor: Colors.white,
+                      color: Colors.blue,
+                      onPressed: () async {
+                        final code = _codeController.text.trim();
+                        AuthCredential credential =
+                            PhoneAuthProvider.getCredential(
+                          verificationId: verificationId,
+                          //verificationId: "8801928943835",
+                          //verificationId: "8801840054144",
+                          //smsCode: "12345"
+                          smsCode: code,
+                          //name:_nameController;
+                        );
+
+                        AuthResult result =
+                            await _auth.signInWithCredential(credential);
+
+                        FirebaseUser user = result.user;
+
+                        if (user != null) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              //builder: (context) => OverviewScreen(user),
+                              builder: (context) => HomeScreen(
+                                user: user,
+                                name: userName,
+                              ),
+                            ),
+                          );
+                        } else {
+                          print("Error");
+                        }
+                      },
+                    )
+                  ]);
+            });
+      },
+      codeAutoRetrievalTimeout: null,
+    );
   }
   // String title = "Sign in";
   //int NID = 2019140;
 
-  String name = 'RoboCup';
+  var name = 'User';
   String pass = 'robocup';
 
-  gotoHomeScreen(String userName) {
+  gotoHomeScreen(var userName) {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => HomeScreen()),
@@ -176,7 +205,8 @@ class _SignInState extends State<SignIn> {
                                     MediaQuery.of(context).size.height * 0.01,
                               ),
                               child: TextFormField(
-                                controller: nameController,
+                                controller: _nameController,
+
                                 decoration: InputDecoration(
                                   labelText: "Name : ",
 
@@ -223,7 +253,7 @@ class _SignInState extends State<SignIn> {
                               child: Column(
                                 children: [
                                   TextFormField(
-                                    controller: phonecontroller,
+                                    controller: _phoneController,
                                     obscureText:
                                         (_showPass == true) ? false : true,
                                     decoration: InputDecoration(
@@ -300,8 +330,9 @@ class _SignInState extends State<SignIn> {
                                       //onPressed: () => gotoHomeScreen(name),
                                       onPressed: () {
                                         final phone =
-                                            phonecontroller.text.trim();
-                                        loginUser(phone, context);
+                                            _phoneController.text.trim();
+                                        loginUser(phone, context,
+                                            _nameController.text.toString());
                                       },
                                     ),
                                   ),

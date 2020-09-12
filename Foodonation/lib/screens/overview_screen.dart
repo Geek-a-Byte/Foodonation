@@ -9,8 +9,12 @@ class OverviewScreen extends StatelessWidget {
   // OverviewScreen(FirebaseUser user) {
   //   user1 = user;
   // }
-  var user = "robo";
-  OverviewScreen(user);
+  //var user = "RoboCup";
+  var user;
+  //OverviewScreen(user);
+  OverviewScreen(FirebaseUser userName, String un) {
+     user = un;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +86,7 @@ class OverviewScreen extends StatelessWidget {
                 child: Text(
                   'Hi! $user',
                   style: TextStyle(
-                    fontSize: 35,
+                    fontSize: 30,
                     fontFamily: 'Avenir',
                     fontWeight: FontWeight.w700,
                     color: Colors.white,
@@ -93,7 +97,7 @@ class OverviewScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(right: 20.0),
                   child: IconButton(
-                    iconSize: 35,
+                    iconSize: 30,
 
                     ///right icon
                     icon: Icon(Icons.menu),

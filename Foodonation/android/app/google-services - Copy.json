@@ -15,14 +15,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "686574987268-r4nl17r1nklonv67es3bk16q2jvbnidv.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.ideaoverflow.Foodonation",
-            "certificate_hash": "ad4ce886a9b9297d2d1a8044483be235388e21f0"
-          }
-        },
-        {
           "client_id": "686574987268-71g52bc5jsu23kgmvnse3k0ebb72htg1.apps.googleusercontent.com",
           "client_type": 3
         }
