@@ -1,17 +1,22 @@
+import 'package:Foodonation/homescreen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/products_grid.dart';
 
 class OverviewScreen extends StatelessWidget {
-  String user = 'RoboCup';
+  // var user1;
+  // OverviewScreen(FirebaseUser user) {
+  //   user1 = user;
+  // }
+  var user = "robo";
+  OverviewScreen(user);
 
-  OverviewScreen(this.user);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       body: Stack(
-        children: [          
+        children: [
           new Container(
               height: 185,
               width: MediaQuery.of(context)
@@ -41,7 +46,7 @@ class OverviewScreen extends StatelessWidget {
                   right: MediaQuery.of(context).size.width * .07,
                 ),
                 //padding: const EdgeInsets.symmetric(vertical: 28.0),
-                
+
                 // child: Row(
                 //   children: [
                 //     Text(
@@ -67,13 +72,13 @@ class OverviewScreen extends StatelessWidget {
                 //   ],
                 // ),
               )),
-        
-        Padding(
-          padding: const EdgeInsets.only(top:80.0),
-          child: AppBar(backgroundColor: Colors.transparent,
+          Padding(
+            padding: const EdgeInsets.only(top: 80.0),
+            child: AppBar(
+              backgroundColor: Colors.transparent,
               elevation: 0,
               title: Padding(
-                padding: const EdgeInsets.only(left:15.0),
+                padding: const EdgeInsets.only(left: 15.0),
                 child: Text(
                   'Hi! $user',
                   style: TextStyle(
@@ -98,16 +103,12 @@ class OverviewScreen extends StatelessWidget {
                 ),
               ],
             ),
-        ),
-
-        
+          ),
           new Container(
             margin: EdgeInsets.only(top: 185),
             //padding: EdgeInsets.only(top: 15),
             child: ProductsGrid(),
           ),
-
-          
         ],
       ),
     );

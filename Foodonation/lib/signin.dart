@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:Foodonation/homescreen.dart';
+import 'package:Foodonation/screens/overview_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -15,12 +17,83 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  // TextEditingController confirmpasswordcontroller = TextEditingController();
-  //TextEditingController nidController = TextEditingController();
+  //taking the input from the user
   TextEditingController nameController = TextEditingController();
-  TextEditingController passwordcontroller = TextEditingController();
+  TextEditingController phonecontroller = TextEditingController();
+  TextEditingController codecontroller = TextEditingController();
+
+  Future<bool> loginUser(String phone, BuildContext context) async {
+    FirebaseAuth _auth = FirebaseAuth.instance;
+    _auth.verifyPhoneNumber(
+        phoneNumber: phone,
+        timeout: Duration(seconds: 60),
+        verificationCompleted: (AuthCredential credential) async {
+          Navigator.of(context).pop();
+          AuthResult result = await _auth.signInWithCredential(credential);
+          FirebaseUser user = result.user;
+          if (user != null) {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => OverviewScreen(user)));
+          } else {
+            print("Error");
+          }
+          //this verification is done when
+        },
+        verificationFailed: (AuthException e) {
+          print("is it?");
+          print(e);
+        },
+        codeSent: (String verificationId, [int forceResendingToken]) {
+          showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (context) {
+                return AlertDialog(
+                    title: Text("Give me code?"),
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        TextField(
+                          controller: codecontroller,
+                        )
+                      ],
+                    ),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text("Confirm"),
+                        textColor: Colors.white,
+                        color: Colors.blue,
+                        onPressed: () async {
+                          final code = codecontroller.text.trim();
+                          AuthCredential credential =
+                              PhoneAuthProvider.getCredential(
+                                  //verificationId: verificationId,
+                                  verificationId: "8801928943835",
+                                  smsCode: "12345"
+                                  //smsCode: code
+                                  );
+                          AuthResult result =
+                              await _auth.signInWithCredential(credential);
+                          FirebaseUser user = result.user;
+                          if (user != null) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        OverviewScreen(user)));
+                          } else {
+                            print("Error");
+                          }
+                        },
+                      )
+                    ]);
+              });
+        },
+        codeAutoRetrievalTimeout: null);
+  }
   // String title = "Sign in";
   //int NID = 2019140;
+
   String name = 'RoboCup';
   String pass = 'robocup';
 
@@ -29,62 +102,6 @@ class _SignInState extends State<SignIn> {
       context,
       MaterialPageRoute(builder: (context) => HomeScreen()),
     );
-  }
-
-  signin() async {
-    var response;
-
-    var data = {
-      //"nid": nidController.text,
-      //"name": nameController.text,
-      //"password": passwordcontroller.text
-
-      //Temporary data
-      //"nid": NID,
-      "name": name,
-      "password": pass,
-    };
-
-    //response = await http.post(baseURL + "signin.php", body: jsonEncode(data));
-    response = await http.post(baseURL + "signin.php", body: jsonEncode(data));
-    //print(response.body);
-
-    var jsonbody = jsonDecode(response.body);
-    //print(jsonbody);
-
-    // String jsonsDataString = response.body
-    //     .toString(); // toString of Response's body is assigned to jsonDataString
-    // var jsonbody = jsonDecode(jsonsDataString);
-    //if (jsonbody["nid"] == nidController.text &&
-    //   jsonbody["name"] == nameController.text &&
-    //    jsonbody["password"] == passwordcontroller.text) {
-    if (jsonbody["name"] == name && jsonbody["password"] == pass) {
-      SuccessAlertBox(
-          context: context,
-          title: "congrats!",
-          messageText: "You are logged in, now select your package!");
-
-      //print(7);
-      setValue("isLoggedin", "true");
-      setValue("name", jsonbody["name"]);
-      //setValue("nid", jsonbody["nid"]);
-      setValue("phone", jsonbody["phone"]);
-      //print(8);
-      //navigation through pages
-      //Navigator.pushNamed(context, '/dashboard');
-      print("Parsi mamma");
-
-      gotoHomeScreen(name);
-    } else if (jsonbody["success"] == "10") {
-      print("Invalid NID or password");
-      WarningAlertBox(
-          context: context,
-          title: "Wait!",
-          messageText: "Invalid username or password");
-    }
-
-    /// Navigator.pushNamed(context, '/dashboard');
-    /*,style: TextStyle(fontSize: 15,color: Colors.black),*/
   }
 
   @override
@@ -144,9 +161,11 @@ class _SignInState extends State<SignIn> {
                             Padding(
                               padding: EdgeInsets.only(
                                 top: MediaQuery.of(context).size.height * 0.05,
-                                bottom: MediaQuery.of(context).size.height * 0.03,
+                                bottom:
+                                    MediaQuery.of(context).size.height * 0.03,
                                 left: MediaQuery.of(context).size.height * 0.01,
-                                right: MediaQuery.of(context).size.height * 0.01,
+                                right:
+                                    MediaQuery.of(context).size.height * 0.01,
                               ),
                               child: TextFormField(
                                 style: TextStyle(
@@ -165,7 +184,8 @@ class _SignInState extends State<SignIn> {
 
                                   hintText: "Your Name",
                                   contentPadding: EdgeInsets.only(
-                                    bottom: MediaQuery.of(context).size.height * .05,
+                                    bottom: MediaQuery.of(context).size.height *
+                                        .05,
                                   ),
                                   hintStyle: TextStyle(color: Colors.black54),
 
@@ -188,19 +208,22 @@ class _SignInState extends State<SignIn> {
                             Padding(
                               padding: EdgeInsets.only(
                                 top: MediaQuery.of(context).size.height * 0.01,
-                                bottom: MediaQuery.of(context).size.height * 0.03,
+                                bottom:
+                                    MediaQuery.of(context).size.height * 0.03,
                                 left: MediaQuery.of(context).size.height * 0.01,
-                                right: MediaQuery.of(context).size.height * 0.01,
+                                right:
+                                    MediaQuery.of(context).size.height * 0.01,
                               ),
                               child: TextFormField(
-                                controller: passwordcontroller,
+                                controller: phonecontroller,
                                 obscureText: true,
                                 decoration: InputDecoration(
                                   labelText: "Phone No : ",
 
                                   hintText: "01*********",
                                   contentPadding: EdgeInsets.only(
-                                    bottom: MediaQuery.of(context).size.height * .05,
+                                    bottom: MediaQuery.of(context).size.height *
+                                        .05,
                                   ),
 
                                   labelStyle: TextStyle(
@@ -253,7 +276,12 @@ class _SignInState extends State<SignIn> {
                                         ],
                                       ),
                                       //color: Colors.black,    I CHANGED THIS//RAIYAN
-                                      onPressed: () => gotoHomeScreen(name),
+                                      //onPressed: () => gotoHomeScreen(name),
+                                      onPressed: () {
+                                        final phone =
+                                            phonecontroller.text.trim();
+                                        loginUser(phone, context);
+                                      },
                                     ),
                                   ),
                                 ), //raised button

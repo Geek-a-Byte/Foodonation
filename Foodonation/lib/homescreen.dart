@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import './screens/overview_screen.dart';
@@ -7,9 +8,12 @@ import 'package:Foodonation/providers/products_provider.dart';
 void main() => runApp(HomeScreen());
 
 class HomeScreen extends StatelessWidget {
-  String userName = 'RoboCup'; //This is where username goes in
-  
+  //This is where username goes in
+  final FirebaseUser user;
+
+  HomeScreen({this.user});
   @override
+  //HomeScreen(userName);
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (ctx) => Products(),
@@ -21,7 +25,7 @@ class HomeScreen extends StatelessWidget {
           fontFamily: 'HelveticaNeue',
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: OverviewScreen(userName),
+        home: OverviewScreen(user),
         routes: {
           /// must define it in main.dart..it reduced state management complexity!
           ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
