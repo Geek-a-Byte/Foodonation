@@ -22,6 +22,8 @@ class _SignInState extends State<SignIn> {
   TextEditingController phonecontroller = TextEditingController();
   TextEditingController codecontroller = TextEditingController();
 
+  bool _showPass = false;
+
   Future<bool> loginUser(String phone, BuildContext context) async {
     FirebaseAuth _auth = FirebaseAuth.instance;
     _auth.verifyPhoneNumber(
@@ -104,6 +106,12 @@ class _SignInState extends State<SignIn> {
     );
   }
 
+  void _toggle() {
+    setState(() {
+      _showPass = !_showPass;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -168,9 +176,6 @@ class _SignInState extends State<SignIn> {
                                     MediaQuery.of(context).size.height * 0.01,
                               ),
                               child: TextFormField(
-                                style: TextStyle(
-                                  color: Colors.black54,
-                                ),
                                 controller: nameController,
                                 decoration: InputDecoration(
                                   labelText: "Name : ",
@@ -183,10 +188,10 @@ class _SignInState extends State<SignIn> {
                                   ),
 
                                   hintText: "Your Name",
-                                  contentPadding: EdgeInsets.only(
-                                    bottom: MediaQuery.of(context).size.height *
-                                        .05,
-                                  ),
+                                  // contentPadding: EdgeInsets.only(
+                                  //   bottom: MediaQuery.of(context).size.height *
+                                  //       .05,
+                                  // ),
                                   hintStyle: TextStyle(color: Colors.black54),
 
                                   enabledBorder: new UnderlineInputBorder(
@@ -197,7 +202,8 @@ class _SignInState extends State<SignIn> {
                                   // and:
 
                                   focusedBorder: new UnderlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white),
+                                    borderSide:
+                                        BorderSide(color: Colors.black12),
                                   ),
                                 ),
                                 cursorColor: Colors.black54,
@@ -214,37 +220,52 @@ class _SignInState extends State<SignIn> {
                                 right:
                                     MediaQuery.of(context).size.height * 0.01,
                               ),
-                              child: TextFormField(
-                                controller: phonecontroller,
-                                obscureText: true,
-                                decoration: InputDecoration(
-                                  labelText: "Phone No : ",
+                              child: Column(
+                                children: [
+                                  TextFormField(
+                                    controller: phonecontroller,
+                                    obscureText:
+                                        (_showPass == true) ? false : true,
+                                    decoration: InputDecoration(
+                                      labelText: "Phone No : ",
 
-                                  hintText: "01*********",
-                                  contentPadding: EdgeInsets.only(
-                                    bottom: MediaQuery.of(context).size.height *
-                                        .05,
+                                      hintText: "01*********",
+
+                                      // contentPadding: EdgeInsets.only(
+                                      //   bottom:
+                                      //       MediaQuery.of(context).size.height *
+                                      //           .05,
+                                      // ),
+
+                                      suffixIcon: IconButton(
+                                        onPressed: _toggle,
+                                        icon: _showPass
+                                            ? Icon(Icons.visibility_off)
+                                            : Icon(Icons.visibility),
+                                      ),
+
+                                      labelStyle: TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.black54,
+                                        fontFamily: 'HelveticaNeue',
+                                        fontWeight: FontWeight.bold,
+                                      ),
+
+                                      border: new UnderlineInputBorder(
+                                        borderSide:
+                                            BorderSide(color: Colors.black38),
+                                      ),
+
+                                      // and:
+
+                                      focusedBorder: new UnderlineInputBorder(
+                                        borderSide:
+                                            BorderSide(color: Colors.black12),
+                                      ),
+                                    ),
+                                    cursorColor: Colors.black,
                                   ),
-
-                                  labelStyle: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.black54,
-                                    fontFamily: 'HelveticaNeue',
-                                    fontWeight: FontWeight.bold,
-                                  ),
-
-                                  enabledBorder: new UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.black38),
-                                  ),
-
-                                  // and:
-
-                                  focusedBorder: new UnderlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white),
-                                  ),
-                                ),
-                                cursorColor: Colors.black,
+                                ],
                               ),
                             ),
                             Row(
@@ -258,7 +279,7 @@ class _SignInState extends State<SignIn> {
                                     child: RaisedButton(
                                       shape: RoundedRectangleBorder(
                                         borderRadius:
-                                            BorderRadius.circular(10.0),
+                                            BorderRadius.circular(12.0),
                                       ),
                                       color: Color(0xff0984e3),
                                       child: Row(

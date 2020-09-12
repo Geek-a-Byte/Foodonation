@@ -28,19 +28,19 @@ class PageOne extends StatelessWidget {
 class MyHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    //Get device size
+    Size devSize = MediaQuery.of(context).size;
     return Scaffold(
       //blue BG (comment the line below if you want white bg)
       //backgroundColor: Color(0xff0984E3),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 88),
-          ),
-
           //Logo image
           Center(
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 18.0),
+              padding: const EdgeInsets.symmetric(vertical: 25.0),
               child: Image.asset(
                 'assets/images/logo.png',
                 width: 80,
@@ -51,11 +51,11 @@ class MyHome extends StatelessWidget {
           //Top text
           Center(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 150.0),
+              padding: const EdgeInsets.only(bottom: 100.0),
               child: Text(
                 'Are you a donor or receiver?',
                 style: TextStyle(
-                  fontSize: 22,
+                  fontSize: 20,
                   fontFamily: 'HelveticaNeue',
                   fontWeight: FontWeight.w700,
                   //Black Text
@@ -69,10 +69,10 @@ class MyHome extends StatelessWidget {
 
           //Button Donor
           ButtonTheme(
-              minWidth: 280,
+              minWidth: devSize.width * .75,
               height: 48,
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                padding: const EdgeInsets.symmetric(vertical: 10.0),
                 child: RaisedButton(
                   textColor: Colors.white,
                   shape: RoundedRectangleBorder(
@@ -85,7 +85,7 @@ class MyHome extends StatelessWidget {
                       color: Color(0xffFFFFFF),
                       fontSize: 15,
                       fontFamily: 'HelveticaNeue',
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
                   onPressed: () => Navigator.pushNamed(context, '/PageTwo'),
@@ -94,10 +94,10 @@ class MyHome extends StatelessWidget {
 
           //Button Receiver
           ButtonTheme(
-              minWidth: 280,
+              minWidth: devSize.width * .75,
               height: 48,
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                padding: const EdgeInsets.symmetric(vertical: 10.0),
                 child: RaisedButton(
                   textColor: Colors.white,
                   shape: RoundedRectangleBorder(
@@ -110,7 +110,7 @@ class MyHome extends StatelessWidget {
                       color: Color(0xffFFFFFF),
                       fontSize: 15,
                       fontFamily: 'HelveticaNeue',
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
                   onPressed: () => Navigator.pushNamed(context, '/signin'),

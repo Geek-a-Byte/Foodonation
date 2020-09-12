@@ -14,6 +14,10 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  bool _showPhn = false;
+  bool _showPass = false;
+  bool _showConfirmPass = false;
+
   String title = "Sign in";
   TextEditingController nidController = TextEditingController();
   TextEditingController nameController = TextEditingController();
@@ -48,6 +52,24 @@ class _SignUpState extends State<SignUp> {
     }
   }
 
+  void _togglePass() {
+    setState(() {
+      _showPass = !_showPass;
+    });
+  }
+
+  void _togglePhn() {
+    setState(() {
+      _showPhn = !_showPhn;
+    });
+  }
+
+  void _toggleConfirmPass() {
+    setState(() {
+      _showConfirmPass = !_showConfirmPass;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Size devSize = MediaQuery.of(context).size; //Gets device dimension
@@ -66,7 +88,7 @@ class _SignUpState extends State<SignUp> {
                 //Create account
                 Padding(
                   padding: EdgeInsets.only(
-                    top: devSize.height * .125,
+                    top: devSize.height * .1,
                     left: devSize.width * .06,
                   ),
                   child: Text(
@@ -84,7 +106,7 @@ class _SignUpState extends State<SignUp> {
                 Expanded(
                   child: Card(
                     elevation: 0,
-                    margin: EdgeInsets.only(top: devSize.height * .035),
+                    margin: EdgeInsets.only(top: devSize.height * .03),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(50),
@@ -110,7 +132,7 @@ class _SignUpState extends State<SignUp> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.05,
+                              height: MediaQuery.of(context).size.height * 0.025,
                             ),
                             Padding(
                               padding: const EdgeInsets.all(10.0),
@@ -230,6 +252,7 @@ class _SignUpState extends State<SignUp> {
                             Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: TextFormField(
+                                obscureText: (_showPhn == true) ? false : true,
                                 style: TextStyle(
                                   fontFamily: 'HelveticaNeue',
                                   fontWeight: FontWeight.w700,
@@ -246,6 +269,13 @@ class _SignUpState extends State<SignUp> {
                                       color: Colors.black54),
 
                                   hintText: "Your phone number",
+
+                                  suffixIcon: IconButton(
+                                    onPressed: _togglePhn,
+                                    icon: _showPhn
+                                        ? Icon(Icons.visibility_off)
+                                        : Icon(Icons.visibility),
+                                  ),
 
                                   hintStyle: TextStyle(
                                       fontFamily: 'HelveticaNeue',
@@ -272,11 +302,18 @@ class _SignUpState extends State<SignUp> {
                               padding: const EdgeInsets.all(10.0),
                               child: TextFormField(
                                 controller: passwordcontroller,
-                                obscureText: true,
+                                obscureText: (_showPass == true) ? false : true,
                                 decoration: InputDecoration(
                                   labelText: "Password:",
 
                                   hintText: "*********",
+
+                                  suffixIcon: IconButton(
+                                    onPressed: _togglePass,
+                                    icon: _showPass
+                                        ? Icon(Icons.visibility_off)
+                                        : Icon(Icons.visibility),
+                                  ),
 
                                   labelStyle: TextStyle(
                                       fontFamily: 'HelveticaNeue',
@@ -302,11 +339,18 @@ class _SignUpState extends State<SignUp> {
                               padding: const EdgeInsets.all(10.0),
                               child: TextFormField(
                                 controller: confirmpasswordcontroller,
-                                obscureText: true,
+                                obscureText: (_showConfirmPass == true) ? false : true,
                                 decoration: InputDecoration(
                                   labelText: "Confirm Password:",
 
                                   hintText: "*********",
+
+                                  suffixIcon: IconButton(
+                                    onPressed: _toggleConfirmPass,
+                                    icon: _showConfirmPass
+                                        ? Icon(Icons.visibility_off)
+                                        : Icon(Icons.visibility),
+                                  ),
 
                                   labelStyle: TextStyle(
                                       fontFamily: 'HelveticaNeue',
@@ -333,14 +377,14 @@ class _SignUpState extends State<SignUp> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: <Widget>[
                                 Padding(
-                                  padding: const EdgeInsets.all(15.0),
+                                  padding: const EdgeInsets.all(10.0),
                                   child: ButtonTheme(
                                     minWidth: 150,
                                     height: 40,
                                     child: RaisedButton(
                                       shape: RoundedRectangleBorder(
                                         borderRadius:
-                                            BorderRadius.circular(8.0),
+                                            BorderRadius.circular(10.0),
                                       ),
                                       color: Color(0xff0984e3),
                                       child: Row(

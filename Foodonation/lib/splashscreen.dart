@@ -39,6 +39,9 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Widget build(BuildContext context) {
+    //Get device size
+    Size devSize = MediaQuery.of(context).size;
+
     return MaterialApp(
       routes: {
         '/receiver': (context) => SignUp(),
@@ -47,22 +50,21 @@ class _SplashScreenState extends State<SplashScreen> {
         //blue BG (comment the line below if you want white bg)
         //backgroundColor: Color(0xff0984E3),
         body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             //Top text
             Center(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 180.0),
-                child: Text(
-                  'Hi, Welcome to Foodonation',
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontFamily: 'Avenir',
-                    fontWeight: FontWeight.w700,
-                    //Black Text
-                    color: Color(0xff2D3436),
-                    //White text
-                    //color: Color(0xffFFFFFF),
-                  ),
+              child: Text(
+                'Hi, Welcome to Foodonation',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontFamily: 'HelveticaNeue',
+                  fontWeight: FontWeight.w700,
+                  //Black Text
+                  color: Color(0xff2D3436),
+                  //White text
+                  //color: Color(0xffFFFFFF),
                 ),
               ),
             ),
@@ -87,7 +89,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 18,
-                    fontFamily: 'Avenir',
+                    fontFamily: 'HelveticaNeue',
                     fontWeight: FontWeight.w300,
                     color: Color(0xff2D3436),
                   ),
@@ -97,7 +99,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
             //Button
             ButtonTheme(
-              minWidth: 280,
+              minWidth: devSize.width * 0.75,
               height: 48,
               child: RaisedButton(
                 textColor: Colors.white,
@@ -111,7 +113,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     color: Color(0xffFFFFFF),
                     fontSize: 15,
                     fontFamily: 'Avenir',
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
                 onPressed: () => Navigator.pushNamed(context, '/PageOne'),
