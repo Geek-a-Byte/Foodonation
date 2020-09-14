@@ -259,7 +259,7 @@ class _SignInState extends State<SignIn> {
                                     decoration: InputDecoration(
                                       labelText: "Phone No : ",
 
-                                      hintText: "01*********",
+                                      hintText: "+880*********",
 
                                       // contentPadding: EdgeInsets.only(
                                       //   bottom:
@@ -269,7 +269,7 @@ class _SignInState extends State<SignIn> {
 
                                       suffixIcon: IconButton(
                                         onPressed: _toggle,
-                                        icon: _showPass
+                                        icon: !_showPass
                                             ? Icon(Icons.visibility_off)
                                             : Icon(Icons.visibility),
                                       ),
