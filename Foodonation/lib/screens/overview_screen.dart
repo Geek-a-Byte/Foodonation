@@ -19,6 +19,70 @@ class OverviewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      endDrawer: Drawer(
+        child: ListView(
+         // Important: Remove any padding from the ListView.
+         padding: EdgeInsets.zero,
+         children: <Widget>[
+          DrawerHeader(
+            child: Stack(children: <Widget>[
+              Positioned(
+                bottom: 15.0,
+                left: 16.0,
+                child:Text('Menu',
+                  style: TextStyle(
+                    fontSize: 38.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+                    )
+                  )
+                ]
+              ),
+            decoration: BoxDecoration(
+              color: Colors.blue,
+            ),
+               //color: Colors.blueAccent,
+          ),
+
+          ListTile(
+            leading: Icon(Icons.account_box),
+            title: Text('My Profile',style: TextStyle(fontSize: 17.0),),
+            onTap: () {
+               // Update the state of the app.
+               // ...
+             },
+           ),
+           
+           ListTile(
+            leading: Icon(Icons.history),
+            title: Text('Order History',style: TextStyle(fontSize: 17.0),),
+            onTap: () {
+               // Update the state of the app.
+               // ...
+             },
+           ),
+
+           ListTile(
+             leading: Icon(Icons.exit_to_app),
+             title: Text('Log Out',style: TextStyle(fontSize: 17.0),),
+             onTap: () {
+               // Update the state of the app.
+               // ...
+             },
+           ),
+
+           ListTile(
+            leading: Icon(Icons.feedback),
+            title: Text('Give Us Feedback',style: TextStyle(fontSize: 17.0),),
+            onTap: () {
+               // Update the state of the app.
+               // ...
+             },
+           ),
+
+         ]
+        ),
+      ),
       body: Stack(
         children: [
           new Container(
@@ -93,19 +157,19 @@ class OverviewScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              actions: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 20.0),
-                  child: IconButton(
-                    iconSize: 30,
+              // actions: [
+              //   Padding(
+              //     padding: const EdgeInsets.only(right: 20.0),
+              //     child: IconButton(
+              //       iconSize: 30,
 
-                    ///right icon
-                    icon: Icon(Icons.menu),
-                    onPressed: () {}, //Menu bar
-                    color: Colors.white,
-                  ),
-                ),
-              ],
+              //       ///right icon
+              //       icon: Icon(Icons.menu),
+              //       onPressed: () {}, //Menu bar
+              //       color: Colors.white,
+              //     ),
+              //   ),
+              // ],
             ),
           ),
           new Container(
