@@ -46,7 +46,7 @@ class OverviewScreen extends StatelessWidget {
 
           ListTile(
             leading: Icon(Icons.account_box),
-            title: Text('My Profile',style: TextStyle(fontSize: 17.0),),
+            title: Text('My Profile',style: TextStyle(fontSize: 16.0),),
             onTap: () {
                // Update the state of the app.
                // ...
@@ -55,7 +55,7 @@ class OverviewScreen extends StatelessWidget {
            
            ListTile(
             leading: Icon(Icons.history),
-            title: Text('Order History',style: TextStyle(fontSize: 17.0),),
+            title: Text('Order History',style: TextStyle(fontSize: 16.0),),
             onTap: () {
                // Update the state of the app.
                // ...
@@ -64,7 +64,7 @@ class OverviewScreen extends StatelessWidget {
 
            ListTile(
              leading: Icon(Icons.exit_to_app),
-             title: Text('Log Out',style: TextStyle(fontSize: 17.0),),
+             title: Text('Log Out',style: TextStyle(fontSize: 16.0),),
              onTap: () {
                // Update the state of the app.
                // ...
@@ -73,7 +73,7 @@ class OverviewScreen extends StatelessWidget {
 
            ListTile(
             leading: Icon(Icons.feedback),
-            title: Text('Give Us Feedback',style: TextStyle(fontSize: 17.0),),
+            title: Text('Give Us Feedback',style: TextStyle(fontSize: 16.0),),
             onTap: () {
                // Update the state of the app.
                // ...
@@ -93,8 +93,8 @@ class OverviewScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.blue,
                 borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(25),
-                  bottomRight: Radius.circular(25),
+                  bottomLeft: Radius.circular(30),
+                  bottomRight: Radius.circular(30),
                 ),
                 //Adding shadow to the blue bar
                 boxShadow: [
@@ -146,7 +146,7 @@ class OverviewScreen extends StatelessWidget {
               backgroundColor: Colors.transparent,
               elevation: 0,
               title: Padding(
-                padding: const EdgeInsets.only(left: 15.0),
+                padding: const EdgeInsets.only(left: 0.0),
                 child: Text(
                   'Hi! $user',
                   style: TextStyle(

@@ -12,7 +12,10 @@ class ProductsGrid extends StatelessWidget {
     ///provider already listened!
     final products = productsData.items;
     return GridView.builder(
-      padding: const EdgeInsets.all(30.0),
+      padding: const EdgeInsets.symmetric(
+        vertical: 30.0,
+        horizontal: 20,
+      ),
       itemCount: products.length,
       itemBuilder: (ctx, i) => ChangeNotifierProvider(
         //wrapping with change notifier!
@@ -28,7 +31,7 @@ class ProductsGrid extends StatelessWidget {
         crossAxisCount: 1,
         childAspectRatio: 16 / 9,
         crossAxisSpacing: 20,
-        mainAxisSpacing: 35,
+        mainAxisSpacing: 25,
       ),
     );
   }
