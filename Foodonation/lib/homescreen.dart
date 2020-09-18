@@ -3,21 +3,35 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import './screens/overview_screen.dart';
 import './screens/product_details_screen.dart';
-import 'package:Foodonation/providers/products_provider.dart';
+import './providers/products_provider.dart';
+import './providers/cart.dart';
+import './providers/orders.dart';
+import './screens/cart_screen.dart';
+import './screens/orders_screen.dart';
 
 void main() => runApp(HomeScreen());
 
 class HomeScreen extends StatelessWidget {
   //This is where username goes in
   final FirebaseUser user;
-  String name ;
+  String name;
   HomeScreen({this.user, this.name});
-  
+
   @override
   //HomeScreen(userName);
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (ctx) => Products(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (ctx) => Products(),
+        ),
+        ChangeNotifierProvider(
+          create: (ctx) => Cart(),
+        ),
+        ChangeNotifierProvider(
+          create: (ctx) => Orders(),
+        ),
+      ],
       child: MaterialApp(
         title: 'Food Donation',
         theme: ThemeData(
@@ -30,6 +44,8 @@ class HomeScreen extends StatelessWidget {
         routes: {
           /// must define it in main.dart..it reduced state management complexity!
           ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
+          CartScreen.routeName: (ctx) => CartScreen(),
+          OrdersScreen.routeName: (ctx) => OrdersScreen(),
         },
       ),
     );

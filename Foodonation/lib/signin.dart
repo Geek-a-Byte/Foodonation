@@ -327,7 +327,7 @@ class _SignInState extends State<SignIn> {
                                         ],
                                       ),
                                       //color: Colors.black,    I CHANGED THIS//RAIYAN
-                                      //onPressed: () => gotoHomeScreen(name),
+                                      // onPressed: () => gotoHomeScreen(name),
                                       onPressed: () {
                                         final phone =
                                             _phoneController.text.trim();

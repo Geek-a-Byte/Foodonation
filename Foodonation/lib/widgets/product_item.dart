@@ -1,7 +1,9 @@
 import '../providers/product.dart';
+import '../providers/product.dart';
 import '../screens/product_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../providers/cart.dart';
 
 class ProductItem extends StatelessWidget {
   // final String id;
@@ -12,6 +14,10 @@ class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final product = Provider.of<Product>(context);
+    final cart = Provider.of<Cart>(
+      context,
+      listen: false,
+    );
     String iconColor = product.iconColor;
     Color setIconColor = iconColor == 'default' //changing icon color
         ? Theme.of(context).accentColor
@@ -51,15 +57,18 @@ class ProductItem extends StatelessWidget {
           footer: GridTileBar(
             ///Image footer and Icon
             backgroundColor: Colors.black87,
-            leading: IconButton(
-              /// left icon
-              icon: Icon(
-                product.isChecked ? Icons.check_box : Icons.add_box,
-                color: setIconColor,
+            leading: Consumer<Product>(
+              builder: (ctx, product, child) => IconButton(
+                /// left icon
+                icon: Icon(
+                  product.isChecked ? Icons.check_box : Icons.add_box,
+                  color: setIconColor,
+                ),
+                onPressed: () {
+                  product.toggleFavouriteStatus();
+                  cart.addItem(product.id, product.title, product.isChecked);
+                },
               ),
-              onPressed: () {
-                product.toggleFavouriteStatus();
-              },
             ),
             title: Text(
               product.title,

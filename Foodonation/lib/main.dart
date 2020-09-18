@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:Foodonation/SignUp.dart';
 import 'package:Foodonation/signin.dart';
 import 'PageTwo.dart';
+import './screens/cart_screen.dart';
+import './screens/orders_screen.dart';
 
 void main() => runApp(FoodonationApp());
 
@@ -29,6 +31,8 @@ class FoodonationApp extends StatelessWidget {
           //'/dashboard': (context) => DashBoard(),
           '/signin': (context) => SignIn(),
           ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
+          CartScreen.routeName: (ctx) => CartScreen(),
+          OrdersScreen.routeName: (ctx) => OrdersScreen(),
         });
   }
 }
