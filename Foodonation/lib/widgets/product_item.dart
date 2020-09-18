@@ -1,5 +1,4 @@
 import '../providers/product.dart';
-import '../providers/product.dart';
 import '../screens/product_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,15 +12,14 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final product = Provider.of<Product>(context);
+    final product = Provider.of<Product>(
+      context,
+      listen: false,
+    ); // will not listen the updates from the providers everytime. only checkbox is wrapped with Consumer.
     final cart = Provider.of<Cart>(
       context,
       listen: false,
     );
-    String iconColor = product.iconColor;
-    Color setIconColor = iconColor == 'default' //changing icon color
-        ? Theme.of(context).accentColor
-        : Colors.greenAccent;
     return Container(
       decoration: BoxDecoration(
         boxShadow: [
@@ -62,7 +60,7 @@ class ProductItem extends StatelessWidget {
                 /// left icon
                 icon: Icon(
                   product.isChecked ? Icons.check_box : Icons.add_box,
-                  color: setIconColor,
+                  color: product.iconColor,
                 ),
                 onPressed: () {
                   product.toggleFavouriteStatus();
