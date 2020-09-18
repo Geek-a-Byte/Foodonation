@@ -29,7 +29,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      endDrawer: Drawer(
+      drawer: Drawer(
         child: ListView(
             // Important: Remove any padding from the ListView.
             padding: EdgeInsets.zero,
