@@ -2,6 +2,7 @@ import 'package:Foodonation/homescreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_awesome_alert_box/flutter_awesome_alert_box.dart';
 import 'SignInNID.dart';
 
 class SignIn extends StatefulWidget {
@@ -17,19 +18,20 @@ class _SignInState extends State<SignIn> {
   //TextEditingController phonecontroller = TextEditingController();
   //TextEditingController codecontroller = TextEditingController();
 
+  String verificationId;
+
   final _nameController = TextEditingController();
   final _phoneController = TextEditingController();
   final _codeController = TextEditingController();
 
   bool _showPass = false;
 
-  Future<void> loginUser(
-      String phone, BuildContext context, String userName) async {
+  Future<void> loginUser(String phone, BuildContext context) async {
     FirebaseAuth _auth = FirebaseAuth.instance;
     print(phone);
     _auth.verifyPhoneNumber(
       phoneNumber: phone,
-      timeout: Duration(seconds: 60),
+      timeout: Duration(seconds: 120),
       verificationCompleted: (AuthCredential credential) async {
         Navigator.of(context).pop();
 
@@ -44,7 +46,7 @@ class _SignInState extends State<SignIn> {
               //builder: (context) => OverviewScreen(user),
               builder: (context) => HomeScreen(
                 user: user,
-                name: userName,
+                //name: userName,
               ),
             ),
           );
@@ -56,19 +58,22 @@ class _SignInState extends State<SignIn> {
       verificationFailed: (AuthException e) {
         print(e.message);
       },
-      codeSent: (String verificationId, [int forceResendingToken]) {
+      codeSent: (String verId, [int forceResendingToken]) {
+        verificationId = verId;
         print('Verification id is:');
         print(verificationId);
+
         showDialog(
+
+            //barrierDismissible: false,
             context: context,
-            barrierDismissible: false,
-            builder: (context) {
+            builder: (dialogContex) {
               return AlertDialog(
                   title: Text("Give me code?"),
                   content: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      TextField(
+                      TextFormField(
                         controller: _codeController,
                       )
                     ],
@@ -83,38 +88,45 @@ class _SignInState extends State<SignIn> {
                         AuthCredential credential =
                             PhoneAuthProvider.getCredential(
                           verificationId: verificationId,
-                          //verificationId: "8801928943835",
-                          //verificationId: "8801840054144",
-                          //smsCode: "12345"
                           smsCode: code,
-                          //name:_nameController;
                         );
+                        try {
+                          AuthResult result =
+                              await _auth.signInWithCredential(credential);
 
-                        AuthResult result =
-                            await _auth.signInWithCredential(credential);
-
-                        FirebaseUser user = result.user;
-
-                        if (user != null) {
+                          FirebaseUser user = result.user;
+                          //the next line is for to close the give my code dialog box after signing in successfully
+                          Navigator.of(context, rootNavigator: true).pop();
+                          SuccessAlertBox(
+                              context: context,
+                              //icon: Icons.done,
+                              title: "Login Successful!",
+                              messageText: "The contact no was verified.");
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                               //builder: (context) => OverviewScreen(user),
                               builder: (context) => HomeScreen(
                                 user: user,
-                                name: userName,
+                                //name: userName,
                               ),
                             ),
                           );
-                        } else {
-                          print("Error");
+                        } catch (Exp) {
+                          print(Exp);
+                          WarningAlertBox(
+                              context: context,
+                              title: "Sorry ! Try Again.",
+                              messageText: "Invalid NID or contact no or OTP");
                         }
                       },
                     )
                   ]);
             });
       },
-      codeAutoRetrievalTimeout: null,
+      codeAutoRetrievalTimeout: (String verId) {
+        verificationId = verId;
+      },
     );
   }
   // String title = "Sign in";
@@ -323,11 +335,17 @@ class _SignInState extends State<SignIn> {
                                       ),
                                       //color: Colors.black,    I CHANGED THIS//RAIYAN
                                       // onPressed: () => gotoHomeScreen(name),
+                                      // onPressed: () {
+                                      //   final phone =
+                                      //       _phoneController.text.trim();
+                                      //   loginUser(phone, context,
+                                      //       _nameController.text.toString());
+                                      // }
                                       onPressed: () {
                                         final phone =
                                             _phoneController.text.trim();
-                                        loginUser(phone, context,
-                                            _nameController.text.toString());
+
+                                        loginUser(phone, context);
                                       },
                                     ),
                                   ),

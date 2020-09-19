@@ -126,8 +126,8 @@ class _SignUpState extends State<SignUp> {
                               //padding: const EdgeInsets.all(10.0),
                               padding: const EdgeInsets.only(
                                 left: 15,
-                                top: 20,
-                                right: 12,
+                                top: 50,
+                                right: 15,
                                 bottom: 15,
                               ),
 
@@ -148,7 +148,10 @@ class _SignUpState extends State<SignUp> {
 
                                   hintText: "Your Name",
 
-                                  hintStyle: TextStyle(color: Colors.blueGrey),
+                                  hintStyle: TextStyle(
+                                      fontFamily: 'HelveticaNeue',
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.blueGrey),
                                   contentPadding: EdgeInsets.only(
                                       top:
                                           4.0), //added by nazia it will give btn hinttext and labeltext
@@ -172,7 +175,7 @@ class _SignUpState extends State<SignUp> {
                               padding: const EdgeInsets.only(
                                 left: 15,
                                 //top: 20,
-                                right: 12,
+                                right: 15,
                                 bottom: 15,
                               ),
                               child: TextFormField(
@@ -219,7 +222,7 @@ class _SignUpState extends State<SignUp> {
                               padding: const EdgeInsets.only(
                                 left: 15,
                                 //top: 20,
-                                right: 12,
+                                right: 15,
                                 bottom: 15,
                               ),
                               child: TextFormField(
@@ -228,8 +231,11 @@ class _SignUpState extends State<SignUp> {
                                 decoration: InputDecoration(
                                   labelText: "NID:",
 
-                                  hintText: "hello",
-                                  hintStyle: TextStyle(color: Colors.blueGrey),
+                                  hintText: "*********",
+                                  hintStyle: TextStyle(
+                                      fontFamily: 'HelveticaNeue',
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.blueGrey),
 
                                   suffixIcon: IconButton(
                                     onPressed: _toggleNID,
@@ -266,7 +272,7 @@ class _SignUpState extends State<SignUp> {
                               padding: const EdgeInsets.only(
                                 left: 15,
                                 //top: 20,
-                                right: 12,
+                                right: 15,
                                 bottom: 15,
                               ),
                               child: TextFormField(
@@ -277,8 +283,11 @@ class _SignUpState extends State<SignUp> {
                                   labelText: "Confirm NID:",
 
                                   hintText: "*********",
-                                  hintStyle: TextStyle(color: Colors.blueGrey),
-                                  contentPadding: EdgeInsets.only(top: 4.0),
+                                  hintStyle: TextStyle(
+                                      fontFamily: 'HelveticaNeue',
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.blueGrey),
+                                  //contentPadding: EdgeInsets.only(top: 4.0),
 
                                   suffixIcon: IconButton(
                                     onPressed: _toggleConfirmNID,
@@ -298,6 +307,9 @@ class _SignUpState extends State<SignUp> {
                                   ),
 
                                   // and:
+                                  // contentPadding: EdgeInsets.only(
+                                  //     top:
+                                  //         4.0), //added by nazia it will give btn hinttext and labeltext
 
                                   focusedBorder: new UnderlineInputBorder(
                                     borderSide: BorderSide(color: Colors.white),
