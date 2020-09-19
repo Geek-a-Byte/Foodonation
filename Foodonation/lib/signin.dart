@@ -57,6 +57,21 @@ class _SignInState extends State<SignIn> {
       },
       verificationFailed: (AuthException e) {
         print(e.message);
+        if (e.message ==
+            "The format of the phone number provided is incorrect. Please enter the phone number in a format that can be parsed into E.164 format. E.164 phone numbers are written in the format [+][country code][subscriber number including area code]. [ Invalid format. ]") {
+          WarningAlertBox(
+              context: context,
+              title: "Sorry ! Try Again.",
+              messageText:
+                  "Invalid format of contact no.use country code at the beginning of your contact no.");
+        } else if (e.message ==
+            "A network error (such as timeout, interrupted connection or unreachable host) has occurred.") {
+          WarningAlertBox(
+              context: context,
+              title: "Sorry ! Try Again.",
+              messageText:
+                  "A network error has occured, please turn on your wifi before entering your contact no");
+        }
       },
       codeSent: (String verId, [int forceResendingToken]) {
         verificationId = verId;
