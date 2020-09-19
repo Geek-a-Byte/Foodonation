@@ -1,11 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 class Product with ChangeNotifier {
   final String id;
   final String title;
   final String description;
   final String imageURL;
-  String iconColor;
+  Color iconColor;
   bool isChecked;
   Product({
     @required this.id,
@@ -13,15 +15,15 @@ class Product with ChangeNotifier {
     @required this.description,
     @required this.imageURL,
     this.isChecked = false,
-    this.iconColor = 'default',
+    this.iconColor = Colors.blue,
   });
 
   void toggleFavouriteStatus() {
     isChecked = !isChecked;
-    if (iconColor == 'default')
-      iconColor = 'green';
+    if (iconColor == Colors.blue)
+      iconColor = Colors.greenAccent;
     else
-      iconColor = 'default';
+      iconColor = Colors.blue;
     notifyListeners();
   }
 }
