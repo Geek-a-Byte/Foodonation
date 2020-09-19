@@ -192,7 +192,7 @@ class _SignUpState extends State<SignUp> {
                                       fontWeight: FontWeight.w700,
                                       color: Colors.black54),
 
-                                  hintText: "Your email id",
+                                  hintText: "name@foodonation.com",
 
                                   hintStyle: TextStyle(
                                       fontFamily: 'HelveticaNeue',
