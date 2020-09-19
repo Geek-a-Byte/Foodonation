@@ -1,10 +1,12 @@
 import 'dart:convert';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_awesome_alert_box/flutter_awesome_alert_box.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:Foodonation/settings.dart';
+
+import 'HomeScreen.dart';
+import 'SignInNID.dart';
 
 class SignUp extends StatefulWidget {
   SignUp({Key key}) : super(key: key);
@@ -14,59 +16,51 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  bool _showPhn = false;
-  bool _showPass = false;
-  bool _showConfirmPass = false;
+  //bool _showPhn = false;
+  bool _showNID = false;
+  bool _showConfirmNID = false;
 
   String title = "Sign in";
   TextEditingController nidController = TextEditingController();
+  TextEditingController confirmNIDcontroller = TextEditingController();
   TextEditingController nameController = TextEditingController();
-  TextEditingController AddController = TextEditingController();
-  TextEditingController contactController = TextEditingController();
-  TextEditingController passwordcontroller = TextEditingController();
-  TextEditingController confirmpasswordcontroller = TextEditingController();
+  TextEditingController emailController = TextEditingController();
 
-  signup() async {
-    var response;
-    if (passwordcontroller.text == confirmpasswordcontroller.text) {
-      var data = {
-        "NID": nidController.text,
-        "password": passwordcontroller.text
-      };
+  // signup() async {
+  //   var response;
+  //   if (passwordcontroller.text == confirmpasswordcontroller.text) {
+  //     var data = {
+  //       "NID": nidController.text,
+  //       "password": passwordcontroller.text
+  //     };
 
-      response =
-          await http.post(baseURL + "/signup.php", body: jsonEncode(data));
-      print(response.body);
-      SuccessAlertBox(
-          context: context, title: "great", messageText: response.body);
-      Navigator.pushNamed(context, '/dashboard');
+  //     response =
+  //         await http.post(baseURL + "/signup.php", body: jsonEncode(data));
+  //     print(response.body);
+  //     SuccessAlertBox(
+  //         context: context, title: "great", messageText: response.body);
+  //     Navigator.pushNamed(context, '/dashboard');
 
-      /// Navigator.pushNamed(context, '/dashboard');
-      /*,style: TextStyle(fontSize: 15,color: Colors.black),*/
+  //     /// Navigator.pushNamed(context, '/dashboard');
+  //     /*,style: TextStyle(fontSize: 15,color: Colors.black),*/
 
-    } else {
-      WarningAlertBox(
-          context: context,
-          title: "wait!",
-          messageText: "password and confirm pasword doesn't match.");
-    }
-  }
+  //   } else {
+  //     WarningAlertBox(
+  //         context: context,
+  //         title: "wait!",
+  //         messageText: "password and confirm pasword doesn't match.");
+  //   }
+  // }
 
-  void _togglePass() {
+  void _toggleNID() {
     setState(() {
-      _showPass = !_showPass;
+      _showNID = !_showNID;
     });
   }
 
-  void _togglePhn() {
+  void _toggleConfirmNID() {
     setState(() {
-      _showPhn = !_showPhn;
-    });
-  }
-
-  void _toggleConfirmPass() {
-    setState(() {
-      _showConfirmPass = !_showConfirmPass;
+      _showConfirmNID = !_showConfirmNID;
     });
   }
 
@@ -88,7 +82,7 @@ class _SignUpState extends State<SignUp> {
                 //Create account
                 Padding(
                   padding: EdgeInsets.only(
-                    top: devSize.height * .1,
+                    top: devSize.height * .2,
                     left: devSize.width * .06,
                   ),
                   child: Text(
@@ -113,15 +107,7 @@ class _SignUpState extends State<SignUp> {
                         topRight: Radius.circular(50),
                       ),
                     ),
-
-                    //color: Color(hashCode),
-
-                    //color: Color.fromRGBO(0, 0, 40, 0.35),
-
-                    //color : const Color(0XFF880E4F), //0xff hocche opacity
-
                     color: Colors.white,
-
                     child: Padding(
                       padding: EdgeInsets.symmetric(
                         horizontal: MediaQuery.of(context).size.width * 0.05,
@@ -132,10 +118,19 @@ class _SignUpState extends State<SignUp> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.025,
+                              height:
+                                  MediaQuery.of(context).size.height * 0.025,
                             ),
+
                             Padding(
-                              padding: const EdgeInsets.all(10.0),
+                              //padding: const EdgeInsets.all(10.0),
+                              padding: const EdgeInsets.only(
+                                left: 15,
+                                top: 20,
+                                right: 12,
+                                bottom: 15,
+                              ),
+
                               child: TextFormField(
                                 style: TextStyle(
                                   color: Colors.black87,
@@ -154,6 +149,9 @@ class _SignUpState extends State<SignUp> {
                                   hintText: "Your Name",
 
                                   hintStyle: TextStyle(color: Colors.blueGrey),
+                                  contentPadding: EdgeInsets.only(
+                                      top:
+                                          4.0), //added by nazia it will give btn hinttext and labeltext
 
                                   enabledBorder: new UnderlineInputBorder(
                                     borderSide: BorderSide(color: Colors.grey),
@@ -166,20 +164,24 @@ class _SignUpState extends State<SignUp> {
                                   ),
                                 ),
                                 cursorColor: Colors.black,
-                                //cursorWidth: 7.000000,
-                                //cursorRadius: Radius.elliptical(10, 15),
                               ),
                             ),
 
                             Padding(
-                              padding: const EdgeInsets.all(10.0),
+                              //padding: const EdgeInsets.all(10.0),
+                              padding: const EdgeInsets.only(
+                                left: 15,
+                                //top: 20,
+                                right: 12,
+                                bottom: 15,
+                              ),
                               child: TextFormField(
                                 style: TextStyle(
                                   color: Colors.black87,
                                 ),
-                                controller: AddController,
+                                controller: emailController,
                                 decoration: InputDecoration(
-                                  labelText: "Address:",
+                                  labelText: "Email:",
 
                                   labelStyle: TextStyle(
                                       fontSize: 15,
@@ -187,13 +189,15 @@ class _SignUpState extends State<SignUp> {
                                       fontWeight: FontWeight.w700,
                                       color: Colors.black54),
 
-                                  hintText: "Your Address",
+                                  hintText: "Your email id",
 
                                   hintStyle: TextStyle(
                                       fontFamily: 'HelveticaNeue',
                                       fontWeight: FontWeight.w500,
                                       color: Colors.blueGrey),
-
+                                  contentPadding: EdgeInsets.only(
+                                      top:
+                                          4.0), //added by nazia it will give btn hinttext and labeltext
                                   enabledBorder: new UnderlineInputBorder(
                                     borderSide: BorderSide(color: Colors.grey),
                                   ),
@@ -211,106 +215,25 @@ class _SignUpState extends State<SignUp> {
                             ),
 
                             Padding(
-                              padding: const EdgeInsets.all(10.0),
+                              //padding: const EdgeInsets.all(10.0),
+                              padding: const EdgeInsets.only(
+                                left: 15,
+                                //top: 20,
+                                right: 12,
+                                bottom: 15,
+                              ),
                               child: TextFormField(
-                                style: TextStyle(
-                                  color: Colors.black87,
-                                ),
                                 controller: nidController,
+                                obscureText: (_showNID == true) ? false : true,
                                 decoration: InputDecoration(
                                   labelText: "NID:",
 
-                                  labelStyle: TextStyle(
-                                      fontSize: 15,
-                                      fontFamily: 'HelveticaNeue',
-                                      fontWeight: FontWeight.w700,
-                                      color: Colors.black54),
-
-                                  hintText: "Your NID",
-
-                                  hintStyle: TextStyle(
-                                      fontFamily: 'HelveticaNeue',
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.blueGrey),
-
-                                  enabledBorder: new UnderlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.grey),
-                                  ),
-
-                                  // and:
-
-                                  focusedBorder: new UnderlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white),
-                                  ),
-                                ),
-                                cursorColor: Colors.black,
-                                //cursorWidth: 7.000000,
-                                //cursorRadius: Radius.elliptical(10, 15),
-                              ),
-                            ),
-
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: TextFormField(
-                                obscureText: (_showPhn == true) ? false : true,
-                                style: TextStyle(
-                                  fontFamily: 'HelveticaNeue',
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.black54,
-                                ),
-                                controller: contactController,
-                                decoration: InputDecoration(
-                                  labelText: "Phone no:",
-
-                                  labelStyle: TextStyle(
-                                      fontSize: 15,
-                                      fontFamily: 'HelveticaNeue',
-                                      fontWeight: FontWeight.w700,
-                                      color: Colors.black54),
-
-                                  hintText: "Your phone number",
+                                  hintText: "hello",
+                                  hintStyle: TextStyle(color: Colors.blueGrey),
 
                                   suffixIcon: IconButton(
-                                    onPressed: _togglePhn,
-                                    icon: _showPhn
-                                        ? Icon(Icons.visibility_off)
-                                        : Icon(Icons.visibility),
-                                  ),
-
-                                  hintStyle: TextStyle(
-                                      fontFamily: 'HelveticaNeue',
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.blueGrey),
-
-                                  enabledBorder: new UnderlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.grey),
-                                  ),
-
-                                  // and:
-
-                                  focusedBorder: new UnderlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white),
-                                  ),
-                                ),
-                                cursorColor: Colors.black,
-                                //cursorWidth: 7.000000,
-                                //cursorRadius: Radius.elliptical(10, 15),
-                              ),
-                            ),
-
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: TextFormField(
-                                controller: passwordcontroller,
-                                obscureText: (_showPass == true) ? false : true,
-                                decoration: InputDecoration(
-                                  labelText: "Password:",
-
-                                  hintText: "*********",
-
-                                  suffixIcon: IconButton(
-                                    onPressed: _togglePass,
-                                    icon: _showPass
+                                    onPressed: _toggleNID,
+                                    icon: !_showNID
                                         ? Icon(Icons.visibility_off)
                                         : Icon(Icons.visibility),
                                   ),
@@ -326,6 +249,9 @@ class _SignUpState extends State<SignUp> {
                                   ),
 
                                   // and:
+                                  // contentPadding: EdgeInsets.only(
+                                  //     top:
+                                  //         4.0), //added by nazia it will give btn hinttext and labeltext
 
                                   focusedBorder: new UnderlineInputBorder(
                                     borderSide: BorderSide(color: Colors.white),
@@ -336,18 +262,27 @@ class _SignUpState extends State<SignUp> {
                             ),
 
                             Padding(
-                              padding: const EdgeInsets.all(10.0),
+                              //padding: const EdgeInsets.all(10.0),
+                              padding: const EdgeInsets.only(
+                                left: 15,
+                                //top: 20,
+                                right: 12,
+                                bottom: 15,
+                              ),
                               child: TextFormField(
-                                controller: confirmpasswordcontroller,
-                                obscureText: (_showConfirmPass == true) ? false : true,
+                                controller: confirmNIDcontroller,
+                                obscureText:
+                                    (_showConfirmNID == true) ? false : true,
                                 decoration: InputDecoration(
-                                  labelText: "Confirm Password:",
+                                  labelText: "Confirm NID:",
 
                                   hintText: "*********",
+                                  hintStyle: TextStyle(color: Colors.blueGrey),
+                                  contentPadding: EdgeInsets.only(top: 4.0),
 
                                   suffixIcon: IconButton(
-                                    onPressed: _toggleConfirmPass,
-                                    icon: _showConfirmPass
+                                    onPressed: _toggleConfirmNID,
+                                    icon: !_showConfirmNID
                                         ? Icon(Icons.visibility_off)
                                         : Icon(Icons.visibility),
                                   ),
@@ -401,7 +336,39 @@ class _SignUpState extends State<SignUp> {
                                         ],
                                       ),
                                       //color: Colors.black,    I CHANGED THIS//RAIYAN
-                                      onPressed: signup,
+                                      onPressed: () async {
+                                        try {
+                                          FirebaseUser user = (await FirebaseAuth
+                                                  .instance
+                                                  .createUserWithEmailAndPassword(
+                                                      email:
+                                                          emailController.text,
+                                                      password:
+                                                          nidController.text))
+                                              .user;
+                                          if (user != null) {
+                                            UserUpdateInfo updateUser =
+                                                UserUpdateInfo();
+                                            //take input from the app
+                                            updateUser.displayName =
+                                                nameController.text;
+                                            //push the inputted name to database
+                                            user.updateProfile(updateUser);
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      SignInNID()),
+                                            );
+                                          }
+                                        } catch (e) {
+                                          print(e);
+                                          nidController.text = "";
+                                          nameController.text = "";
+                                          emailController.text = "";
+                                          confirmNIDcontroller.text = "";
+                                        }
+                                      },
                                     ),
                                   ),
                                 ), //raised button

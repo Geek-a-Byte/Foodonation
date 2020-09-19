@@ -1,122 +1,21 @@
-import 'package:Foodonation/homescreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'SignInNID.dart';
+import 'homescreen.dart';
 
-class SignIn extends StatefulWidget {
-  SignIn({Key key}) : super(key: key);
-
+class SignInNID extends StatefulWidget {
+  SignInNID({Key key}) : super(key: key);
   @override
-  _SignInState createState() => _SignInState();
+  _SignInNIDState createState() => _SignInNIDState();
 }
 
-class _SignInState extends State<SignIn> {
-  //taking the input from the user
-  //TextEditingController nameController = TextEditingController();
-  //TextEditingController phonecontroller = TextEditingController();
-  //TextEditingController codecontroller = TextEditingController();
-
-  final _nameController = TextEditingController();
-  final _phoneController = TextEditingController();
-  final _codeController = TextEditingController();
+class _SignInNIDState extends State<SignInNID> {
+  final nidController = TextEditingController();
+  final emailController = TextEditingController();
+  final nameController = TextEditingController();
 
   bool _showPass = false;
 
-  Future<void> loginUser(
-      String phone, BuildContext context, String userName) async {
-    FirebaseAuth _auth = FirebaseAuth.instance;
-    print(phone);
-    _auth.verifyPhoneNumber(
-      phoneNumber: phone,
-      timeout: Duration(seconds: 60),
-      verificationCompleted: (AuthCredential credential) async {
-        Navigator.of(context).pop();
-
-        AuthResult result = await _auth.signInWithCredential(credential);
-
-        FirebaseUser user = result.user;
-
-        if (user != null) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              //builder: (context) => OverviewScreen(user),
-              builder: (context) => HomeScreen(
-                user: user,
-                name: userName,
-              ),
-            ),
-          );
-        } else {
-          print("Error");
-        }
-        //this verification is done when
-      },
-      verificationFailed: (AuthException e) {
-        print(e.message);
-      },
-      codeSent: (String verificationId, [int forceResendingToken]) {
-        print('Verification id is:');
-        print(verificationId);
-        showDialog(
-            context: context,
-            barrierDismissible: false,
-            builder: (context) {
-              return AlertDialog(
-                  title: Text("Give me code?"),
-                  content: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      TextField(
-                        controller: _codeController,
-                      )
-                    ],
-                  ),
-                  actions: <Widget>[
-                    FlatButton(
-                      child: Text("Confirm"),
-                      textColor: Colors.white,
-                      color: Colors.blue,
-                      onPressed: () async {
-                        final code = _codeController.text.trim();
-                        AuthCredential credential =
-                            PhoneAuthProvider.getCredential(
-                          verificationId: verificationId,
-                          //verificationId: "8801928943835",
-                          //verificationId: "8801840054144",
-                          //smsCode: "12345"
-                          smsCode: code,
-                          //name:_nameController;
-                        );
-
-                        AuthResult result =
-                            await _auth.signInWithCredential(credential);
-
-                        FirebaseUser user = result.user;
-
-                        if (user != null) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              //builder: (context) => OverviewScreen(user),
-                              builder: (context) => HomeScreen(
-                                user: user,
-                                name: userName,
-                              ),
-                            ),
-                          );
-                        } else {
-                          print("Error");
-                        }
-                      },
-                    )
-                  ]);
-            });
-      },
-      codeAutoRetrievalTimeout: null,
-    );
-  }
   // String title = "Sign in";
   //int NID = 2019140;
 
@@ -200,40 +99,27 @@ class _SignInState extends State<SignIn> {
                                     MediaQuery.of(context).size.height * 0.01,
                               ),
                               child: TextFormField(
-                                controller: _nameController,
-
+                                controller: nameController,
                                 decoration: InputDecoration(
                                   labelText: "Name : ",
-
                                   labelStyle: TextStyle(
                                     fontSize: 16,
                                     color: Colors.black54,
                                     fontFamily: 'HelveticaNeue',
                                     fontWeight: FontWeight.bold,
                                   ),
-
                                   hintText: "Your Name",
-                                  // contentPadding: EdgeInsets.only(
-                                  //   bottom: MediaQuery.of(context).size.height *
-                                  //       .05,
-                                  // ),
                                   hintStyle: TextStyle(color: Colors.black54),
-
                                   enabledBorder: new UnderlineInputBorder(
                                     borderSide:
                                         BorderSide(color: Colors.black38),
                                   ),
-
-                                  // and:
-
                                   focusedBorder: new UnderlineInputBorder(
                                     borderSide:
                                         BorderSide(color: Colors.black12),
                                   ),
                                 ),
                                 cursorColor: Colors.black54,
-                                //cursorWidth: 7.000000,
-                                //cursorRadius: Radius.elliptical(10, 15),
                               ),
                             ),
                             Padding(
@@ -248,19 +134,61 @@ class _SignInState extends State<SignIn> {
                               child: Column(
                                 children: [
                                   TextFormField(
-                                    controller: _phoneController,
+                                    controller: emailController,
+                                    decoration: InputDecoration(
+                                      labelText: "Email : ",
+
+                                      hintText: "name@foodonation.com",
+
+                                      labelStyle: TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.black54,
+                                        fontFamily: 'HelveticaNeue',
+                                        fontWeight: FontWeight.bold,
+                                      ),
+
+                                      border: new UnderlineInputBorder(
+                                        borderSide:
+                                            BorderSide(color: Colors.black38),
+                                      ),
+
+                                      // and:
+
+                                      focusedBorder: new UnderlineInputBorder(
+                                        borderSide:
+                                            BorderSide(color: Colors.black12),
+                                      ),
+                                    ),
+                                    cursorColor: Colors.black,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                top: MediaQuery.of(context).size.height * 0.01,
+                                bottom:
+                                    MediaQuery.of(context).size.height * 0.03,
+                                left: MediaQuery.of(context).size.height * 0.01,
+                                right:
+                                    MediaQuery.of(context).size.height * 0.01,
+                              ),
+                              child: Column(
+                                children: [
+                                  TextFormField(
+                                    controller: nidController,
                                     obscureText:
                                         (_showPass == true) ? false : true,
                                     decoration: InputDecoration(
-                                      labelText: "Phone No : ",
+                                      labelText: "Password : ",
 
-                                      hintText: "+880*********",
+                                      hintText: "*********",
 
-                                      // contentPadding: EdgeInsets.only(
-                                      //   bottom:
-                                      //       MediaQuery.of(context).size.height *
-                                      //           .05,
-                                      // ),
+                                      contentPadding: EdgeInsets.only(
+                                        bottom:
+                                            MediaQuery.of(context).size.height *
+                                                .05,
+                                      ),
 
                                       suffixIcon: IconButton(
                                         onPressed: _toggle,
@@ -322,12 +250,37 @@ class _SignInState extends State<SignIn> {
                                         ],
                                       ),
                                       //color: Colors.black,    I CHANGED THIS//RAIYAN
-                                      // onPressed: () => gotoHomeScreen(name),
-                                      onPressed: () {
-                                        final phone =
-                                            _phoneController.text.trim();
-                                        loginUser(phone, context,
-                                            _nameController.text.toString());
+                                      //onPressed: () => gotoHomeScreen(name),
+                                      onPressed: () async {
+                                        try {
+                                          FirebaseUser user = (await FirebaseAuth
+                                                  .instance
+                                                  .signInWithEmailAndPassword(
+                                                      email:
+                                                          emailController.text,
+                                                      password:
+                                                          nidController.text))
+                                              .user;
+                                          if (user != null) {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                //builder: (context) => OverviewScreen(user),
+                                                builder: (context) =>
+                                                    HomeScreen(
+                                                  user: user,
+                                                  //name: userName,
+                                                ),
+                                              ),
+                                            );
+                                          }
+                                        } catch (e) {
+                                          print(e);
+                                          nidController.text = "";
+                                          nameController.text = "";
+                                          emailController.text = "";
+                                          //todo: alertdialog with error
+                                        }
                                       },
                                     ),
                                   ),
@@ -360,35 +313,6 @@ class _SignInState extends State<SignIn> {
                                 ),
                               ),
                             ),
-                            // Padding(
-                            /* padding: EdgeInsets.symmetric(
-                                vertical:
-                                    MediaQuery.of(context).size.width * .075,
-                              ), */
-                            new RichText(
-                              text: new TextSpan(
-                                children: [
-                                  new TextSpan(
-                                    text: "Wanna signin with your NID? ",
-                                    style: new TextStyle(color: Colors.black54),
-                                  ),
-                                  new TextSpan(
-                                    text: 'Tap here!',
-                                    style: new TextStyle(color: Colors.blue),
-                                    recognizer: new TapGestureRecognizer()
-                                      ..onTap = () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  SignInNID()),
-                                        );
-                                      },
-                                  ),
-                                ],
-                              ),
-                            ),
-                            //),
                           ],
                         ),
                       ),

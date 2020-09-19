@@ -12,6 +12,7 @@ import 'package:Foodonation/signin.dart';
 import 'PageTwo.dart';
 import './screens/cart_screen.dart';
 import './screens/orders_screen.dart';
+import 'package:Foodonation/SignInNID.dart';
 
 void main() => runApp(FoodonationApp());
 
@@ -30,6 +31,7 @@ class FoodonationApp extends StatelessWidget {
           '/SignUp': (context) => SignUp(),
           //'/dashboard': (context) => DashBoard(),
           '/signin': (context) => SignIn(),
+          '/SignInNID': (context) => SignInNID(),
           ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
           CartScreen.routeName: (ctx) => CartScreen(),
           OrdersScreen.routeName: (ctx) => OrdersScreen(),
