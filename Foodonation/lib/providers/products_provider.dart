@@ -9,43 +9,46 @@ class Products with ChangeNotifier {
   // Products() {
   //   loadProduct();
   // }
-  List<Product> _items = [];
+  List<Product> _items = [
+    Product(
+      id: 'p1',
+      title: 'Package - 01',
+      description:
+          'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      imageURL: 'https://imgur.com/fy5oNRr.png',
+    ),
+    Product(
+      id: 'p2',
+      title: 'Package - 02',
+      description:
+          'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      imageURL: 'https://imgur.com/JF9fuTx.png',
+    ),
+    Product(
+      id: 'p3',
+      title: 'Package - 03',
+      description:
+          'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      imageURL: 'https://imgur.com/JFqcSqL.png',
+    ),
+    Product(
+      id: 'p4',
+      title: 'Package - 04',
+      description:
+          'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      imageURL: 'https://imgur.com/e1jFFiR.png',
+    ),
+  ];
 
   void loadProduct() {
     this.addProduct(
       Product(
-        id: 'p1',
-        title: 'Package - 01',
+        id: 'p5',
+        title: 'Package - 06',
         description:
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        imageURL: 'https://imgur.com/fy5oNRr.png',
-      ),
-    );
-    this.addProduct(
-      Product(
-        id: 'p2',
-        title: 'Package - 02',
-        description:
-            'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        imageURL: 'https://imgur.com/JF9fuTx.png',
-      ),
-    );
-    this.addProduct(
-      Product(
-        id: 'p3',
-        title: 'Package - 03',
-        description:
-            'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        imageURL: 'https://imgur.com/JFqcSqL.png',
-      ),
-    );
-    this.addProduct(
-      Product(
-        id: 'p4',
-        title: 'Package - 04',
-        description:
-            'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        imageURL: 'https://imgur.com/e1jFFiR.png',
+        imageURL:
+            'https://www.helpguide.org/wp-content/uploads/table-with-grains-vegetables-fruit-768.jpg',
       ),
     );
     notifyListeners();
@@ -83,30 +86,6 @@ class Products with ChangeNotifier {
       _items.add(newProduct);
       notifyListeners();
     });
-  }
-
-  Future<void> fetchAndSetProducts() async {
-    const url = 'https://foodonation-129a8.firebaseio.com/products.json';
-    try {
-      final response = await http.get(url);
-
-      ///print(json.decode(response.body));
-      final extractedData = json.decode(response.body) as Map<String, dynamic>;
-      final List<Product> loadedProductsList = [];
-      extractedData.forEach((prodId, prodData) {
-        loadedProductsList.add(Product(
-          id: prodId,
-          title: prodData['title'],
-          description: prodData['description'],
-          isChecked: prodData['isChecked'],
-          imageURL: prodData['imageURL'],
-        ));
-      });
-      _items = loadedProductsList;
-      notifyListeners();
-    } catch (error) {
-      throw (error);
-    }
   }
 
   void changeStatus(String id) {

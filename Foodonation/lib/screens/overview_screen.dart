@@ -38,14 +38,14 @@ class _OverviewScreenState extends State<OverviewScreen> {
   //   super.initState();
   // }
 
-  @override
-  void didChangeDependencies() {
-    if (_isInit) {
-      Provider.of<Products>(context).fetchAndSetProducts();
-    }
-    _isInit = false;
-    super.didChangeDependencies();
-  }
+  // @override
+  // void didChangeDependencies() {
+  //   if (_isInit) {
+  //     //Provider.of<Products>(context).fetchAndSetProducts();
+  //   }
+  //   _isInit = false;
+  //   super.didChangeDependencies();
+  // }
 
   @override
   Widget build(BuildContext context) {

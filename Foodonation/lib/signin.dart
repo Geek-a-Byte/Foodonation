@@ -349,19 +349,19 @@ class _SignInState extends State<SignIn> {
                                         ],
                                       ),
                                       //color: Colors.black,    I CHANGED THIS//RAIYAN
-                                      onPressed: () => gotoHomeScreen(name),
+                                      //onPressed: () => gotoHomeScreen(name),
                                       // onPressed: () {
                                       //   final phone =
                                       //       _phoneController.text.trim();
                                       //   loginUser(phone, context,
                                       //       _nameController.text.toString());
                                       // }
-                                      // onPressed: () {
-                                      //   final phone =
-                                      //       _phoneController.text.trim();
+                                      onPressed: () {
+                                        final phone =
+                                            _phoneController.text.trim();
 
-                                      //   loginUser(phone, context);
-                                      // },
+                                        loginUser(phone, context);
+                                      },
                                     ),
                                   ),
                                 ), //raised button
