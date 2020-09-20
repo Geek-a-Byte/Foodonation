@@ -16,6 +16,7 @@ class ProductsGrid extends StatelessWidget {
         vertical: 30.0,
         horizontal: 20,
       ),
+      //padding: const EdgeInsets.all(30),
       itemCount: products.length,
       itemBuilder: (ctx, i) => ChangeNotifierProvider.value(
         //wrapping with change notifier!
@@ -34,6 +35,13 @@ class ProductsGrid extends StatelessWidget {
         crossAxisSpacing: 20,
         mainAxisSpacing: 25,
       ),
+
+      // gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+      //   maxCrossAxisExtent: 400,
+      //   mainAxisSpacing: 20,
+      //   crossAxisSpacing: 20,
+      //   childAspectRatio: 16 / 9,
+      // ),
     );
   }
 }

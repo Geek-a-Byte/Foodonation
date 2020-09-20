@@ -1,4 +1,5 @@
 import 'package:Foodonation/homescreen.dart';
+import 'package:Foodonation/providers/products_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -8,6 +9,7 @@ import '../widgets/badge.dart';
 import '../providers/cart.dart';
 import '../screens/cart_screen.dart';
 import '../screens/orders_screen.dart';
+import '../providers/products_provider.dart';
 
 class OverviewScreen extends StatefulWidget {
   // var user1;
@@ -26,6 +28,25 @@ class OverviewScreen extends StatefulWidget {
 }
 
 class _OverviewScreenState extends State<OverviewScreen> {
+  var _isInit = true;
+
+  // @override
+  // void initState() {
+  //   Future.delayed(Duration.zero).then((_) {
+  //     Provider.of<Products>(context).fetchAndSetProducts();
+  //   });
+  //   super.initState();
+  // }
+
+  @override
+  void didChangeDependencies() {
+    if (_isInit) {
+      Provider.of<Products>(context).fetchAndSetProducts();
+    }
+    _isInit = false;
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
