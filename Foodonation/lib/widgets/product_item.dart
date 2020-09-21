@@ -66,7 +66,7 @@ class ProductItem extends StatelessWidget {
                       : Theme.of(context).primaryColor,
                 ),
                 onPressed: () {
-                  product.toggleFavouriteStatus();
+                  product.toggleCheckStatus();
                   cart.addItem(product.id, product.title, product.isChecked);
                 },
               ),

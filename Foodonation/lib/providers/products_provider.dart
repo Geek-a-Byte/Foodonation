@@ -114,6 +114,6 @@ class Products with ChangeNotifier {
   }
 
   void changeStatus(String id) {
-    findById(id).toggleFavouriteStatus();
+    findById(id).toggleCheckStatus();
   }
 }

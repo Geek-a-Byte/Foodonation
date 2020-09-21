@@ -24,7 +24,7 @@ class Product with ChangeNotifier {
     notifyListeners();
   }
 
-  void toggleFavouriteStatus() async {
+  Future<void> toggleCheckStatus() async {
     final temp = isChecked;
     isChecked = !isChecked;
     notifyListeners();
