@@ -186,7 +186,8 @@ class _OverviewScreenState extends State<OverviewScreen> {
               title: Padding(
                 padding: const EdgeInsets.only(left: 0.0),
                 child: Text(
-                  'Hi! ${widget.user}',
+                  //'Hi! ${widget.user}',
+                  'Welcome!',
                   style: TextStyle(
                     fontSize: 30,
                     fontFamily: 'Avenir',
