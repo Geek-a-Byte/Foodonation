@@ -14,25 +14,23 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  //taking the input from the user
-  //TextEditingController nameController = TextEditingController();
-  //TextEditingController phonecontroller = TextEditingController();
-  //TextEditingController codecontroller = TextEditingController();
-
-  String verificationId;
+  //!taking the input from the user
 
   final _nameController = TextEditingController();
   final _phoneController = TextEditingController();
   final _codeController = TextEditingController();
+  String verificationId;
 
-  bool _showPass = false;
+  //bool _showPass = false;
 
+  // ! phone authentication starts
   Future<void> loginUser(String phone, BuildContext context) async {
     FirebaseAuth _auth = FirebaseAuth.instance;
     print(phone);
     _auth.verifyPhoneNumber(
       phoneNumber: phone,
       timeout: Duration(seconds: 120),
+
       verificationCompleted: (AuthCredential credential) async {
         Navigator.of(context).pop();
 
@@ -41,20 +39,23 @@ class _SignInState extends State<SignIn> {
         FirebaseUser user = result.user;
 
         if (user != null) {
+          UserUpdateInfo updateUser = UserUpdateInfo();
+          updateUser.displayName = _nameController.text;
+          user.updateProfile(updateUser);
           Navigator.push(
             context,
             MaterialPageRoute(
-              //builder: (context) => OverviewScreen(user),
-              builder: (context) => HomeScreen(
-                  //user: user,
-                  ),
+              builder: (context) => HomeScreen(),
             ),
           );
+          print("Already logged in!!");
         } else {
           print("Error");
         }
         //this verification is done when
       },
+
+      //!if verification fails for no wifi/net connection,invalid format
       verificationFailed: (AuthException e) {
         print(e.message);
         if (e.message ==
@@ -73,6 +74,8 @@ class _SignInState extends State<SignIn> {
                   "A network error has occured, please turn on your wifi before entering your contact no");
         }
       },
+
+      //!sending code to the given phone no
       codeSent: (String verId, [int forceResendingToken]) {
         verificationId = verId;
         print('Verification id is:');
@@ -111,10 +114,14 @@ class _SignInState extends State<SignIn> {
 
                           FirebaseUser user = result.user;
                           if (user != null) {
+                            //!updating the name while signin
                             UserUpdateInfo updateUser = UserUpdateInfo();
                             updateUser.displayName = _nameController.text;
+                            //!pushing the name to firebase
                             user.updateProfile(updateUser);
                           }
+
+                          //! To keep the current user logged in,
                           SharedPreferences prefs =
                               await SharedPreferences.getInstance();
                           prefs?.setBool("isLoggedIn", true);
@@ -169,11 +176,11 @@ class _SignInState extends State<SignIn> {
     );
   }
 
-  void _toggle() {
-    setState(() {
-      _showPass = !_showPass;
-    });
-  }
+  // void _toggle() {
+  //   setState(() {
+  //_showPass = !_showPass;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -288,8 +295,8 @@ class _SignInState extends State<SignIn> {
                                 children: [
                                   TextFormField(
                                     controller: _phoneController,
-                                    obscureText:
-                                        (_showPass == true) ? false : true,
+                                    // obscureText:
+                                    //     (_showPass == true) ? false : true,
                                     decoration: InputDecoration(
                                       labelText: "Phone No : ",
 
@@ -301,12 +308,12 @@ class _SignInState extends State<SignIn> {
                                       //           .05,
                                       // ),
 
-                                      suffixIcon: IconButton(
-                                        onPressed: _toggle,
-                                        icon: !_showPass
-                                            ? Icon(Icons.visibility_off)
-                                            : Icon(Icons.visibility),
-                                      ),
+                                      // suffixIcon: IconButton(
+                                      //   onPressed: _toggle,
+                                      //   icon: !_showPass
+                                      //       ? Icon(Icons.visibility_off)
+                                      //       : Icon(Icons.visibility),
+                                      // ),
 
                                       labelStyle: TextStyle(
                                         fontSize: 16,

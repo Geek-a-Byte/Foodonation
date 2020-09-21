@@ -37,16 +37,16 @@ class OverviewScreen extends StatefulWidget {
 class _OverviewScreenState extends State<OverviewScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseUser user;
+
+  @override
   void initState() {
-    //super.initState();
+    super.initState();
     initUser();
   }
 
-  String username;
-
   initUser() async {
     user = await _auth.currentUser();
-    print(user.displayName);
+    setState(() {});
   }
 
   var _isInit = true;
@@ -74,7 +74,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
       drawer: Drawer(
         child: ListView(
             // Important: Remove any padding from the ListView.
-            padding: EdgeInsets.zero,
+
             children: <Widget>[
               //drawer
               DrawerHeader(
@@ -83,7 +83,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
                       bottom: 15.0,
                       left: 16.0,
                       child: Text(
-                        'Menu',
+                        "${user?.displayName} ",
                         style: TextStyle(
                             fontSize: 38.0,
                             fontWeight: FontWeight.bold,
@@ -196,32 +196,6 @@ class _OverviewScreenState extends State<OverviewScreen> {
                   top: 80,
                   right: MediaQuery.of(context).size.width * .07,
                 ),
-                //padding: const EdgeInsets.symmetric(vertical: 28.0),
-
-                // child: Row(
-                //   children: [
-                //     Text(
-                //       'Hi! $user',
-                //       style: TextStyle(
-                //         fontSize: 35,
-                //         fontFamily: 'Avenir',
-                //         fontWeight: FontWeight.w700,
-                //         color: Colors.white,
-                //       ),
-                //     ),
-                //     Container(
-                //       padding: EdgeInsets.only(left: 90, top: 10),
-                //       child: IconButton(
-                //         iconSize: 35,
-
-                //         ///right icon
-                //         icon: Icon(Icons.menu),
-                //         onPressed: () {}, //Menu bar
-                //         color: Colors.white,
-                //       ),
-                //     ),
-                //   ],
-                // ),
               )),
           Padding(
             padding: const EdgeInsets.only(top: 80.0),
@@ -229,10 +203,11 @@ class _OverviewScreenState extends State<OverviewScreen> {
               backgroundColor: Colors.transparent,
               elevation: 0,
               title: Padding(
-                padding: const EdgeInsets.only(left: 0.0),
+                padding: const EdgeInsets.only(left: 19.0),
                 child: Text(
                   //'Hi! $username',
                   'Hi! ${user?.displayName}',
+                  //'Today\'s Menu',
 
                   style: TextStyle(
                     fontSize: 30,
