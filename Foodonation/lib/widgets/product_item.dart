@@ -60,7 +60,10 @@ class ProductItem extends StatelessWidget {
                 /// left icon
                 icon: Icon(
                   product.isChecked ? Icons.check_box : Icons.add_box,
-                  color: product.iconColor,
+                  // color: product.iconColor,
+                  color: product.isChecked
+                      ? Colors.greenAccent
+                      : Theme.of(context).primaryColor,
                 ),
                 onPressed: () {
                   product.toggleFavouriteStatus();
@@ -77,7 +80,7 @@ class ProductItem extends StatelessWidget {
               ///right icon
               icon: Icon(Icons.menu),
               onPressed: () {},
-              color: Theme.of(context).accentColor,
+              color: Theme.of(context).primaryColor,
             ),
           ),
         ),
