@@ -1,5 +1,6 @@
 import 'package:Foodonation/homescreen.dart';
 import 'package:Foodonation/providers/products_provider.dart';
+import 'package:Foodonation/screens/comment.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -117,6 +118,11 @@ class _OverviewScreenState extends State<OverviewScreen> {
                 onTap: () {
                   // Update the state of the app.
                   // ...
+                  Navigator.push(context, new MaterialPageRoute(
+                    builder: (_){
+                      return Comment();
+                    }
+                    ));
                 },
               ),
             ]),

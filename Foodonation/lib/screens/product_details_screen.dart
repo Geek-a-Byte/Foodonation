@@ -69,27 +69,27 @@ class ProductDetailScreen extends StatelessWidget {
             Container(
               /// container for description
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              height: descriptionLength,
+              height: 250,
               child: Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0),
                 ),
                 color: Colors.white70,
-                child: Container(
-                  padding: EdgeInsets.all(25),
-                  child: Text(
-                    loadedProduct.description,
-                    textAlign: TextAlign.center,
-                    softWrap: true,
-                    style: TextStyle(
-                        fontFamily: 'HelveticaNeue',
-                        fontSize: 20,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w300),
+                    child: Container(
+                    padding: EdgeInsets.all(25),
+                    child: Text(
+                      loadedProduct.description,
+                      textAlign: TextAlign.left,
+                      softWrap: true,
+                      style: TextStyle(
+                          fontFamily: 'HelveticaNeue',
+                          fontSize: 20,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w300),
+                    ),
                   ),
                 ),
               ),
-            ),
           ],
         ),
       ),
