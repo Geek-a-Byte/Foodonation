@@ -78,23 +78,24 @@ class _CartScreenState extends State<CartScreen> {
                         borderRadius: BorderRadius.circular(30),
                       ),
                       child: setUpButtonChild(),
-                      onPressed: () {
-                        setState(() {
-                          // for (int it = 0; it < cartData.itemCount; it++) {
-                          //   Provider.of<Products>(context, listen: false)
-                          //       .changeStatus(cartData.items.keys.toString());
-                          // }
-                          cartData.items.values.toList().forEach((element) =>
-                              Provider.of<Products>(context, listen: false)
-                                  .changeStatus(element.id));
-                          cartData.clearCart();
-                          if (_state == 0) {
-                            animateButton();
-                          }
-                          Provider.of<Orders>(context, listen: false)
-                              .addOrder(cartData.items.values.toList(), 1);
-                        });
-                      },
+                      onPressed: cartData.itemCount <= 0
+                          ? null
+                          : () {
+                              setState(() async {
+                                await Provider.of<Orders>(context,
+                                        listen: false)
+                                    .addOrder(
+                                        cartData.items.values.toList(), 1);
+                                cartData.items.values.toList().forEach(
+                                    (element) => Provider.of<Products>(context,
+                                            listen: false)
+                                        .changeStatus(element.id));
+                                cartData.clearCart();
+                                if (_state == 0) {
+                                  animateButton();
+                                }
+                              });
+                            },
                       elevation: 5,
                       color: Colors.green,
                     ),

@@ -12,9 +12,9 @@ class OrderItem extends StatelessWidget {
       child: Column(
         children: <Widget>[
           ListTile(
-            title: Text(order.id.toString()),
-            subtitle: Text(
-              DateFormat('dd MM yyyy hh:mm').format(order.dateTime),
+            //title: Text(order.id.toString()),
+            title: Text(
+              DateFormat('dd/MM/yyyy hh:mm').format(order.dateTime),
             ),
             // trailing: IconButton(
             //   icon: Icon(Icons.expand_more),
