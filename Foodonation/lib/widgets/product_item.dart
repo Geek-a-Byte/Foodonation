@@ -1,3 +1,5 @@
+import 'package:popup_menu/popup_menu.dart';
+
 import '../providers/product.dart';
 import '../screens/product_details_screen.dart';
 import 'package:flutter/material.dart';
@@ -76,7 +78,13 @@ class ProductItem extends StatelessWidget {
             trailing: IconButton(
               ///right icon
               icon: Icon(Icons.menu),
-              onPressed: () {},
+              onPressed: () {
+                if (product.isChecked == true) {
+                  print('checked');
+                } else {
+                  print("not checked");
+                }
+              },
               color: Theme.of(context).accentColor,
             ),
           ),

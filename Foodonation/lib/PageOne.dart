@@ -16,8 +16,8 @@ class PageOne extends StatelessWidget {
     return MaterialApp(
         initialRoute: '/',
         routes: {
-          '/PageOne': (context) => PageOne(),
-          '/PageTwo': (context) => PageTwo(),
+          // '/PageOne': (context) => PageOne(),
+          //'/PageTwo': (context) => PageTwo(),
           '/SignUp': (context) => SignUp(),
           '/signin': (context) => SignIn(),
         },
@@ -74,22 +74,31 @@ class MyHome extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10.0),
                 child: RaisedButton(
-                  textColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25.0),
-                  ),
-                  color: Color(0xff0984e3),
-                  child: Text(
-                    'Donor',
-                    style: TextStyle(
-                      color: Color(0xffFFFFFF),
-                      fontSize: 15,
-                      fontFamily: 'HelveticaNeue',
-                      fontWeight: FontWeight.w700,
+                    textColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25.0),
                     ),
-                  ),
-                  onPressed: () => Navigator.pushNamed(context, '/PageTwo'),
-                ),
+                    color: Color(0xff0984e3),
+                    child: Text(
+                      'Donor',
+                      style: TextStyle(
+                        color: Color(0xffFFFFFF),
+                        fontSize: 15,
+                        fontFamily: 'HelveticaNeue',
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          //builder: (context) => OverviewScreen(user),
+                          builder: (context) => PageTwo(),
+                        ),
+                      );
+                    }
+                    //=> Navigator.pushNamed(context, '/PageTwo'),
+                    ),
               )),
 
           //Button Receiver

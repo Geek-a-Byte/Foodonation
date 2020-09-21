@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_awesome_alert_box/flutter_awesome_alert_box.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'SignInNID.dart';
 
 class SignIn extends StatefulWidget {
@@ -45,9 +46,8 @@ class _SignInState extends State<SignIn> {
             MaterialPageRoute(
               //builder: (context) => OverviewScreen(user),
               builder: (context) => HomeScreen(
-                user: user,
-                //name: userName,
-              ),
+                  //user: user,
+                  ),
             ),
           );
         } else {
@@ -110,6 +110,14 @@ class _SignInState extends State<SignIn> {
                               await _auth.signInWithCredential(credential);
 
                           FirebaseUser user = result.user;
+                          if (user != null) {
+                            UserUpdateInfo updateUser = UserUpdateInfo();
+                            updateUser.displayName = _nameController.text;
+                            user.updateProfile(updateUser);
+                          }
+                          SharedPreferences prefs =
+                              await SharedPreferences.getInstance();
+                          prefs?.setBool("isLoggedIn", true);
                           //the next line is for to close the give my code dialog box after signing in successfully
                           Navigator.of(context, rootNavigator: true).pop();
                           SuccessAlertBox(
@@ -121,10 +129,7 @@ class _SignInState extends State<SignIn> {
                             context,
                             MaterialPageRoute(
                               //builder: (context) => OverviewScreen(user),
-                              builder: (context) => HomeScreen(
-                                user: user,
-                                //name: userName,
-                              ),
+                              builder: (context) => HomeScreen(),
                             ),
                           );
                         } catch (Exp) {
@@ -147,10 +152,17 @@ class _SignInState extends State<SignIn> {
   // String title = "Sign in";
   //int NID = 2019140;
 
-  var name = 'User';
-  String pass = 'robocup';
+  // var name = 'User';
+  // String pass = 'robocup';
 
-  gotoHomeScreen(var userName) {
+  // gotoHomeScreen(var userName) {
+  //   Navigator.push(
+  //     context,
+  //     MaterialPageRoute(builder: (context) => HomeScreen()),
+  //   );
+  // }
+
+  gotoHomeScreen() {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => HomeScreen()),

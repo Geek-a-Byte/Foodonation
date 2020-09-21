@@ -1,14 +1,19 @@
+import 'package:Foodonation/User.dart';
 import 'package:Foodonation/homescreen.dart';
 import 'package:Foodonation/providers/products_provider.dart';
+import 'package:Foodonation/signin.dart';
+import 'package:Foodonation/splashscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 import '../widgets/products_grid.dart';
 import '../widgets/badge.dart';
 import '../providers/cart.dart';
 import '../screens/cart_screen.dart';
 import '../screens/orders_screen.dart';
+import 'package:popup_menu/popup_menu.dart';
 import '../providers/products_provider.dart';
 
 class OverviewScreen extends StatefulWidget {
@@ -17,17 +22,33 @@ class OverviewScreen extends StatefulWidget {
   //   user1 = user;
   // }
   //var user = "RoboCup";
-  var user;
-  //OverviewScreen(user);
-  OverviewScreen(FirebaseUser userName, String un) {
-    user = un;
-  }
+
+  // //OverviewScreen(name);
+
+  // //get username => name;
+  // OverviewScreen(String un) {
+  //   user = un;
+  // }
 
   @override
   _OverviewScreenState createState() => _OverviewScreenState();
 }
 
 class _OverviewScreenState extends State<OverviewScreen> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  FirebaseUser user;
+  void initState() {
+    //super.initState();
+    initUser();
+  }
+
+  String username;
+
+  initUser() async {
+    user = await _auth.currentUser();
+    print(user.displayName);
+  }
+
   var _isInit = true;
 
   // @override
@@ -38,14 +59,14 @@ class _OverviewScreenState extends State<OverviewScreen> {
   //   super.initState();
   // }
 
-  // @override
-  // void didChangeDependencies() {
-  //   if (_isInit) {
-  //     //Provider.of<Products>(context).fetchAndSetProducts();
-  //   }
-  //   _isInit = false;
-  //   super.didChangeDependencies();
-  // }
+  @override
+  void didChangeDependencies() {
+    if (_isInit) {
+      //Provider.of<Products>(context).fetchAndSetProducts();
+    }
+    _isInit = false;
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,6 +104,12 @@ class _OverviewScreenState extends State<OverviewScreen> {
                 onTap: () {
                   // Update the state of the app.
                   // ...
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        //builder: (context) => OverviewScreen(user),
+                        builder: (context) => User()),
+                  );
                 },
               ),
               ListTile(
@@ -103,9 +130,27 @@ class _OverviewScreenState extends State<OverviewScreen> {
                   'Log Out',
                   style: TextStyle(fontSize: 16.0),
                 ),
-                onTap: () {
+                onTap: () async {
                   // Update the state of the app.
                   // ...
+
+                  SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  await prefs.remove('userPreference');
+                  prefs.setBool('isLoggedIn', false);
+                  await Future.delayed(Duration(seconds: 2));
+
+                  Navigator.of(context).pushAndRemoveUntil(
+                    // the new route
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => SplashScreen(),
+                    ),
+
+                    // this function should return true when we're done removing routes
+                    // but because we want to remove all other screens, we make it
+                    // always return false
+                    (Route route) => false,
+                  );
                 },
               ),
               ListTile(
@@ -186,7 +231,9 @@ class _OverviewScreenState extends State<OverviewScreen> {
               title: Padding(
                 padding: const EdgeInsets.only(left: 0.0),
                 child: Text(
-                  'Hi! ${widget.user}',
+                  //'Hi! $username',
+                  'Hi! ${user?.displayName}',
+
                   style: TextStyle(
                     fontSize: 30,
                     fontFamily: 'Avenir',

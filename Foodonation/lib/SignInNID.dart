@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'homescreen.dart';
 
 class SignInNID extends StatefulWidget {
@@ -22,7 +23,7 @@ class _SignInNIDState extends State<SignInNID> {
   var name = 'User';
   String pass = 'robocup';
 
-  gotoHomeScreen(var userName) {
+  gotoHomeScreen() {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => HomeScreen()),
@@ -262,15 +263,21 @@ class _SignInNIDState extends State<SignInNID> {
                                                           nidController.text))
                                               .user;
                                           if (user != null) {
+                                            SharedPreferences prefs =
+                                                await SharedPreferences
+                                                    .getInstance();
+                                            prefs?.setBool("isLoggedIn", true);
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
                                                 //builder: (context) => OverviewScreen(user),
                                                 builder: (context) =>
                                                     HomeScreen(
-                                                  user: user,
-                                                  //name: userName,
-                                                ),
+                                                        // nameController.text
+
+                                                        // //user: user,
+                                                        // //name: userName,
+                                                        ),
                                               ),
                                             );
                                           }

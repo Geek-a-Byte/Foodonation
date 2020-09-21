@@ -364,6 +364,7 @@ class _SignUpState extends State<SignUp> {
                                             //take input from the app
                                             updateUser.displayName =
                                                 nameController.text;
+
                                             //push the inputted name to database
                                             user.updateProfile(updateUser);
                                             Navigator.push(
