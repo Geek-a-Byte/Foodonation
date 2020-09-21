@@ -14,9 +14,13 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  //!to validate at first add a global key
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  //bool _autoValidate;
   //!taking the input from the user
 
   final _nameController = TextEditingController();
+  //String _nameController;
   final _phoneController = TextEditingController();
   final _codeController = TextEditingController();
   String verificationId;
@@ -229,219 +233,269 @@ class _SignInState extends State<SignIn> {
                         topRight: Radius.circular(50),
                       ),
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(30.0),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.only(
-                                top: MediaQuery.of(context).size.height * 0.05,
-                                bottom:
-                                    MediaQuery.of(context).size.height * 0.03,
-                                left: MediaQuery.of(context).size.height * 0.01,
-                                right:
-                                    MediaQuery.of(context).size.height * 0.01,
-                              ),
-                              child: TextFormField(
-                                controller: _nameController,
-
-                                decoration: InputDecoration(
-                                  labelText: "Name : ",
-
-                                  labelStyle: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.black54,
-                                    fontFamily: 'HelveticaNeue',
-                                    fontWeight: FontWeight.bold,
-                                  ),
-
-                                  hintText: "Your Name",
-                                  // contentPadding: EdgeInsets.only(
-                                  //   bottom: MediaQuery.of(context).size.height *
-                                  //       .05,
-                                  // ),
-                                  hintStyle: TextStyle(color: Colors.black54),
-
-                                  enabledBorder: new UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.black38),
-                                  ),
-
-                                  // and:
-
-                                  focusedBorder: new UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.black12),
-                                  ),
+                    child: Form(
+                      key: _formKey,
+                      child: Padding(
+                        padding: const EdgeInsets.all(30.0),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.only(
+                                  top:
+                                      MediaQuery.of(context).size.height * 0.05,
+                                  bottom:
+                                      MediaQuery.of(context).size.height * 0.03,
+                                  left:
+                                      MediaQuery.of(context).size.height * 0.01,
+                                  right:
+                                      MediaQuery.of(context).size.height * 0.01,
                                 ),
-                                cursorColor: Colors.black54,
-                                //cursorWidth: 7.000000,
-                                //cursorRadius: Radius.elliptical(10, 15),
+                                child: TextFormField(
+                                  controller: _nameController,
+                                  validator: (value) {
+                                    if (value.isEmpty)
+                                      return 'Your Full name is Required';
+                                    else
+                                      return null;
+                                  },
+
+                                  decoration: InputDecoration(
+                                    labelText: "Name : ",
+
+                                    labelStyle: TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.black54,
+                                      fontFamily: 'HelveticaNeue',
+                                      fontWeight: FontWeight.bold,
+                                    ),
+
+                                    helperText:
+                                        "Enter your full name here(as per NID card)",
+                                    // contentPadding: EdgeInsets.only(
+                                    //   bottom: MediaQuery.of(context).size.height *
+                                    //       .05,
+                                    // ),
+                                    helperStyle:
+                                        TextStyle(color: Colors.black54),
+
+                                    enabledBorder: new UnderlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.black38),
+                                    ),
+
+                                    // and:
+                                    contentPadding: EdgeInsets.only(
+                                      bottom:
+                                          MediaQuery.of(context).size.height *
+                                              .01,
+                                    ),
+
+                                    focusedBorder: new UnderlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.blue),
+                                    ),
+                                  ),
+                                  cursorColor: Colors.black54,
+                                  //cursorWidth: 7.000000,
+                                  //cursorRadius: Radius.elliptical(10, 15),
+                                ),
                               ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                top: MediaQuery.of(context).size.height * 0.01,
-                                bottom:
-                                    MediaQuery.of(context).size.height * 0.03,
-                                left: MediaQuery.of(context).size.height * 0.01,
-                                right:
-                                    MediaQuery.of(context).size.height * 0.01,
+                              Padding(
+                                padding: EdgeInsets.only(
+                                  top:
+                                      MediaQuery.of(context).size.height * 0.01,
+                                  bottom:
+                                      MediaQuery.of(context).size.height * 0.03,
+                                  left:
+                                      MediaQuery.of(context).size.height * 0.01,
+                                  right:
+                                      MediaQuery.of(context).size.height * 0.01,
+                                ),
+                                child: Column(
+                                  children: [
+                                    TextFormField(
+                                      controller: _phoneController,
+
+                                      validator: (value) {
+                                        if (value.isEmpty)
+                                          return 'Please give a valid contact no.';
+                                        else
+                                          return null;
+                                      },
+
+                                      // obscureText:
+                                      //     (_showPass == true) ? false : true,
+                                      decoration: InputDecoration(
+                                        contentPadding: EdgeInsets.only(
+                                          bottom: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              .01,
+                                        ),
+                                        labelText: "Phone No : ",
+
+                                        helperText:
+                                            "Enter your valid phone no with country code (+880)",
+
+                                        // contentPadding: EdgeInsets.only(
+                                        //   bottom:
+                                        //       MediaQuery.of(context).size.height *
+                                        //           .05,
+                                        // ),
+
+                                        // suffixIcon: IconButton(
+                                        //   onPressed: _toggle,
+                                        //   icon: !_showPass
+                                        //       ? Icon(Icons.visibility_off)
+                                        //       : Icon(Icons.visibility),
+                                        // ),
+
+                                        labelStyle: TextStyle(
+                                          fontSize: 16,
+                                          color: Colors.black54,
+                                          fontFamily: 'HelveticaNeue',
+                                          fontWeight: FontWeight.bold,
+                                        ),
+
+                                        border: new UnderlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.black38),
+                                        ),
+
+                                        // and:
+
+                                        focusedBorder: new UnderlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.blue),
+                                        ),
+                                      ),
+                                      cursorColor: Colors.black,
+                                    ),
+                                  ],
+                                ),
                               ),
-                              child: Column(
-                                children: [
-                                  TextFormField(
-                                    controller: _phoneController,
-                                    // obscureText:
-                                    //     (_showPass == true) ? false : true,
-                                    decoration: InputDecoration(
-                                      labelText: "Phone No : ",
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.all(25.0),
+                                    child: ButtonTheme(
+                                      minWidth: 150,
+                                      height: 40,
+                                      child: RaisedButton(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(12.0),
+                                        ),
+                                        color: Color(0xff0984e3),
+                                        child: Row(
+                                          children: <Widget>[
+                                            //Icon(Icons.person_add, color: Colors.white),  I PERSONALLY DON'T PREFER THIS THO
+                                            Text(
+                                              "Sign in",
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                color: Colors.white,
+                                                fontFamily: 'HelveticaNeue',
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        //color: Colors.black,    I CHANGED THIS//RAIYAN
+                                        //onPressed: () => gotoHomeScreen(name),
+                                        // onPressed: () {
+                                        //   final phone =
+                                        //       _phoneController.text.trim();
+                                        //   loginUser(phone, context,
+                                        //       _nameController.text.toString());
+                                        // }
+                                        onPressed: () {
+                                          _formKey.currentState.validate()
+                                              ? Scaffold(
+                                                  body: Builder(
+                                                    builder: (context) =>
+                                                        Text('This is valid.'),
+                                                  ),
+                                                )
+                                              : Scaffold.of(context)
+                                                  .showSnackBar(SnackBar(
+                                                      content: Text(
+                                                          "This is not valid.")));
 
-                                      hintText: "+880*********",
+                                          final phone =
+                                              _phoneController.text.trim();
 
-                                      // contentPadding: EdgeInsets.only(
-                                      //   bottom:
-                                      //       MediaQuery.of(context).size.height *
-                                      //           .05,
-                                      // ),
-
-                                      // suffixIcon: IconButton(
-                                      //   onPressed: _toggle,
-                                      //   icon: !_showPass
-                                      //       ? Icon(Icons.visibility_off)
-                                      //       : Icon(Icons.visibility),
-                                      // ),
-
-                                      labelStyle: TextStyle(
-                                        fontSize: 16,
-                                        color: Colors.black54,
-                                        fontFamily: 'HelveticaNeue',
-                                        fontWeight: FontWeight.bold,
-                                      ),
-
-                                      border: new UnderlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.black38),
-                                      ),
-
-                                      // and:
-
-                                      focusedBorder: new UnderlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.black12),
+                                          loginUser(phone, context);
+                                        },
                                       ),
                                     ),
-                                    cursorColor: Colors.black,
-                                  ),
+                                  ), //raised button
                                 ],
                               ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.all(25.0),
-                                  child: ButtonTheme(
-                                    minWidth: 150,
-                                    height: 40,
-                                    child: RaisedButton(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(12.0),
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                  vertical:
+                                      MediaQuery.of(context).size.width * .075,
+                                ),
+                                child: new RichText(
+                                  text: new TextSpan(
+                                    children: [
+                                      new TextSpan(
+                                        text: "Don't have an account? ",
+                                        style: new TextStyle(
+                                            color: Colors.black54),
                                       ),
-                                      color: Color(0xff0984e3),
-                                      child: Row(
-                                        children: <Widget>[
-                                          //Icon(Icons.person_add, color: Colors.white),  I PERSONALLY DON'T PREFER THIS THO
-                                          Text(
-                                            "Sign in",
-                                            style: TextStyle(
-                                              fontSize: 15,
-                                              color: Colors.white,
-                                              fontFamily: 'HelveticaNeue',
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ],
+                                      new TextSpan(
+                                        text: 'Create one!',
+                                        style:
+                                            new TextStyle(color: Colors.blue),
+                                        recognizer: new TapGestureRecognizer()
+                                          ..onTap = () {
+                                            Navigator.pushNamed(
+                                                context, '/SignUp');
+                                          },
                                       ),
-                                      //color: Colors.black,    I CHANGED THIS//RAIYAN
-                                      //onPressed: () => gotoHomeScreen(name),
-                                      // onPressed: () {
-                                      //   final phone =
-                                      //       _phoneController.text.trim();
-                                      //   loginUser(phone, context,
-                                      //       _nameController.text.toString());
-                                      // }
-                                      onPressed: () {
-                                        final phone =
-                                            _phoneController.text.trim();
-
-                                        loginUser(phone, context);
-                                      },
-                                    ),
+                                    ],
                                   ),
-                                ), //raised button
-                              ],
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(
+                                ),
+                              ),
+                              // Padding(
+                              /* padding: EdgeInsets.symmetric(
                                 vertical:
                                     MediaQuery.of(context).size.width * .075,
-                              ),
-                              child: new RichText(
+                              ), */
+                              new RichText(
                                 text: new TextSpan(
                                   children: [
                                     new TextSpan(
-                                      text: "Don't have an account? ",
+                                      text: "Wanna signin with your NID? ",
                                       style:
                                           new TextStyle(color: Colors.black54),
                                     ),
                                     new TextSpan(
-                                      text: 'Create one!',
+                                      text: 'Tap here!',
                                       style: new TextStyle(color: Colors.blue),
                                       recognizer: new TapGestureRecognizer()
                                         ..onTap = () {
-                                          Navigator.pushNamed(
-                                              context, '/SignUp');
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    SignInNID()),
+                                          );
                                         },
                                     ),
                                   ],
                                 ),
                               ),
-                            ),
-                            // Padding(
-                            /* padding: EdgeInsets.symmetric(
-                                vertical:
-                                    MediaQuery.of(context).size.width * .075,
-                              ), */
-                            new RichText(
-                              text: new TextSpan(
-                                children: [
-                                  new TextSpan(
-                                    text: "Wanna signin with your NID? ",
-                                    style: new TextStyle(color: Colors.black54),
-                                  ),
-                                  new TextSpan(
-                                    text: 'Tap here!',
-                                    style: new TextStyle(color: Colors.blue),
-                                    recognizer: new TapGestureRecognizer()
-                                      ..onTap = () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  SignInNID()),
-                                        );
-                                      },
-                                  ),
-                                ],
-                              ),
-                            ),
-                            //),
-                          ],
+                              //),
+                            ],
+                          ),
                         ),
                       ),
                     ),

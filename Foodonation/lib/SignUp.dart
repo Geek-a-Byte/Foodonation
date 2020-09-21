@@ -16,11 +16,7 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  //bool _showPhn = false;
-  bool _showNID = false;
-  bool _showConfirmNID = false;
-
-  String title = "Sign in";
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController nidController = TextEditingController();
   TextEditingController confirmNIDcontroller = TextEditingController();
   TextEditingController nameController = TextEditingController();
@@ -52,18 +48,6 @@ class _SignUpState extends State<SignUp> {
   //   }
   // }
 
-  void _toggleNID() {
-    setState(() {
-      _showNID = !_showNID;
-    });
-  }
-
-  void _toggleConfirmNID() {
-    setState(() {
-      _showConfirmNID = !_showConfirmNID;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     Size devSize = MediaQuery.of(context).size; //Gets device dimension
@@ -82,7 +66,7 @@ class _SignUpState extends State<SignUp> {
                 //Create account
                 Padding(
                   padding: EdgeInsets.only(
-                    top: devSize.height * .2,
+                    top: devSize.height * .12,
                     left: devSize.width * .06,
                   ),
                   child: Text(
@@ -108,309 +92,385 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
                     color: Colors.white,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: MediaQuery.of(context).size.width * 0.05,
-                      ),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            SizedBox(
-                              height:
-                                  MediaQuery.of(context).size.height * 0.025,
-                            ),
-
-                            Padding(
-                              //padding: const EdgeInsets.all(10.0),
-                              padding: const EdgeInsets.only(
-                                left: 15,
-                                top: 50,
-                                right: 15,
-                                bottom: 15,
+                    child: Form(
+                      key: _formKey,
+                      child: Padding(
+                        // padding: const EdgeInsets.all(15.0),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: MediaQuery.of(context).size.width * 0.05,
+                        ),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.025,
                               ),
 
-                              child: TextFormField(
-                                style: TextStyle(
-                                  color: Colors.black87,
+                              Padding(
+                                //padding: const EdgeInsets.all(10.0),
+                                padding: EdgeInsets.only(
+                                  top:
+                                      MediaQuery.of(context).size.height * 0.03,
+                                  bottom:
+                                      MediaQuery.of(context).size.height * 0.03,
+                                  left:
+                                      MediaQuery.of(context).size.height * 0.01,
+                                  right:
+                                      MediaQuery.of(context).size.height * 0.01,
                                 ),
-                                controller: nameController,
-                                decoration: InputDecoration(
-                                  labelText: "Name:",
 
-                                  labelStyle: TextStyle(
-                                    fontSize: 15,
-                                    color: Colors.black54,
-                                    fontFamily: 'HelveticaNeue',
-                                    fontWeight: FontWeight.w700,
+                                child: TextFormField(
+                                  style: TextStyle(
+                                    color: Colors.black87,
                                   ),
+                                  controller: nameController,
+                                  validator: (value) {
+                                    if (value.isEmpty)
+                                      return 'Your Full name is Required';
+                                    else
+                                      return null;
+                                  },
+                                  decoration: InputDecoration(
+                                    labelText: "Name:",
 
-                                  hintText: "Your Name",
-
-                                  hintStyle: TextStyle(
-                                      fontFamily: 'HelveticaNeue',
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.blueGrey),
-                                  contentPadding: EdgeInsets.only(
-                                      top:
-                                          4.0), //added by nazia it will give btn hinttext and labeltext
-
-                                  enabledBorder: new UnderlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.grey),
-                                  ),
-
-                                  // and:
-
-                                  focusedBorder: new UnderlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white),
-                                  ),
-                                ),
-                                cursorColor: Colors.black,
-                              ),
-                            ),
-
-                            Padding(
-                              //padding: const EdgeInsets.all(10.0),
-                              padding: const EdgeInsets.only(
-                                left: 15,
-                                //top: 20,
-                                right: 15,
-                                bottom: 15,
-                              ),
-                              child: TextFormField(
-                                style: TextStyle(
-                                  color: Colors.black87,
-                                ),
-                                controller: emailController,
-                                decoration: InputDecoration(
-                                  labelText: "Email:",
-
-                                  labelStyle: TextStyle(
+                                    labelStyle: TextStyle(
                                       fontSize: 15,
+                                      color: Colors.black54,
                                       fontFamily: 'HelveticaNeue',
                                       fontWeight: FontWeight.w700,
-                                      color: Colors.black54),
+                                    ),
 
-                                  hintText: "name@foodonation.com",
+                                    helperText:
+                                        "Enter your full name here(as per NID card)",
 
-                                  hintStyle: TextStyle(
-                                      fontFamily: 'HelveticaNeue',
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.blueGrey),
-                                  contentPadding: EdgeInsets.only(
-                                      top:
-                                          4.0), //added by nazia it will give btn hinttext and labeltext
-                                  enabledBorder: new UnderlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.grey),
+                                    helperStyle: TextStyle(
+                                        fontFamily: 'HelveticaNeue',
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.blueGrey),
+                                    contentPadding: EdgeInsets.only(
+                                      bottom:
+                                          MediaQuery.of(context).size.height *
+                                              .01,
+                                    ), //added by nazia it will give btn helpertext and labeltext
+
+                                    enabledBorder: new UnderlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.grey),
+                                    ),
+
+                                    // and:
+
+                                    focusedBorder: new UnderlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.blue),
+                                    ),
                                   ),
-
-                                  // and:
-
-                                  focusedBorder: new UnderlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white),
-                                  ),
+                                  cursorColor: Colors.black,
                                 ),
-                                cursorColor: Colors.black,
-                                //cursorWidth: 7.000000,
-                                //cursorRadius: Radius.elliptical(10, 15),
                               ),
-                            ),
 
-                            Padding(
-                              //padding: const EdgeInsets.all(10.0),
-                              padding: const EdgeInsets.only(
-                                left: 15,
-                                //top: 20,
-                                right: 15,
-                                bottom: 15,
-                              ),
-                              child: TextFormField(
-                                controller: nidController,
-                                obscureText: (_showNID == true) ? false : true,
-                                decoration: InputDecoration(
-                                  labelText: "NID:",
-
-                                  hintText: "*********",
-                                  hintStyle: TextStyle(
-                                      fontFamily: 'HelveticaNeue',
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.blueGrey),
-
-                                  suffixIcon: IconButton(
-                                    onPressed: _toggleNID,
-                                    icon: !_showNID
-                                        ? Icon(Icons.visibility_off)
-                                        : Icon(Icons.visibility),
-                                  ),
-
-                                  labelStyle: TextStyle(
-                                      fontFamily: 'HelveticaNeue',
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 15,
-                                      color: Colors.black54),
-
-                                  enabledBorder: new UnderlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.grey),
-                                  ),
-
-                                  // and:
-                                  // contentPadding: EdgeInsets.only(
-                                  //     top:
-                                  //         4.0), //added by nazia it will give btn hinttext and labeltext
-
-                                  focusedBorder: new UnderlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white),
-                                  ),
+                              Padding(
+                                //padding: const EdgeInsets.all(10.0),
+                                padding: EdgeInsets.only(
+                                  top:
+                                      MediaQuery.of(context).size.height * 0.03,
+                                  bottom:
+                                      MediaQuery.of(context).size.height * 0.03,
+                                  left:
+                                      MediaQuery.of(context).size.height * 0.01,
+                                  right:
+                                      MediaQuery.of(context).size.height * 0.01,
                                 ),
-                                cursorColor: Colors.black,
-                              ),
-                            ),
-
-                            Padding(
-                              //padding: const EdgeInsets.all(10.0),
-                              padding: const EdgeInsets.only(
-                                left: 15,
-                                //top: 20,
-                                right: 15,
-                                bottom: 15,
-                              ),
-                              child: TextFormField(
-                                controller: confirmNIDcontroller,
-                                obscureText:
-                                    (_showConfirmNID == true) ? false : true,
-                                decoration: InputDecoration(
-                                  labelText: "Confirm NID:",
-
-                                  hintText: "*********",
-                                  hintStyle: TextStyle(
-                                      fontFamily: 'HelveticaNeue',
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.blueGrey),
-                                  //contentPadding: EdgeInsets.only(top: 4.0),
-
-                                  suffixIcon: IconButton(
-                                    onPressed: _toggleConfirmNID,
-                                    icon: !_showConfirmNID
-                                        ? Icon(Icons.visibility_off)
-                                        : Icon(Icons.visibility),
+                                child: TextFormField(
+                                  style: TextStyle(
+                                    color: Colors.black87,
                                   ),
+                                  controller: emailController,
+                                  validator: (value) {
+                                    if (value.isEmpty)
+                                      return 'Email id is required';
+                                    else
+                                      return null;
+                                  },
+                                  decoration: InputDecoration(
+                                    labelText: "Email:",
 
-                                  labelStyle: TextStyle(
-                                      fontFamily: 'HelveticaNeue',
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 15,
-                                      color: Colors.black54),
+                                    labelStyle: TextStyle(
+                                        fontSize: 15,
+                                        fontFamily: 'HelveticaNeue',
+                                        fontWeight: FontWeight.w700,
+                                        color: Colors.black54),
 
-                                  enabledBorder: new UnderlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.grey),
+                                    helperText: "fullname@foodonation.com",
+
+                                    helperStyle: TextStyle(
+                                        fontFamily: 'HelveticaNeue',
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.blueGrey),
+                                    contentPadding: EdgeInsets.only(
+                                      bottom:
+                                          MediaQuery.of(context).size.height *
+                                              .01,
+                                    ), //added by nazia it will give btn helpertext and labeltext
+                                    enabledBorder: new UnderlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.grey),
+                                    ),
+
+                                    // and:
+
+                                    focusedBorder: new UnderlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.blue),
+                                    ),
                                   ),
-
-                                  // and:
-                                  // contentPadding: EdgeInsets.only(
-                                  //     top:
-                                  //         4.0), //added by nazia it will give btn hinttext and labeltext
-
-                                  focusedBorder: new UnderlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white),
-                                  ),
+                                  cursorColor: Colors.black,
+                                  //cursorWidth: 7.000000,
+                                  //cursorRadius: Radius.elliptical(10, 15),
                                 ),
-                                cursorColor: Colors.black,
                               ),
-                            ),
 
-                            //Buttons
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: ButtonTheme(
-                                    minWidth: 150,
-                                    height: 40,
-                                    child: RaisedButton(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      ),
-                                      color: Color(0xff0984e3),
-                                      child: Row(
-                                        children: <Widget>[
-                                          //Icon(Icons.person_add, color: Colors.white),  I PERSONALLY DON'T PREFER THIS THO
-                                          Text(
-                                            "Sign Up",
-                                            style: TextStyle(
-                                              fontSize: 15,
-                                              color: Colors.white,
-                                              fontFamily: 'Avenir',
+                              Padding(
+                                //padding: const EdgeInsets.all(10.0),
+                                padding: EdgeInsets.only(
+                                  top:
+                                      MediaQuery.of(context).size.height * 0.03,
+                                  bottom:
+                                      MediaQuery.of(context).size.height * 0.03,
+                                  left:
+                                      MediaQuery.of(context).size.height * 0.01,
+                                  right:
+                                      MediaQuery.of(context).size.height * 0.01,
+                                ),
+                                child: TextFormField(
+                                  style: TextStyle(
+                                    color: Colors.black87,
+                                  ),
+                                  controller: nidController,
+                                  validator: (value) {
+                                    if (value.isEmpty)
+                                      return 'Your authorized NID is required';
+                                    else
+                                      return null;
+                                  },
+                                  decoration: InputDecoration(
+                                    labelText: "NID:",
+
+                                    helperText:
+                                        "Enter your authorized NID here",
+                                    helperStyle: TextStyle(
+                                        fontFamily: 'HelveticaNeue',
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.blueGrey),
+
+                                    labelStyle: TextStyle(
+                                        fontFamily: 'HelveticaNeue',
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 15,
+                                        color: Colors.black54),
+
+                                    enabledBorder: new UnderlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.grey),
+                                    ),
+                                    contentPadding: EdgeInsets.only(
+                                      bottom:
+                                          MediaQuery.of(context).size.height *
+                                              .01,
+                                    ),
+
+                                    // and:
+                                    // contentPadding: EdgeInsets.only(
+                                    //     top:
+                                    //         4.0), //added by nazia it will give btn helpertext and labeltext
+
+                                    focusedBorder: new UnderlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.blue),
+                                    ),
+                                  ),
+                                  cursorColor: Colors.black,
+                                ),
+                              ),
+                              Padding(
+                                //padding: const EdgeInsets.all(10.0),
+                                padding: EdgeInsets.only(
+                                  top:
+                                      MediaQuery.of(context).size.height * 0.03,
+                                  bottom:
+                                      MediaQuery.of(context).size.height * 0.03,
+                                  left:
+                                      MediaQuery.of(context).size.height * 0.01,
+                                  right:
+                                      MediaQuery.of(context).size.height * 0.01,
+                                ),
+                                child: TextFormField(
+                                  style: TextStyle(
+                                    color: Colors.black87,
+                                  ),
+                                  controller: nidController,
+                                  validator: (value) {
+                                    if (value.isEmpty)
+                                      return 'Please confirm your NID';
+                                    else
+                                      return null;
+                                  },
+                                  decoration: InputDecoration(
+                                    labelText: "Confirm NID:",
+
+                                    helperText: "Rewrite/Confirm your NID here",
+                                    helperStyle: TextStyle(
+                                        fontFamily: 'HelveticaNeue',
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.blueGrey),
+
+                                    labelStyle: TextStyle(
+                                        fontFamily: 'HelveticaNeue',
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 15,
+                                        color: Colors.black54),
+
+                                    enabledBorder: new UnderlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.grey),
+                                    ),
+                                    contentPadding: EdgeInsets.only(
+                                      bottom:
+                                          MediaQuery.of(context).size.height *
+                                              .01,
+                                    ),
+
+                                    // and:
+                                    // contentPadding: EdgeInsets.only(
+                                    //     top:
+                                    //         4.0), //added by nazia it will give btn helpertext and labeltext
+
+                                    focusedBorder: new UnderlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.blue),
+                                    ),
+                                  ),
+                                  cursorColor: Colors.black,
+                                ),
+                              ),
+
+                              //Buttons
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: ButtonTheme(
+                                      minWidth: 150,
+                                      height: 40,
+                                      child: RaisedButton(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                        ),
+                                        color: Color(0xff0984e3),
+                                        child: Row(
+                                          children: <Widget>[
+                                            //Icon(Icons.person_add, color: Colors.white),  I PERSONALLY DON'T PREFER THIS THO
+                                            Text(
+                                              "Sign Up",
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                color: Colors.white,
+                                                fontFamily: 'Avenir',
+                                              ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                      //color: Colors.black,    I CHANGED THIS//RAIYAN
-                                      onPressed: () async {
-                                        try {
-                                          FirebaseUser user = (await FirebaseAuth
-                                                  .instance
-                                                  .createUserWithEmailAndPassword(
-                                                      email:
-                                                          emailController.text,
-                                                      password:
-                                                          nidController.text))
-                                              .user;
-                                          if (user != null) {
-                                            UserUpdateInfo updateUser =
-                                                UserUpdateInfo();
-                                            //take input from the app
-                                            updateUser.displayName =
-                                                nameController.text;
+                                          ],
+                                        ),
+                                        //color: Colors.black,    I CHANGED THIS//RAIYAN
+                                        onPressed: () async {
+                                          _formKey.currentState.validate()
+                                              ? Scaffold(
+                                                  body: Builder(
+                                                    builder: (context) =>
+                                                        Text('This is valid.'),
+                                                  ),
+                                                )
+                                              : Scaffold.of(context)
+                                                  .showSnackBar(SnackBar(
+                                                      content: Text(
+                                                          "This is not valid.")));
+                                          // if (nidController.text !=
+                                          //     confirmNIDcontroller.text) {
+                                          //   WarningAlertBox(
+                                          //       context: context,
+                                          //       title: "wait!",
+                                          //       messageText:
+                                          //           "password and confirm pasword doesn't match.");
+                                          // }
+                                          try {
+                                            FirebaseUser user = (await FirebaseAuth
+                                                    .instance
+                                                    .createUserWithEmailAndPassword(
+                                                        email: emailController
+                                                            .text,
+                                                        password:
+                                                            nidController.text))
+                                                .user;
+                                            if (user != null) {
+                                              UserUpdateInfo updateUser =
+                                                  UserUpdateInfo();
+                                              //take input from the app
+                                              updateUser.displayName =
+                                                  nameController.text;
 
-                                            //push the inputted name to database
-                                            user.updateProfile(updateUser);
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      SignInNID()),
-                                            );
+                                              //push the inputted name to database
+                                              user.updateProfile(updateUser);
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        SignInNID()),
+                                              );
+                                            }
+                                          } catch (e) {
+                                            print(e);
+                                            nidController.text = "";
+                                            nameController.text = "";
+                                            emailController.text = "";
+                                            confirmNIDcontroller.text = "";
                                           }
-                                        } catch (e) {
-                                          print(e);
-                                          nidController.text = "";
-                                          nameController.text = "";
-                                          emailController.text = "";
-                                          confirmNIDcontroller.text = "";
-                                        }
-                                      },
-                                    ),
-                                  ),
-                                ), //raised button
-                              ],
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: new RichText(
-                                text: new TextSpan(
-                                  children: [
-                                    new TextSpan(
-                                      text: "Already have an account? ",
-                                      style:
-                                          new TextStyle(color: Colors.black54),
-                                    ),
-                                    new TextSpan(
-                                      text: 'Sign in!',
-                                      style: new TextStyle(color: Colors.blue),
-                                      recognizer: new TapGestureRecognizer()
-                                        ..onTap = () {
-                                          Navigator.pushNamed(
-                                              context, '/signin');
                                         },
+                                      ),
                                     ),
-                                  ],
+                                  ), //raised button
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: new RichText(
+                                  text: new TextSpan(
+                                    children: [
+                                      new TextSpan(
+                                        text: "Already have an account? ",
+                                        style: new TextStyle(
+                                            color: Colors.black54),
+                                      ),
+                                      new TextSpan(
+                                        text: 'Sign in!',
+                                        style:
+                                            new TextStyle(color: Colors.blue),
+                                        recognizer: new TapGestureRecognizer()
+                                          ..onTap = () {
+                                            Navigator.pushNamed(
+                                                context, '/signin');
+                                          },
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
