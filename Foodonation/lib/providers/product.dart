@@ -1,13 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class Product with ChangeNotifier {
   final String id;
   final String title;
   final String description;
   final String imageURL;
-  Color iconColor;
   bool isChecked;
   Product({
     @required this.id,
@@ -15,15 +17,30 @@ class Product with ChangeNotifier {
     @required this.description,
     @required this.imageURL,
     this.isChecked = false,
-    this.iconColor = Colors.blue,
   });
 
-  void toggleFavouriteStatus() {
-    isChecked = !isChecked;
-    if (iconColor == Colors.blue)
-      iconColor = Colors.greenAccent;
-    else
-      iconColor = Colors.blue;
+  void _setCheckStatus(bool newStatus) {
+    isChecked = newStatus;
     notifyListeners();
+  }
+
+  Future<void> toggleCheckStatus() async {
+    final temp = isChecked;
+    isChecked = !isChecked;
+    notifyListeners();
+    final url = 'https://foodonation-129a8.firebaseio.com/products/$id.json';
+    try {
+      final response = await http.patch(
+        url,
+        body: json.encode({
+          'isChecked': isChecked,
+        }),
+      );
+      if (response.statusCode >= 400) {
+        _setCheckStatus(temp);
+      }
+    } catch (error) {
+      _setCheckStatus(temp);
+    }
   }
 }

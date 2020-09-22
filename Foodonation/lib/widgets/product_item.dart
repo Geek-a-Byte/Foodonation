@@ -62,10 +62,13 @@ class ProductItem extends StatelessWidget {
                 /// left icon
                 icon: Icon(
                   product.isChecked ? Icons.check_box : Icons.add_box,
-                  color: product.iconColor,
+                  // color: product.iconColor,
+                  color: product.isChecked
+                      ? Colors.greenAccent
+                      : Theme.of(context).primaryColor,
                 ),
                 onPressed: () {
-                  product.toggleFavouriteStatus();
+                  product.toggleCheckStatus();
                   cart.addItem(product.id, product.title, product.isChecked);
                 },
               ),
@@ -78,14 +81,8 @@ class ProductItem extends StatelessWidget {
             trailing: IconButton(
               ///right icon
               icon: Icon(Icons.menu),
-              onPressed: () {
-                if (product.isChecked == true) {
-                  print('checked');
-                } else {
-                  print("not checked");
-                }
-              },
-              color: Theme.of(context).accentColor,
+              onPressed: () {},
+              color: Theme.of(context).primaryColor,
             ),
           ),
         ),
