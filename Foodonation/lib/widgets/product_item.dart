@@ -81,7 +81,16 @@ class ProductItem extends StatelessWidget {
             trailing: IconButton(
               ///right icon
               icon: Icon(Icons.menu),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushNamed(
+                  ProductDetailScreen.routeName,
+
+                  /// simply navigate by the routeName created at 'product_details_screen.dart'
+                  arguments: product.id,
+
+                  /// as product id is unique..passed it as argument of pushNamed
+                );
+              },
               color: Theme.of(context).primaryColor,
             ),
           ),

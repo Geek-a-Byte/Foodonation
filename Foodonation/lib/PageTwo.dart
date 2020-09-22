@@ -55,7 +55,7 @@ class PageTwo extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 80.0),
               child: Text(
-                '0192*******\n0171*******',
+                '+8801928943835 \n+8801714323216',
                 style: TextStyle(
                   fontSize: 20,
                   fontFamily: 'HelveticaNeue',
@@ -93,7 +93,7 @@ class PageTwo extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 20.0),
               child: Text(
-                '0192*******\n',
+                '+8801710525540\n',
                 style: TextStyle(
                   fontSize: 20,
                   fontFamily: 'HelveticaNeue',
