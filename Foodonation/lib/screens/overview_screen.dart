@@ -204,29 +204,27 @@ class _OverviewScreenState extends State<OverviewScreen> {
                     style: TextStyle(fontSize: 16.0),
                   ),
                   onTap: () {
-                  // Update the state of the app.
-                  // ...
-                  Navigator.push(context, new MaterialPageRoute(
-                    builder: (_){
+                    // Update the state of the app.
+                    // ...
+                    Navigator.push(context, new MaterialPageRoute(builder: (_) {
                       return Comment();
-                    }
-                    ));
-                },
-              ),
-            ]),
-      ),
-      body: Stack(
-        children: [
-          new Container(
-              height: 185,
-              width: MediaQuery.of(context)
-                  .size
-                  .width, //Gets the width of the screen
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(30),
-                  bottomRight: Radius.circular(30),
+                    }));
+                  },
+                ),
+              ]),
+        ),
+        body: Stack(
+          children: [
+            new Container(
+                height: 185,
+                width: MediaQuery.of(context)
+                    .size
+                    .width, //Gets the width of the screen
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(30),
+                    bottomRight: Radius.circular(30),
                   ),
                   //Adding shadow to the blue bar
                   boxShadow: [
@@ -302,17 +300,16 @@ class _OverviewScreenState extends State<OverviewScreen> {
                 // ],
               ),
             ),
-          ),
-          new Container(
-            margin: EdgeInsets.only(top: 185),
-            //padding: EdgeInsets.only(top: 15),
-            child: _isLoading
-                ? Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : ProductsGrid(),
-          ),
-        ],
+            new Container(
+              margin: EdgeInsets.only(top: 185),
+              //padding: EdgeInsets.only(top: 15),
+              child: _isLoading
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : ProductsGrid(),
+            ),
+          ],
         ),
       ),
     );

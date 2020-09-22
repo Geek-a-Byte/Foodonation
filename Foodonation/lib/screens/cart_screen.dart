@@ -81,7 +81,7 @@ class _CartScreenState extends State<CartScreen> {
                       onPressed: cartData.itemCount <= 0
                           ? null
                           : () {
-                              setState(() async {
+                              final response = setState(() async {
                                 await Provider.of<Orders>(context,
                                         listen: false)
                                     .addOrder(

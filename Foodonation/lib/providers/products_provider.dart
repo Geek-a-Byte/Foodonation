@@ -93,6 +93,30 @@ class Products with ChangeNotifier {
     }
   }
 
+  Future<void> fetchAndSetProducts() async {
+    const url = 'https://foodonation-129a8.firebaseio.com/products.json';
+    try {
+      final response = await http.get(url);
+
+      ///print(json.decode(response.body));
+      final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      final List<Product> loadedProductsList = [];
+      extractedData.forEach((prodId, prodData) {
+        loadedProductsList.add(Product(
+          id: prodId,
+          title: prodData['title'],
+          description: prodData['description'],
+          isChecked: prodData['isChecked'],
+          imageURL: prodData['imageURL'],
+        ));
+      });
+      _items = loadedProductsList;
+      notifyListeners();
+    } catch (error) {
+      throw (error);
+    }
+  }
+
   void changeStatus(String id) {
     findById(id).toggleCheckStatus();
   }
