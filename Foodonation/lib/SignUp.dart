@@ -1,9 +1,13 @@
+import 'dart:async';
 import 'dart:convert';
+import 'package:Foodonation/signin.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_awesome_alert_box/flutter_awesome_alert_box.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'HomeScreen.dart';
 import 'SignInNID.dart';
 
@@ -424,20 +428,104 @@ class _SignUpState extends State<SignUp> {
 
                                               //push the inputted name to database
                                               user.updateProfile(updateUser);
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        SignInNID()),
-                                              );
                                             }
+                                            SuccessAlertBox(
+                                                context: context,
+                                                //icon: Icons.done,
+                                                title: "SignUp Successful!",
+                                                messageText:
+                                                    "Account created successfully.Please signin to proceed to your account");
+
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      SignInNID()),
+                                            );
                                           } catch (e) {
-                                            print(e);
-                                            nidController.text = "";
-                                            nameController.text = "";
-                                            emailController.text = "";
-                                            confirmNIDcontroller.text = "";
+                                            //PlatformException errorType;
+
+                                            switch (e.message) {
+                                              case 'The email address is badly formatted.':
+                                                // errorType =
+                                                //     PlatformException.UserNotFound;
+                                                print(
+                                                    "Hello1 : email id badly formatted");
+                                                WarningAlertBox(
+                                                    context: context,
+                                                    title: "warning!",
+                                                    messageText:
+                                                        " email id badly formatted, please follow this format: fullname@foodonation.com");
+                                                break;
+                                              case 'The email address is already in use by another account.':
+                                                // errorType =
+                                                //     PlatformException.UserNotFound;
+                                                print(
+                                                    "Hello5 : email address is already in use");
+                                                WarningAlertBox(
+                                                    context: context,
+                                                    title: "warning!",
+                                                    messageText:
+                                                        " Email id already in use.");
+                                                break;
+                                              case 'The given password is invalid. [ Password should be at least 6 characters ]':
+                                                // errorType = authProblems
+                                                //     .PasswordNotValid;
+                                                print(
+                                                    "Hello2 :  The given password is invalid[should be atleast 6 characters].");
+                                                WarningAlertBox(
+                                                    context: context,
+                                                    title: "warning!",
+                                                    messageText:
+                                                        "Given NID is less than 6 characters.Please give a valid NID.");
+                                                break;
+                                              case 'A network error (such as timeout, interrupted connection or unreachable host) has occurred.':
+                                                // errorType =
+                                                //     authProblems.NetworkError;
+                                                print(
+                                                    "Hello3 : network error , no wifi");
+                                                WarningAlertBox(
+                                                    context: context,
+                                                    title: "warning!",
+                                                    messageText:
+                                                        "Network error. Please check your internet connection before signing up.");
+                                                break;
+                                              // ...
+                                              default:
+                                                print("Hello4");
+                                                print(
+                                                    'Case ${e.message} is not yet implemented');
+                                                WarningAlertBox(
+                                                    context: context,
+                                                    title: "warning!",
+                                                    messageText:
+                                                        "An error has occured.Please contact with respective authorities for this. ");
+                                            }
+
+                                            //print('The error is $errorType');
                                           }
+                                          // } on AuthException catch (e) {
+                                          //   print("hello");
+                                          //   if (e.code == 'weak-password') {
+                                          //     print(
+                                          //         'The password provided is too weak.');
+                                          //   } else if (e.code ==
+                                          //       'email-already-in-use') {
+                                          //     print(
+                                          //         'The account already exists for that email.');
+                                          //   }
+                                          // } catch (e) {
+                                          //   print(e.toString());
+                                          // }
+
+                                          // } catch (PlatformException e) {
+                                          //   print("hello");
+                                          //   print(e);
+                                          //   nidController.text = "";
+                                          //   nameController.text = "";
+                                          //   emailController.text = "";
+                                          //   confirmNIDcontroller.text = "";
+                                          // }
                                         },
                                       ),
                                     ),
@@ -460,8 +548,12 @@ class _SignUpState extends State<SignUp> {
                                             new TextStyle(color: Colors.blue),
                                         recognizer: new TapGestureRecognizer()
                                           ..onTap = () {
-                                            Navigator.pushNamed(
-                                                context, '/signin');
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      SignIn()),
+                                            );
                                           },
                                       ),
                                     ],

@@ -2,6 +2,7 @@ import 'package:Foodonation/SignUp.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_awesome_alert_box/flutter_awesome_alert_box.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'homescreen.dart';
 
@@ -270,26 +271,34 @@ class _SignInNIDState extends State<SignInNID> {
                                                         password:
                                                             nidController.text))
                                                 .user;
+
                                             if (user != null) {
                                               SharedPreferences prefs =
                                                   await SharedPreferences
                                                       .getInstance();
                                               prefs?.setBool(
                                                   "isLoggedIn", true);
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  //builder: (context) => OverviewScreen(user),
-                                                  builder: (context) =>
-                                                      HomeScreen(
-                                                          // nameController.text
-
-                                                          // //user: user,
-                                                          // //name: userName,
-                                                          ),
-                                                ),
-                                              );
                                             }
+                                            SuccessAlertBox(
+                                                context: context,
+                                                //icon: Icons.done,
+                                                title: "Login Successful!",
+                                                messageText:
+                                                    "The email ID was verified.");
+
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                //builder: (context) => OverviewScreen(user),
+                                                builder: (context) =>
+                                                    HomeScreen(
+                                                        // nameController.text
+
+                                                        // //user: user,
+                                                        // //name: userName,
+                                                        ),
+                                              ),
+                                            );
                                           } catch (e) {
                                             print(e);
                                             nidController.text = "";
