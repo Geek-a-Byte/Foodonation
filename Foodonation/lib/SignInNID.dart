@@ -119,7 +119,7 @@ class _SignInNIDState extends State<SignInNID> {
                                       decoration: InputDecoration(
                                         labelText: "Email : ",
 
-                                        helperText: "fullname@foodonation.com",
+                                        helperText: "NID@foodonation.com",
 
                                         labelStyle: TextStyle(
                                           fontSize: 16,
