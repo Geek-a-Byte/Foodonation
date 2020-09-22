@@ -300,11 +300,6 @@ class _SignInNIDState extends State<SignInNID> {
                                               ),
                                             );
                                           } catch (e) {
-                                            WarningAlertBox(
-                                                context: context,
-                                                title: "Sorry ! Try Again.",
-                                                messageText:
-                                                    "Invalid NID or network error.");
                                             print(e);
                                             nidController.text = "";
                                             nameController.text = "";
