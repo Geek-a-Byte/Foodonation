@@ -94,7 +94,12 @@ class _CartScreenState extends State<CartScreen> {
                                 if (_state == 0) {
                                   animateButton();
                                 }
+                                  showDialog(
+                          context: context,
+                          builder: (BuildContext context) => _buildAboutDialog(context),
+                        );
                               });
+                            
                             },
                       elevation: 5,
                       color: Colors.green,
@@ -139,3 +144,52 @@ class _CartScreenState extends State<CartScreen> {
     });
   }
 }
+
+Widget _buildAboutDialog(BuildContext context) {
+  DateTime now = new DateTime.now();
+  DateTime next = now.add(new Duration(days:3));
+    return new AlertDialog(
+      title: const Text(
+        'Order Details',
+        style: TextStyle(
+          fontSize: 25.0,
+        ),
+      ),
+      content: Padding(
+        padding: const EdgeInsets.symmetric(horizontal:8.0),
+        child: new Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(
+                  Icons.check_circle,
+                  color: Colors.green,
+                ),
+                Spacer(),
+                Text('Your request has been accepted.'),
+              ],
+            ),
+            SizedBox(height: 10.0,),
+            Text('Date of request : $now'),
+            SizedBox(height: 10.0,),
+            Text('Date of delivery : $next'),
+            //DateTime now = new DateTime.now();
+            //_buildAboutText(),
+            //_buildLogoAttribution(),
+          ],
+        ),
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          textColor: Theme.of(context).primaryColor,
+          child: const Text('Ok, got it!'),
+        ),
+      ],
+    );
+  }
