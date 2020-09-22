@@ -411,31 +411,31 @@ class _SignInState extends State<SignIn> {
                                           ],
                                         ),
                                         //color: Colors.black,    I CHANGED THIS//RAIYAN
-                                        onPressed: () => gotoHomeScreen(),
+                                        // onPressed: () => gotoHomeScreen(),
                                         // onPressed: () {
                                         //   final phone =
                                         //       _phoneController.text.trim();
                                         //   loginUser(phone, context,
                                         //       _nameController.text.toString());
                                         // }
-                                        // onPressed: () {
-                                        //   _formKey.currentState.validate()
-                                        //       ? Scaffold(
-                                        //           body: Builder(
-                                        //             builder: (context) =>
-                                        //                 Text('This is valid.'),
-                                        //           ),
-                                        //         )
-                                        //       : Scaffold.of(context)
-                                        //           .showSnackBar(SnackBar(
-                                        //               content: Text(
-                                        //                   "This is not valid.")));
+                                        onPressed: () {
+                                          _formKey.currentState.validate()
+                                              ? Scaffold(
+                                                  body: Builder(
+                                                    builder: (context) =>
+                                                        Text('This is valid.'),
+                                                  ),
+                                                )
+                                              : Scaffold.of(context)
+                                                  .showSnackBar(SnackBar(
+                                                      content: Text(
+                                                          "This is not valid.")));
 
-                                        //   final phone =
-                                        //       _phoneController.text.trim();
+                                          final phone =
+                                              _phoneController.text.trim();
 
-                                        //   loginUser(phone, context);
-                                        // },
+                                          loginUser(phone, context);
+                                        },
                                       ),
                                     ),
                                   ), //raised button
