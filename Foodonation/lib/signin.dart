@@ -1,3 +1,4 @@
+import 'package:Foodonation/SignUp.dart';
 import 'package:Foodonation/homescreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
@@ -459,8 +460,12 @@ class _SignInState extends State<SignIn> {
                                             new TextStyle(color: Colors.blue),
                                         recognizer: new TapGestureRecognizer()
                                           ..onTap = () {
-                                            Navigator.pushNamed(
-                                                context, '/SignUp');
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      SignUp()),
+                                            );
                                           },
                                       ),
                                     ],

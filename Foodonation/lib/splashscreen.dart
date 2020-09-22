@@ -196,7 +196,7 @@ class _SplashScreenState extends State<SplashScreen> {
                           context: context,
                           title: "wait!",
                           messageText:
-                              "You're not signed in..Please Sign in/Create account first!");
+                              "You're not signed in..To create account or sign in tap the 'Let\'s get started' button!");
                     }
                   },
                   //onPressed: () => Navigator.pushNamed(context, '/PageOne'),
