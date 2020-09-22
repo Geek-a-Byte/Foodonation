@@ -169,17 +169,16 @@ class _SignInNIDState extends State<SignInNID> {
 
                                       validator: (value) {
                                         if (value.isEmpty)
-                                          return 'Your authorized NID is required';
+                                          return 'Your password is required';
                                         else
                                           return null;
                                       },
                                       // obscureText:
                                       //     (_showPass == true) ? false : true,
                                       decoration: InputDecoration(
-                                        labelText: "NID : ",
+                                        labelText: "Password : ",
 
-                                        helperText:
-                                            "Enter your authorized NID here",
+                                        helperText: "Enter your password here",
 
                                         contentPadding: EdgeInsets.only(
                                           bottom: MediaQuery.of(context)

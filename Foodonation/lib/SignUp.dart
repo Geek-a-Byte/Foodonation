@@ -207,7 +207,7 @@ class _SignUpState extends State<SignUp> {
                                         fontWeight: FontWeight.w700,
                                         color: Colors.black54),
 
-                                    helperText: "fullname@foodonation.com",
+                                    helperText: "NID@foodonation.com",
 
                                     helperStyle: TextStyle(
                                         fontFamily: 'HelveticaNeue',
@@ -255,15 +255,15 @@ class _SignUpState extends State<SignUp> {
                                   controller: nidController,
                                   validator: (value) {
                                     if (value.isEmpty)
-                                      return 'Your authorized NID is required';
+                                      return 'Password is required';
                                     else
                                       return null;
                                   },
                                   decoration: InputDecoration(
-                                    labelText: "NID:",
+                                    labelText: "Password:",
 
                                     helperText:
-                                        "Enter your authorized NID here",
+                                        "Enter atleast 6-digit password here",
                                     helperStyle: TextStyle(
                                         fontFamily: 'HelveticaNeue',
                                         fontWeight: FontWeight.w500,
@@ -317,14 +317,15 @@ class _SignUpState extends State<SignUp> {
                                   controller: nidController,
                                   validator: (value) {
                                     if (value.isEmpty)
-                                      return 'Please confirm your NID';
+                                      return 'Please confirm your password';
                                     else
                                       return null;
                                   },
                                   decoration: InputDecoration(
-                                    labelText: "Confirm NID:",
+                                    labelText: "Confirm Password:",
 
-                                    helperText: "Rewrite/Confirm your NID here",
+                                    helperText:
+                                        "Rewrite/Confirm your password here",
                                     helperStyle: TextStyle(
                                         fontFamily: 'HelveticaNeue',
                                         fontWeight: FontWeight.w500,
@@ -477,7 +478,7 @@ class _SignUpState extends State<SignUp> {
                                                     context: context,
                                                     title: "warning!",
                                                     messageText:
-                                                        "Given NID is less than 6 characters.Please give a valid NID.");
+                                                        "Given password is less than 6 characters.Please give a valid password.");
                                                 break;
                                               case 'A network error (such as timeout, interrupted connection or unreachable host) has occurred.':
                                                 // errorType =
