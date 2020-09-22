@@ -11,48 +11,48 @@ class Products with ChangeNotifier {
   // }
   List<Product> _items = [];
 
-  void loadProduct() {
-    this.addProduct(
-      Product(
-        id: 'p1',
-        title: 'Package - 01',
-        description:
-            '1. Rice(5 kg)\n2. Lentils(1 kg)\n3. Potato(2 kg)\n4. Soyabean Oil(1 Litre)\n5. Egg(1 dozen)\n6. Flattered Rice(1 kg)',
-        imageURL: 'https://imgur.com/fy5oNRr.png',
-      ),
-    );
+  // void loadProduct() {
+  //   // this.addProduct(
+  //   //   Product(
+  //   //     id: 'p1',
+  //   //     title: 'Package - 01',
+  //   //     description:
+  //   //         '1. Rice(5 kg)\n2. Lentils(1 kg)\n3. Potato(2 kg)\n4. Soyabean Oil(1 Litre)\n5. Egg(1 dozen)\n6. Flattered Rice(1 kg)',
+  //   //     imageURL: 'https://imgur.com/fy5oNRr.png',
+  //   //   ),
+  //   // );
 
-    this.addProduct(
-      Product(
-        id: 'p2',
-        title: 'Package - 02',
-        description:
-            '1. Rice (5 kg)\n2. Lentils (1 kg)\n3. Egg (1 dogen)\n4. Soyabean Oil (1 Litre)\n5. Wheat (2 kg)',
-        imageURL: 'https://imgur.com/JF9fuTx.png',
-      ),
-    );
+  //   // this.addProduct(
+  //   //   Product(
+  //   //     id: 'p2',
+  //   //     title: 'Package - 02',
+  //   //     description:
+  //   //         '1. Rice (5 kg)\n2. Lentils (1 kg)\n3. Egg (1 dogen)\n4. Soyabean Oil (1 Litre)\n5. Wheat (2 kg)',
+  //   //     imageURL: 'https://imgur.com/JF9fuTx.png',
+  //   //   ),
+  //   // );
 
-    this.addProduct(
-      Product(
-        id: 'p3',
-        title: 'Package - 03',
-        description:
-            '1. Whole Wheat Atta (2 kg)\n2. Potato (2 kg)\n3. Lentils (1 kg)\n 4. Soyabean Oil (1 Litre)\n5. Puffed Rice (1 kg)',
-        imageURL: 'https://imgur.com/JFqcSqL.png',
-      ),
-    );
+  //   // this.addProduct(
+  //   //   Product(
+  //   //     id: 'p3',
+  //   //     title: 'Package - 03',
+  //   //     description:
+  //   //         '1. Whole Wheat Atta (2 kg)\n2. Potato (2 kg)\n3. Lentils (1 kg)\n 4. Soyabean Oil (1 Litre)\n5. Puffed Rice (1 kg)',
+  //   //     imageURL: 'https://imgur.com/JFqcSqL.png',
+  //   //   ),
+  //   // );
 
-    this.addProduct(
-      Product(
-        id: 'p4',
-        title: 'Package - 04',
-        description:
-            '1. Laal Shak (1 kg)\n2. Papaya (2 kg)\n3. Guava (1 kg)\n4. Lemon (Qtn: 4)\n5. Pui Shak (1 kg)\n6. Sugar (1 kg)\n7. Salt(1 kg)',
-        imageURL: 'https://imgur.com/e1jFFiR.png',
-      ),
-    );
-    notifyListeners();
-  }
+  //   // this.addProduct(
+  //   //   Product(
+  //   //     id: 'p4',
+  //   //     title: 'Package - 04',
+  //   //     description:
+  //   //         '1. Laal Shak (1 kg)\n2. Papaya (2 kg)\n3. Guava (1 kg)\n4. Lemon (Qtn: 4)\n5. Pui Shak (1 kg)\n6. Sugar (1 kg)\n7. Salt(1 kg)',
+  //   //     imageURL: 'https://imgur.com/e1jFFiR.png',
+  //   //   ),
+  //   // );
+  //   notifyListeners();
+  // }
 
   List<Product> get items {
     return [..._items];

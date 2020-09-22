@@ -42,10 +42,10 @@ class ProductDetailScreen extends StatelessWidget {
               ),
 
               /// container for image
-              //margin: EdgeInsets.only(top: 10),
+              margin: EdgeInsets.only(top: 10),
               height: 300,
               width: double.infinity,
-              //padding: const EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Image.network(
                 loadedProduct.imageURL,
                 fit: BoxFit.cover,
@@ -75,21 +75,21 @@ class ProductDetailScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15.0),
                 ),
                 color: Colors.white70,
-                    child: Container(
-                    padding: EdgeInsets.all(25),
-                    child: Text(
-                      loadedProduct.description,
-                      textAlign: TextAlign.left,
-                      softWrap: true,
-                      style: TextStyle(
-                          fontFamily: 'HelveticaNeue',
-                          fontSize: 20,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w300),
-                    ),
+                child: Container(
+                  padding: EdgeInsets.all(25),
+                  child: Text(
+                    loadedProduct.description,
+                    textAlign: TextAlign.left,
+                    softWrap: true,
+                    style: TextStyle(
+                        fontFamily: 'HelveticaNeue',
+                        fontSize: 20,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w300),
                   ),
                 ),
               ),
+            ),
           ],
         ),
       ),
