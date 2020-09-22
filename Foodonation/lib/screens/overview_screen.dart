@@ -1,6 +1,7 @@
 import 'package:Foodonation/User.dart';
 import 'package:Foodonation/homescreen.dart';
 import 'package:Foodonation/providers/products_provider.dart';
+import 'package:Foodonation/screens/comment.dart';
 import 'package:Foodonation/signin.dart';
 import 'package:Foodonation/splashscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -195,24 +196,29 @@ class _OverviewScreenState extends State<OverviewScreen> {
                     style: TextStyle(fontSize: 16.0),
                   ),
                   onTap: () {
-                    // Update the state of the app.
-                    // ...
-                  },
-                ),
-              ]),
-        ),
-        body: Stack(
-          children: [
-            new Container(
-                height: 185,
-                width: MediaQuery.of(context)
-                    .size
-                    .width, //Gets the width of the screen
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(30),
-                    bottomRight: Radius.circular(30),
+                  // Update the state of the app.
+                  // ...
+                  Navigator.push(context, new MaterialPageRoute(
+                    builder: (_){
+                      return Comment();
+                    }
+                    ));
+                },
+              ),
+            ]),
+      ),
+      body: Stack(
+        children: [
+          new Container(
+              height: 185,
+              width: MediaQuery.of(context)
+                  .size
+                  .width, //Gets the width of the screen
+              decoration: BoxDecoration(
+                color: Colors.blue,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(30),
+                  bottomRight: Radius.circular(30),
                   ),
                   //Adding shadow to the blue bar
                   boxShadow: [
