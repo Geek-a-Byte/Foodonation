@@ -126,9 +126,9 @@ class _SignInState extends State<SignIn> {
                           }
 
                           //! To keep the current user logged in,
-                          SharedPreferences prefs =
-                              await SharedPreferences.getInstance();
-                          prefs?.setBool("isLoggedIn", true);
+                          // SharedPreferences prefs =
+                          //     await SharedPreferences.getInstance();
+                          // prefs?.setBool("isLoggedIn", true);
                           //the next line is for to close the give my code dialog box after signing in successfully
                           Navigator.of(context, rootNavigator: true).pop();
                           SuccessAlertBox(
@@ -136,6 +136,9 @@ class _SignInState extends State<SignIn> {
                               //icon: Icons.done,
                               title: "Login Successful!",
                               messageText: "The contact no was verified.");
+                          SharedPreferences prefs =
+                              await SharedPreferences.getInstance();
+                          prefs?.setBool("isLoggedIn", true);
                           Navigator.push(
                             context,
                             MaterialPageRoute(
