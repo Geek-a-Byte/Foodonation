@@ -1,7 +1,11 @@
+import 'dart:async';
+import 'package:Foodonation/PageOne.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:Foodonation/settings.dart';
-
+import 'package:flutter_awesome_alert_box/flutter_awesome_alert_box.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'SignUp.dart';
+import 'homescreen.dart';
 
 class SplashScreen extends StatefulWidget {
   SplashScreen({Key key}) : super(key: key);
@@ -14,28 +18,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    gotosignup();
-  }
-
-  gotosignup() async {
-    var abc = await getValue("isLoggedin");
-    // if (abc == "true") {
-    //   print(abc);
-    //   Future.delayed(const Duration(milliseconds: 1500), () {
-    //     Navigator.pushReplacementNamed(context, '/dashboard');
-    //   });
-    // } else {
-    //   Future.delayed(const Duration(milliseconds: 1500), () {
-    //     Navigator.pushReplacementNamed(context, '/SignUp');
-    //   });
-    // }
-
-    if (abc == "true") {
-      print(abc);
-      Future.delayed(const Duration(milliseconds: 1500), () {
-        Navigator.pushReplacementNamed(context, '/SignUp');
-      });
-    }
   }
 
   Widget build(BuildContext context) {
@@ -43,9 +25,9 @@ class _SplashScreenState extends State<SplashScreen> {
     Size devSize = MediaQuery.of(context).size;
 
     return MaterialApp(
-      routes: {
-        '/receiver': (context) => SignUp(),
-      },
+      // routes: {
+      //   '/receiver': (context) => SignUp(),
+      // },
       home: Scaffold(
         //blue BG (comment the line below if you want white bg)
         //backgroundColor: Color(0xff0984E3),
@@ -97,7 +79,6 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
 
-            //Button
             ButtonTheme(
               minWidth: devSize.width * 0.75,
               height: 48,
@@ -116,7 +97,110 @@ class _SplashScreenState extends State<SplashScreen> {
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-                onPressed: () => Navigator.pushNamed(context, '/PageOne'),
+                onPressed: () async {
+                  SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  var status = prefs.getBool('isLoggedIn') ?? false;
+                  print(status);
+                  if (status) {
+                    // final FirebaseAuth _auth = FirebaseAuth.instance;
+                    // FirebaseUser user;
+
+                    // initUser() async {
+                    //   user = await _auth.currentUser();
+                    // }
+
+                    // void initState() {
+                    //   initUser();
+                    // }
+
+                    //user logged in, then go to homescreen
+                    WarningAlertBox(
+                        context: context,
+                        title: "wait!",
+                        messageText:
+                            "You're already logged into another account! please signout before proceeding!");
+                  } else {
+                    //user not logged in, then go to pageone
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          //builder: (context) => OverviewScreen(user),
+                          builder: (context) => PageOne()
+                          //name: userName,
+                          ),
+                    );
+                  }
+                },
+                //onPressed: () => Navigator.pushNamed(context, '/PageOne'),
+              ),
+            ),
+
+            //Button
+            Padding(
+              padding: const EdgeInsets.only(top: 10.0),
+              child: ButtonTheme(
+                minWidth: devSize.width * 0.75,
+                height: 48,
+                child: RaisedButton(
+                  textColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25.0),
+                  ),
+                  color: Color(0xff0984e3),
+                  child: Text(
+                    'Already Signed in? Go to your account.',
+                    style: TextStyle(
+                      color: Color(0xffFFFFFF),
+                      fontSize: 15,
+                      fontFamily: 'Avenir',
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  onPressed: () async {
+                    SharedPreferences prefs =
+                        await SharedPreferences.getInstance();
+                    var status = prefs.getBool('isLoggedIn') ?? false;
+                    print(status);
+                    if (status) {
+                      // final FirebaseAuth _auth = FirebaseAuth.instance;
+                      // FirebaseUser user;
+
+                      // initUser() async {
+                      //   user = await _auth.currentUser();
+                      // }
+
+                      // void initState() {
+                      //   initUser();
+                      // }
+
+                      //user logged in, then go to homescreen
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          //builder: (context) => OverviewScreen(user),
+                          builder: (context) => HomeScreen(),
+                        ),
+                      );
+                    } else {
+                      //user not logged in, then go to pageone
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //       //builder: (context) => OverviewScreen(user),
+                      //       builder: (context) => PageOne()
+                      //       //name: userName,
+                      //       ),
+                      // );
+                      WarningAlertBox(
+                          context: context,
+                          title: "wait!",
+                          messageText:
+                              "You're not signed in..To create account or sign in tap the 'Let\'s get started' button!");
+                    }
+                  },
+                  //onPressed: () => Navigator.pushNamed(context, '/PageOne'),
+                ),
               ),
             ),
           ],

@@ -9,13 +9,16 @@ import './providers/orders.dart';
 import './screens/cart_screen.dart';
 import './screens/orders_screen.dart';
 
-void main() => runApp(HomeScreen());
+//void main() => runApp(HomeScreen());
 
 class HomeScreen extends StatelessWidget {
-  //This is where username goes in
-  final FirebaseUser user;
-  String name;
-  HomeScreen({this.user, this.name});
+  // //This is where username goes in
+  // //final FirebaseUser user;
+  // String name;
+  // //
+  // HomeScreen(String name) {
+  //   this.name = name;
+  // }
 
   @override
   //HomeScreen(userName);
@@ -40,7 +43,7 @@ class HomeScreen extends StatelessWidget {
           fontFamily: 'HelveticaNeue',
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: OverviewScreen(user, name),
+        home: OverviewScreen(),
         routes: {
           /// must define it in main.dart..it reduced state management complexity!
           ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),

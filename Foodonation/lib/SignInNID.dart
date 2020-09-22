@@ -1,6 +1,9 @@
+import 'package:Foodonation/SignUp.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_awesome_alert_box/flutter_awesome_alert_box.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'homescreen.dart';
 
 class SignInNID extends StatefulWidget {
@@ -10,11 +13,12 @@ class SignInNID extends StatefulWidget {
 }
 
 class _SignInNIDState extends State<SignInNID> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final nidController = TextEditingController();
   final emailController = TextEditingController();
   final nameController = TextEditingController();
 
-  bool _showPass = false;
+  //bool _showPass = false;
 
   // String title = "Sign in";
   //int NID = 2019140;
@@ -22,18 +26,18 @@ class _SignInNIDState extends State<SignInNID> {
   var name = 'User';
   String pass = 'robocup';
 
-  gotoHomeScreen(var userName) {
+  gotoHomeScreen() {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => HomeScreen()),
     );
   }
 
-  void _toggle() {
-    setState(() {
-      _showPass = !_showPass;
-    });
-  }
+  // void _toggle() {
+  //   setState(() {
+  //     _showPass = !_showPass;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -71,249 +75,276 @@ class _SignInNIDState extends State<SignInNID> {
                   ),
                 ),
                 Expanded(
-                  child: Card(
-                    color: Colors.white,
-                    elevation: 0,
-                    margin: EdgeInsets.only(
-                        top: MediaQuery.of(context).size.height * 0.05),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(50),
-                        topRight: Radius.circular(50),
+                  child: Form(
+                    key: _formKey,
+                    child: Card(
+                      color: Colors.white,
+                      elevation: 0,
+                      margin: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height * 0.05),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(50),
+                          topRight: Radius.circular(50),
+                        ),
                       ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(30.0),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.only(
-                                top: MediaQuery.of(context).size.height * 0.05,
-                                bottom:
-                                    MediaQuery.of(context).size.height * 0.03,
-                                left: MediaQuery.of(context).size.height * 0.01,
-                                right:
-                                    MediaQuery.of(context).size.height * 0.01,
-                              ),
-                              child: TextFormField(
-                                controller: nameController,
-                                decoration: InputDecoration(
-                                  labelText: "Name : ",
-                                  labelStyle: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.black54,
-                                    fontFamily: 'HelveticaNeue',
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  hintText: "Your Name",
-                                  hintStyle: TextStyle(color: Colors.black54),
-                                  enabledBorder: new UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.black38),
-                                  ),
-                                  focusedBorder: new UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.black12),
-                                  ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(30.0),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.only(
+                                  top:
+                                      MediaQuery.of(context).size.height * 0.01,
+                                  bottom:
+                                      MediaQuery.of(context).size.height * 0.03,
+                                  left:
+                                      MediaQuery.of(context).size.height * 0.01,
+                                  right:
+                                      MediaQuery.of(context).size.height * 0.01,
                                 ),
-                                cursorColor: Colors.black54,
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                top: MediaQuery.of(context).size.height * 0.01,
-                                bottom:
-                                    MediaQuery.of(context).size.height * 0.03,
-                                left: MediaQuery.of(context).size.height * 0.01,
-                                right:
-                                    MediaQuery.of(context).size.height * 0.01,
-                              ),
-                              child: Column(
-                                children: [
-                                  TextFormField(
-                                    controller: emailController,
-                                    decoration: InputDecoration(
-                                      labelText: "Email : ",
+                                child: Column(
+                                  children: [
+                                    TextFormField(
+                                      controller: emailController,
+                                      validator: (value) {
+                                        if (value.isEmpty)
+                                          return 'Your registered email ID is required';
+                                        else
+                                          return null;
+                                      },
+                                      decoration: InputDecoration(
+                                        labelText: "Email : ",
 
-                                      hintText: "name@foodonation.com",
+                                        helperText: "fullname@foodonation.com",
 
-                                      labelStyle: TextStyle(
-                                        fontSize: 16,
-                                        color: Colors.black54,
-                                        fontFamily: 'HelveticaNeue',
-                                        fontWeight: FontWeight.bold,
+                                        labelStyle: TextStyle(
+                                          fontSize: 16,
+                                          color: Colors.black54,
+                                          fontFamily: 'HelveticaNeue',
+                                          fontWeight: FontWeight.bold,
+                                        ),
+
+                                        border: new UnderlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.black38),
+                                        ),
+
+                                        // and:
+                                        contentPadding: EdgeInsets.only(
+                                          bottom: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              .01,
+                                        ),
+
+                                        focusedBorder: new UnderlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.blue),
+                                        ),
                                       ),
-
-                                      border: new UnderlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.black38),
-                                      ),
-
-                                      // and:
-
-                                      focusedBorder: new UnderlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.black12),
-                                      ),
+                                      cursorColor: Colors.black,
                                     ),
-                                    cursorColor: Colors.black,
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                top: MediaQuery.of(context).size.height * 0.01,
-                                bottom:
-                                    MediaQuery.of(context).size.height * 0.03,
-                                left: MediaQuery.of(context).size.height * 0.01,
-                                right:
-                                    MediaQuery.of(context).size.height * 0.01,
-                              ),
-                              child: Column(
-                                children: [
-                                  TextFormField(
-                                    controller: nidController,
-                                    obscureText:
-                                        (_showPass == true) ? false : true,
-                                    decoration: InputDecoration(
-                                      labelText: "Password : ",
+                              Padding(
+                                padding: EdgeInsets.only(
+                                  top:
+                                      MediaQuery.of(context).size.height * 0.01,
+                                  bottom:
+                                      MediaQuery.of(context).size.height * 0.03,
+                                  left:
+                                      MediaQuery.of(context).size.height * 0.01,
+                                  right:
+                                      MediaQuery.of(context).size.height * 0.01,
+                                ),
+                                child: Column(
+                                  children: [
+                                    TextFormField(
+                                      controller: nidController,
 
-                                      hintText: "*********",
+                                      validator: (value) {
+                                        if (value.isEmpty)
+                                          return 'Your authorized NID is required';
+                                        else
+                                          return null;
+                                      },
+                                      // obscureText:
+                                      //     (_showPass == true) ? false : true,
+                                      decoration: InputDecoration(
+                                        labelText: "NID : ",
 
-                                      contentPadding: EdgeInsets.only(
-                                        bottom:
-                                            MediaQuery.of(context).size.height *
-                                                .05,
+                                        helperText:
+                                            "Enter your authorized NID here",
+
+                                        contentPadding: EdgeInsets.only(
+                                          bottom: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              .01,
+                                        ),
+
+                                        // suffixIcon: IconButton(
+                                        //   onPressed: _toggle,
+                                        //   icon: !_showPass
+                                        //       ? Icon(Icons.visibility_off)
+                                        //       : Icon(Icons.visibility),
+                                        // ),
+
+                                        labelStyle: TextStyle(
+                                          fontSize: 16,
+                                          color: Colors.black54,
+                                          fontFamily: 'HelveticaNeue',
+                                          fontWeight: FontWeight.bold,
+                                        ),
+
+                                        border: new UnderlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.black38),
+                                        ),
+
+                                        // and:
+
+                                        focusedBorder: new UnderlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.blue),
+                                        ),
                                       ),
-
-                                      suffixIcon: IconButton(
-                                        onPressed: _toggle,
-                                        icon: !_showPass
-                                            ? Icon(Icons.visibility_off)
-                                            : Icon(Icons.visibility),
-                                      ),
-
-                                      labelStyle: TextStyle(
-                                        fontSize: 16,
-                                        color: Colors.black54,
-                                        fontFamily: 'HelveticaNeue',
-                                        fontWeight: FontWeight.bold,
-                                      ),
-
-                                      border: new UnderlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.black38),
-                                      ),
-
-                                      // and:
-
-                                      focusedBorder: new UnderlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.black12),
-                                      ),
+                                      cursorColor: Colors.black,
                                     ),
-                                    cursorColor: Colors.black,
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.all(25.0),
-                                  child: ButtonTheme(
-                                    minWidth: 150,
-                                    height: 40,
-                                    child: RaisedButton(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(12.0),
-                                      ),
-                                      color: Color(0xff0984e3),
-                                      child: Row(
-                                        children: <Widget>[
-                                          //Icon(Icons.person_add, color: Colors.white),  I PERSONALLY DON'T PREFER THIS THO
-                                          Text(
-                                            "Sign in",
-                                            style: TextStyle(
-                                              fontSize: 15,
-                                              color: Colors.white,
-                                              fontFamily: 'HelveticaNeue',
-                                              fontWeight: FontWeight.bold,
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.all(25.0),
+                                    child: ButtonTheme(
+                                      minWidth: 150,
+                                      height: 40,
+                                      child: RaisedButton(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(12.0),
+                                        ),
+                                        color: Color(0xff0984e3),
+                                        child: Row(
+                                          children: <Widget>[
+                                            //Icon(Icons.person_add, color: Colors.white),  I PERSONALLY DON'T PREFER THIS THO
+                                            Text(
+                                              "Sign in",
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                color: Colors.white,
+                                                fontFamily: 'HelveticaNeue',
+                                                fontWeight: FontWeight.bold,
+                                              ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                      //color: Colors.black,    I CHANGED THIS//RAIYAN
-                                      //onPressed: () => gotoHomeScreen(name),
-                                      onPressed: () async {
-                                        try {
-                                          FirebaseUser user = (await FirebaseAuth
-                                                  .instance
-                                                  .signInWithEmailAndPassword(
-                                                      email:
-                                                          emailController.text,
-                                                      password:
-                                                          nidController.text))
-                                              .user;
-                                          if (user != null) {
+                                          ],
+                                        ),
+                                        //color: Colors.black,    I CHANGED THIS//RAIYAN
+                                        //onPressed: () => gotoHomeScreen(name),
+                                        onPressed: () async {
+                                          _formKey.currentState.validate()
+                                              ? Scaffold(
+                                                  body: Builder(
+                                                    builder: (context) =>
+                                                        Text('This is valid.'),
+                                                  ),
+                                                )
+                                              : Scaffold.of(context)
+                                                  .showSnackBar(SnackBar(
+                                                      content: Text(
+                                                          "This is not valid.")));
+                                          try {
+                                            FirebaseUser user = (await FirebaseAuth
+                                                    .instance
+                                                    .signInWithEmailAndPassword(
+                                                        email: emailController
+                                                            .text,
+                                                        password:
+                                                            nidController.text))
+                                                .user;
+
+                                            if (user != null) {
+                                              SharedPreferences prefs =
+                                                  await SharedPreferences
+                                                      .getInstance();
+                                              prefs?.setBool(
+                                                  "isLoggedIn", true);
+                                            }
+                                            SuccessAlertBox(
+                                                context: context,
+                                                //icon: Icons.done,
+                                                title: "Login Successful!",
+                                                messageText:
+                                                    "The email ID was verified.");
+
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
                                                 //builder: (context) => OverviewScreen(user),
                                                 builder: (context) =>
                                                     HomeScreen(
-                                                  user: user,
-                                                  //name: userName,
-                                                ),
+                                                        // nameController.text
+
+                                                        // //user: user,
+                                                        // //name: userName,
+                                                        ),
                                               ),
                                             );
+                                          } catch (e) {
+                                            print(e);
+                                            nidController.text = "";
+                                            nameController.text = "";
+                                            emailController.text = "";
+                                            //todo: alertdialog with error
                                           }
-                                        } catch (e) {
-                                          print(e);
-                                          nidController.text = "";
-                                          nameController.text = "";
-                                          emailController.text = "";
-                                          //todo: alertdialog with error
-                                        }
-                                      },
-                                    ),
-                                  ),
-                                ), //raised button
-                              ],
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                vertical:
-                                    MediaQuery.of(context).size.width * .075,
-                              ),
-                              child: new RichText(
-                                text: new TextSpan(
-                                  children: [
-                                    new TextSpan(
-                                      text: "Don't have an account? ",
-                                      style:
-                                          new TextStyle(color: Colors.black54),
-                                    ),
-                                    new TextSpan(
-                                      text: 'Create one!',
-                                      style: new TextStyle(color: Colors.blue),
-                                      recognizer: new TapGestureRecognizer()
-                                        ..onTap = () {
-                                          Navigator.pushNamed(
-                                              context, '/SignUp');
                                         },
+                                      ),
                                     ),
-                                  ],
+                                  ), //raised button
+                                ],
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                  vertical:
+                                      MediaQuery.of(context).size.width * .075,
+                                ),
+                                child: new RichText(
+                                  text: new TextSpan(
+                                    children: [
+                                      new TextSpan(
+                                        text: "Don't have an account? ",
+                                        style: new TextStyle(
+                                            color: Colors.black54),
+                                      ),
+                                      new TextSpan(
+                                        text: 'Create one!',
+                                        style:
+                                            new TextStyle(color: Colors.blue),
+                                        recognizer: new TapGestureRecognizer()
+                                          ..onTap = () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      SignUp()),
+                                            );
+                                          },
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
