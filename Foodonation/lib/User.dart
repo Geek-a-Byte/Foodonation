@@ -61,9 +61,6 @@ class _UserState extends State<User> {
                   child: Text("Name : "
                           "${user?.displayName} " +
                       "\n\n" +
-                      "phone no : "
-                          "${user?.phoneNumber}" +
-                      "\n\n" +
                       "email address : "
                           "${user?.email}" +
                       "\n\n" +
