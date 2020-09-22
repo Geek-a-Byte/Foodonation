@@ -25,6 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Size devSize = MediaQuery.of(context).size;
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       // routes: {
       //   '/receiver': (context) => SignUp(),
       // },

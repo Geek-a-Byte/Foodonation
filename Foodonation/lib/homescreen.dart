@@ -36,6 +36,7 @@ class HomeScreen extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Food Donation',
         theme: ThemeData(
           primarySwatch: Colors.blue,

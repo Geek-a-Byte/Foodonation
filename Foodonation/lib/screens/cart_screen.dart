@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:intl/intl.dart';
+
 import '../providers/cart.dart';
 import '../providers/orders.dart';
 import 'package:flutter/material.dart';
@@ -94,12 +96,12 @@ class _CartScreenState extends State<CartScreen> {
                                 if (_state == 0) {
                                   animateButton();
                                 }
-                                  showDialog(
-                          context: context,
-                          builder: (BuildContext context) => _buildAboutDialog(context),
-                        );
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      _buildAboutDialog(context),
+                                );
                               });
-                            
                             },
                       elevation: 5,
                       color: Colors.green,
@@ -147,49 +149,60 @@ class _CartScreenState extends State<CartScreen> {
 
 Widget _buildAboutDialog(BuildContext context) {
   DateTime now = new DateTime.now();
-  DateTime next = now.add(new Duration(days:3));
-    return new AlertDialog(
-      title: const Text(
-        'Order Details',
-        style: TextStyle(
-          fontSize: 25.0,
-        ),
+  String formatNow = DateFormat('dd-MM-yyyy kk:mm').format(now);
+  DateTime next = now.add(new Duration(days: 3));
+  String formatNext = DateFormat('dd-MM-yyyy kk:mm').format(next);
+  return new AlertDialog(
+    title: const Text(
+      'Order Details',
+      style: TextStyle(
+        fontSize: 25.0,
       ),
-      content: Padding(
-        padding: const EdgeInsets.symmetric(horizontal:8.0),
-        child: new Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Icon(
+    ),
+    content: Padding(
+      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+      child: new Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
                   Icons.check_circle,
                   color: Colors.green,
                 ),
-                Spacer(),
-                Text('Your request has been accepted.'),
-              ],
-            ),
-            SizedBox(height: 10.0,),
-            Text('Date of request : $now'),
-            SizedBox(height: 10.0,),
-            Text('Date of delivery : $next'),
-            //DateTime now = new DateTime.now();
-            //_buildAboutText(),
-            //_buildLogoAttribution(),
-          ],
-        ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                child: Text('Your request has been accepted.'),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 10.0,
+          ),
+          Text('Date of request : $formatNow'),
+          SizedBox(
+            height: 10.0,
+          ),
+          Text('Date of delivery : $formatNext'),
+          //DateTime now = new DateTime.now();
+          //_buildAboutText(),
+          //_buildLogoAttribution(),
+        ],
       ),
-      actions: <Widget>[
-        new FlatButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          textColor: Theme.of(context).primaryColor,
-          child: const Text('Ok, got it!'),
-        ),
-      ],
-    );
-  }
+    ),
+    actions: <Widget>[
+      new FlatButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        textColor: Theme.of(context).primaryColor,
+        child: const Text('Ok, got it!'),
+      ),
+    ],
+  );
+}
